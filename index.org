@@ -1,0 +1,14 @@
+#+TITLE: jgomo3
+#+AUTHOR: Jesús Gómez
+
+Web content about myself.
+
+# * Bio
+
+* Blog
+  Opinions, notes and creativity sparkles.
+  [[/blog][Read it]]
+
+
+# * Articles
+# * Projects
