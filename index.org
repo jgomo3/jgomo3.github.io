@@ -1,13 +1,15 @@
 #+TITLE: jgomo3
 #+AUTHOR: Jesús Gómez
 
-Web content about myself.
+Web content for, by and/or about myself.
 
 # * Bio
 
 * Blog
+
   Opinions, notes and creativity sparkles.
-  [[/blog][Read it]]
+
+  - [[file:blog/2018/04/my-configs-sharing-setup.org][My configs sharing setup]]
 
 
 # * Articles
