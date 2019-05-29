@@ -1,0 +1,19 @@
+#+TITLE: Notes on the Graphics Java Tutorials
+
+The first thing you would notice on the java tutorials today is the warning
+about they being wrote for the Java 8 version. And in the Graphics tutorials,
+the first thing that took my attention was the usage of Applets for the
+examples.
+
+So I rewrote the examples to avoid using the Applets. The other thing I noticed,
+was that while learning, I actually preferred to see the explicit classes
+imported instead of the wildcard (*) importing. This is because it is useful to
+learn where are the classes being classified in the namespace of Java, while
+reading the examples, something that the wildcard obfuscate.
+
+[[https://gist.github.com/jgomo3/4d6cd51c80c787956e3f9f73c053abc4][The modified version]]. To run it, add a folder named images with the following files:
+
+ - [[https://docs.oracle.com/javase/tutorial/2d/basic2d/examples/images/weather-cloud.png][weather-cloud.png]]
+ - [[https://docs.oracle.com/javase/tutorial/2d/basic2d/examples/images/weather-rain.png][weather-rain.png]]
+ - [[https://docs.oracle.com/javase/tutorial/2d/basic2d/examples/images/weather-snow.png][weather-snow.png]]
+ - [[https://docs.oracle.com/javase/tutorial/2d/basic2d/examples/images/weather-sun.png][weather-sun.png]]
