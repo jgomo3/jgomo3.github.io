@@ -9,8 +9,7 @@ Web content for, by and/or about myself.
 
   Opinions, notes and creativity sparkles.
 
-  - [[file:blog/2018/04/my-configs-sharing-setup.org][My configs sharing setup]]
-
+  - [[file:blog/2019/05/notes-on-the-graphics-java-tutorials.org][Notes on the Graphics Java Tutorials]]
 
 # * Articles
 # * Projects
