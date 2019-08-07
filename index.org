@@ -10,6 +10,7 @@ Web content for, by and/or about myself.
   Opinions, notes and creativity sparkles.
 
   - [[file:blog/2019/05/notes-on-the-graphics-java-tutorials.org][Notes on the Graphics Java Tutorials]]
+  - [[file:blog/2019/08/tee-stream-in-bash.org][Tee stream in bash]]
 
 # * Articles
 # * Projects

@@ -1,0 +1,46 @@
+#+TITLE: Tee stream in bash
+
+Chaining some transformations in bash you need to split the current form to 2 or
+more other transformations, and the ~tee~ command sparks in your mind. But tee
+can only multiply and redirect the stream to files and the standard output. It
+is easy to redirect the standard output to one of the desired transformations
+but how to do it from the files to the other transformations?
+
+I needed a pipeline which reused one output and the input of 2 new
+transformations. Something like:
+
+#+BEGIN_SRC ditaa
+configure_0 -> plan - - > configure_1 -> process
+                    \ - > configure_2 -> process
+#+END_SRC
+
+I.e, based on the same "plan" process 2 different configurations of "something".
+
+Named pipes can be used for this:
+
+#+BEGIN_SRC bash
+mkfifo path_1
+mkfifo path_2
+
+configure_0 | plan | tee path_1 path_2 > /dev/null
+<path_1 configure_1 | process &
+<path_2 configure_2 | process &
+#+END_SRC
+
+Another way of doing this is using Bash process substitution, which create
+"named pipes" on the fly and redirect the input or output of a process from or
+to that pipe. The result would be something like:
+
+#+BEGIN_SRC bash
+configure_0 | plan | tee \
+  >(configure_1 | process) \
+  >(configure_2 | process) \
+  > /dev/null
+#+END_SRC
+
+This would result in the same result as the first example with explicit named
+pipes, but resembles more to the graph diagram.
+
+*Note*: The 2 processes forking from the tee are ran in parallel. That is the
+reason I added an unnecessary (but useful) & to run the jobs in background and
+in parallel: to compare similar behaviours.
