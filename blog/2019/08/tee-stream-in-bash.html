@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-08-07 Wed 00:24 -->
+<!-- 2019-08-07 Wed 01:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tee stream in bash</title>
@@ -243,11 +243,19 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Tee stream in bash</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org262a5b1">1. Complication</a></li>
+</ul>
+</div>
+</div>
 <p>
-Chaining some transformations in bash you need to split the current form to 2 or
+Chaining some transformations in bash you need to give the current form to 2 or
 more other transformations, and the <code>tee</code> command sparks in your mind. But tee
-can only multiply and redirect the stream to files and the standard output. It
-is easy to redirect the standard output to one of the desired transformations
+can only multiply and redirect the stream to files and to the standard output.
+It is easy to redirect the standard output to one of the desired transformations
 but how to do it from the files to the other transformations?
 </p>
 
@@ -285,7 +293,7 @@ configure_0 | plan | tee path_1 path_2 &gt; /dev/null
 </div>
 
 <p>
-Another way of doing this is using Bash process substitution, which create
+Another way of doing this is using <a href="https:www.gnu.org/software/bash/manual/html_node/Process-Substitution.html">Bash process substitution</a>, which create
 "named pipes" on the fly and redirect the input or output of a process from or
 to that pipe. The result would be something like:
 </p>
@@ -308,10 +316,69 @@ pipes, but resembling more to the graph diagram.
 reason I added an unnecessary (but useful) &amp; to run the jobs in background and
 in parallel: to compare similar behaviours.
 </p>
+
+<div id="outline-container-org262a5b1" class="outline-2">
+<h2 id="org262a5b1"><span class="section-number-2">1</span> Complication</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+But suppose the output of <b>plan</b> is to be used as the content of a file that
+must be specified by name as a parameter of <b>configure<sub>1</sub></b> or <b>configure<sub>2</sub></b>. In
+other words, suppose neither <b>configure<sub>1</sub></b> nor <b>configure<sub>2</sub></b> read from the
+standard input, but they receive a file to read from as an argument. i.e, all we
+could do is something like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">plan &gt; temporal_file
+configure_1 temporal_file
+</pre>
+</div>
+
+<p>
+The same can be done with a named pipe:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">mkfifo temporal_pipe
+plan &gt; temporal_pipe
+configure_1 temporal_pipe
+</pre>
+</div>
+
+<p>
+So it is possible then to use <b>process substitution</b>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">plan | configure_1 &lt;<span style="color: #3a81c3;">(</span>cat<span style="color: #3a81c3;">)</span>
+</pre>
+</div>
+
+
+<p>
+Applying this to the tee pipeline but supposing configure behave like described,
+the code using <b>process substitution</b> would be:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">configure_0 | plan | tee <span style="color: #2d9574;">\</span>
+  &gt;<span style="color: #3a81c3;">(</span>configure_1 &lt;<span style="color: #6c3163;">(</span>cat<span style="color: #6c3163;">)</span>| process<span style="color: #3a81c3;">)</span> <span style="color: #2d9574;">\</span>
+  &gt;<span style="color: #3a81c3;">(</span>configure_2 &lt;<span style="color: #6c3163;">(</span>cat<span style="color: #6c3163;">)</span>| process<span style="color: #3a81c3;">)</span> <span style="color: #2d9574;">\</span>
+  &gt; /dev/null
+</pre>
+</div>
+
+<p>
+This technique is similar to using <code>xargs</code>, but instead of interpreting its
+standard input as literal arguments for a command, it interprets it as the
+content of a temporal file being used as argument of a command.
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jesús Gómez</p>
-<p class="date">Created: 2019-08-07 Wed 00:24</p>
+<p class="date">Created: 2019-08-07 Wed 01:06</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
