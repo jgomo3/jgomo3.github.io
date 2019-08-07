@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-08-06 Tue 23:56 -->
+<!-- 2019-08-07 Wed 00:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>jgomo3</title>
+<title>Tee stream in bash</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Jesús Gómez" />
 <style type="text/css">
@@ -242,36 +242,72 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">jgomo3</h1>
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#org16f8805">1. Blog</a></li>
-</ul>
-</div>
-</div>
+<h1 class="title">Tee stream in bash</h1>
 <p>
-Web content for, by and/or about myself.
+Chaining some transformations in bash you need to split the current form to 2 or
+more other transformations, and the <code>tee</code> command sparks in your mind. But tee
+can only multiply and redirect the stream to files and the standard output. It
+is easy to redirect the standard output to one of the desired transformations
+but how to do it from the files to the other transformations?
 </p>
 
-<div id="outline-container-org16f8805" class="outline-2">
-<h2 id="org16f8805"><span class="section-number-2">1</span> Blog</h2>
-<div class="outline-text-2" id="text-1">
 <p>
-Opinions, notes and creativity sparkles.
+I needed a pipeline which reused one output and the input of 2 new
+transformations. Something like:
 </p>
 
-<ul class="org-ul">
-<li><a href="blog/2019/05/notes-on-the-graphics-java-tutorials.html">Notes on the Graphics Java Tutorials</a></li>
-<li><a href="blog/2019/08/tee-stream-in-bash.html">Tee stream in bash</a></li>
-</ul>
+<div class="org-src-container">
+<pre class="src src-ditaa">configure_0 -&gt; plan - - &gt; configure_1 -&gt; process
+                    \ - &gt; configure_2 -&gt; process
+</pre>
 </div>
+
+<p>
+I.e, based on the same "plan" process 2 different configurations of "something".
+</p>
+
+<p>
+Named pipes can be used for this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">mkfifo path_1
+mkfifo path_2
+
+configure_0 | plan | tee path_1 path_2 &gt; /dev/null
+&lt;path_1 configure_1 | process &amp;
+&lt;path_2 configure_2 | process &amp;
+</pre>
 </div>
+
+<p>
+Another way of doing this is using Bash process substitution, which create
+"named pipes" on the fly and redirect the input or output of a process from or
+to that pipe. The result would be something like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">configure_0 | plan | tee <span style="color: #2d9574;">\</span>
+  &gt;<span style="color: #3a81c3;">(</span>configure_1 | process<span style="color: #3a81c3;">)</span> <span style="color: #2d9574;">\</span>
+  &gt;<span style="color: #3a81c3;">(</span>configure_2 | process<span style="color: #3a81c3;">)</span> <span style="color: #2d9574;">\</span>
+  &gt; /dev/null
+</pre>
+</div>
+
+<p>
+This would result in the same result as the first example with explicit named
+pipes, but resembles more to the graph diagram.
+</p>
+
+<p>
+<b>Note</b>: The 2 processes forking from the tee are ran in parallel. That is the
+reason I added an unnecessary (but useful) &amp; to run the jobs in background and
+in parallel: to compare similar behaviours.
+</p>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jesús Gómez</p>
-<p class="date">Created: 2019-08-06 Tue 23:56</p>
+<p class="date">Created: 2019-08-07 Wed 00:12</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
