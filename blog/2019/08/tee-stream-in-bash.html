@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-08-07 Wed 00:12 -->
+<!-- 2019-08-07 Wed 00:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tee stream in bash</title>
@@ -252,8 +252,12 @@ but how to do it from the files to the other transformations?
 </p>
 
 <p>
-I needed a pipeline which reused one output and the input of 2 new
-transformations. Something like:
+I needed a pipeline which reused one output as the input of 2 new
+transformations.
+</p>
+
+<p>
+e.g. Something like:
 </p>
 
 <div class="org-src-container">
@@ -263,7 +267,7 @@ transformations. Something like:
 </div>
 
 <p>
-I.e, based on the same "plan" process 2 different configurations of "something".
+i.e, based on the same "plan" process 2 different configurations of "something".
 </p>
 
 <p>
@@ -295,8 +299,8 @@ to that pipe. The result would be something like:
 </div>
 
 <p>
-This would result in the same result as the first example with explicit named
-pipes, but resembles more to the graph diagram.
+This would end with a similar result as the first example with explicit named
+pipes, but resembling more to the graph diagram.
 </p>
 
 <p>
@@ -307,7 +311,7 @@ in parallel: to compare similar behaviours.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jesús Gómez</p>
-<p class="date">Created: 2019-08-07 Wed 00:12</p>
+<p class="date">Created: 2019-08-07 Wed 00:24</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
