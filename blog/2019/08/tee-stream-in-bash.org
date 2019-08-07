@@ -6,15 +6,17 @@ can only multiply and redirect the stream to files and the standard output. It
 is easy to redirect the standard output to one of the desired transformations
 but how to do it from the files to the other transformations?
 
-I needed a pipeline which reused one output and the input of 2 new
-transformations. Something like:
+I needed a pipeline which reused one output as the input of 2 new
+transformations.
+
+e.g. Something like:
 
 #+BEGIN_SRC ditaa
 configure_0 -> plan - - > configure_1 -> process
                     \ - > configure_2 -> process
 #+END_SRC
 
-I.e, based on the same "plan" process 2 different configurations of "something".
+i.e, based on the same "plan" process 2 different configurations of "something".
 
 Named pipes can be used for this:
 
@@ -38,8 +40,8 @@ configure_0 | plan | tee \
   > /dev/null
 #+END_SRC
 
-This would result in the same result as the first example with explicit named
-pipes, but resembles more to the graph diagram.
+This would end with a similar result as the first example with explicit named
+pipes, but resembling more to the graph diagram.
 
 *Note*: The 2 processes forking from the tee are ran in parallel. That is the
 reason I added an unnecessary (but useful) & to run the jobs in background and
