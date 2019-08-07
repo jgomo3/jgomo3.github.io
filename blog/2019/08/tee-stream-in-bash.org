@@ -1,9 +1,9 @@
 #+TITLE: Tee stream in bash
 
-Chaining some transformations in bash you need to split the current form to 2 or
+Chaining some transformations in bash you need to give the current form to 2 or
 more other transformations, and the ~tee~ command sparks in your mind. But tee
-can only multiply and redirect the stream to files and the standard output. It
-is easy to redirect the standard output to one of the desired transformations
+can only multiply and redirect the stream to files and to the standard output.
+It is easy to redirect the standard output to one of the desired transformations
 but how to do it from the files to the other transformations?
 
 I needed a pipeline which reused one output as the input of 2 new
@@ -29,7 +29,7 @@ configure_0 | plan | tee path_1 path_2 > /dev/null
 <path_2 configure_2 | process &
 #+END_SRC
 
-Another way of doing this is using Bash process substitution, which create
+Another way of doing this is using [[https:www.gnu.org/software/bash/manual/html_node/Process-Substitution.html][Bash process substitution]], which create
 "named pipes" on the fly and redirect the input or output of a process from or
 to that pipe. The result would be something like:
 
@@ -46,3 +46,45 @@ pipes, but resembling more to the graph diagram.
 *Note*: The 2 processes forking from the tee are ran in parallel. That is the
 reason I added an unnecessary (but useful) & to run the jobs in background and
 in parallel: to compare similar behaviours.
+
+* Complication
+
+But suppose the output of *plan* is to be used as the content of a file that
+must be specified by name as a parameter of *configure_1* or *configure_2*. In
+other words, suppose neither *configure_1* nor *configure_2* read from the
+standard input, but they receive a file to read from as an argument. i.e, all we
+could do is something like:
+
+#+BEGIN_SRC bash
+plan > temporal_file
+configure_1 temporal_file
+#+END_SRC
+
+The same can be done with a named pipe:
+
+#+BEGIN_SRC bash
+mkfifo temporal_pipe
+plan > temporal_pipe
+configure_1 temporal_pipe
+#+END_SRC
+
+So it is possible then to use *process substitution*:
+
+#+BEGIN_SRC bash
+plan | configure_1 <(cat)
+#+END_SRC
+
+
+Applying this to the tee pipeline but supposing configure behave like described,
+the code using *process substitution* would be:
+
+#+BEGIN_SRC bash
+configure_0 | plan | tee \
+  >(configure_1 <(cat)| process) \
+  >(configure_2 <(cat)| process) \
+  > /dev/null
+#+END_SRC
+
+This technique is similar to using ~xargs~, but instead of interpreting its
+standard input as literal arguments for a command, it interprets it as the
+content of a temporal file being used as argument of a command.
