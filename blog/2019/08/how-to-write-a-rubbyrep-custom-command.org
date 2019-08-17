@@ -1,0 +1,91 @@
+#+TITLE+: How to write a Rubyrep custom command
+
+* What is Rubyrep
+
+[[https://www.rubyrep.org/index.html][Rubyrep]] is an interesting tool that provides a small but concise set of commands
+for achieve databases replication.
+
+The core commands (scan, sync and replicate) are driven by a configuration file
+that describe the job in coded in the Ruby Language.
+
+In that configuration file you'll describe the 2 databases to be synchronized,
+the tables you are interested in, and what to actually do: insert, delete or
+update from or to one of the databases to the other.
+
+If you want to learn how to use rubyrep, [[https://www.rubyrep.org/tutorial.html][their official tutorial]] is the right
+place to begin. The tool is also well documented.
+
+I'm going to assume that you are already familiar with rubyrep.
+
+* How to make a custom Rubyrep command
+
+If you find the provided commands do too much or too little, or simply doesn't
+do exactly what you need but you want to use the same configuration file for
+other purposes without cluttering your solutions with more custom tools, you
+have a way to extend Rubyrep by registering a new command you'll code for what
+you need.
+
+As an example, I'll tell what I needed to do and how adding a new command solved
+my problem.
+
+Rubyrep [[https://www.rubyrep.org/features.html#Z6][Automatically orders table syncs to avoid foreign key conflicts]]. And I
+needed that ordered list. Why? I'll explain in another moment.
+
+One way to obtain that list was to run the *scan* command.
+
+With no more arguments than the configuration file, the *scan* command analyzes
+the tables in the mentioned order, looking for differences between both
+databases while printing the name of the table being analyzed and a summary of
+the differences.
+
+The output could be lent to a formatter that could then output only the name of
+the tables.
+
+But that approach has at least 2 flaws.
+
+First, the summary *scan* produce is not, strictly speaking, in a structured
+format. That means I'll be risking the assumptions made in the formatter design
+to be unsatisfied by special cases of the input for *scan*.
+
+I can imagine a big enough table name to potentially split insert a new line in
+the *scan* output.
+
+Also, updates to Rubyrep themselves are not tied to respect the current output
+format. That means updating Rubyrep would be more costly for this case.
+
+Second, the *scan* command, well: scans. That is an unnecessary time the process
+would be paying if all it produce is a list of tables independently of what the
+differences between databases are.
+
+So I wanted what *scan* does but without the actual scanning process.
+
+I considered many approaches for this, but implemented the solution by adding a
+custom command to Rubyrep to outputs only that: the list of tables to be synced
+in the order *scan*, *sync* or *replicate* would do process them.
+
+I called that command: *plan*.
+
+** Extending by API and extending the tool itself
+
+Rubyrep has a [[https://www.rubydoc.info/github/rubyrep/rubyrep/][well documented API]] you can use in order to use it
+programmatically. The test suite you find in the source code gives good examples
+of how to use it that way.
+
+This means you could write your own Ruby script and achieve the results you want
+by using the API properly.
+
+But while I was studying the rubyrep codebase I found commands can be added to
+the tool itself. And I found this appropriate because:
+
+ - I didn't want to add more tools to my toolbox
+ - I do use Rubyrep as a command tool for many other things beside this
+   particular goal
+ - This particular goal is achieved by a part of other Rubyrep commands
+
+
+
+# Preparation for a Hello World
+# Writing the Hello World command
+# Writing a Tables based command with the Base class
+# Code of my case
+# Future work, avoid the custom binary rubyrep
