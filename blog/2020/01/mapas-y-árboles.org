@@ -1,0 +1,232 @@
+#TITLE: Mapas y árboles
+
+Darle estructura a los datos ¿Para qué? para luego acceder a ellos
+ordenadamente. El particular órden elegido, puede que coincida con los
+propósitos del sistema que utilizará dichos datos.
+
+Luego de ordenar tus datos de manera estructurada (otra forma de decirlo es, de
+manera premeditada), obtienes un sistema, que podemos denominar «estructura», la
+cuál te permite acceder a los datos de manera inteligente (eficiente).
+
+Claro, la estructura facilita acceder los datos en cierta manera, pero
+dificulta, o incluso imposibilita, acceder a ellos de otra.
+
+Piensa en un rascacielos. Para llegar a la oficina 1003, puedes usar el ascensor
+hasta el piso 100 (visitando los pisos 1 al 99 por segundos (tal vez décimas de
+segundos)), lo que sería el método que facilita la estructura, o pudieras
+escalar el edificio por su fachada, lo que yo diría que es un método difícil.
+
+En resumen, una estructura de datos permite agrupar datos y facilita métodos para
+acceder a ellos.
+
+El arte está entonces en hacer coincidir esos métodos con los propósitos del
+sistema que vaya a utilizarlos.
+
+Uno de los casos de uso más comunes es agrupar datos y asignarles una dirección
+que el sistema puede utilizar para solicitar un dato en particular a posterior.
+Como el ejemplo del rascacielos, la dirección sería el número de la oficina, y
+el dato es la oficina en si mismo.
+
+Este caso de uso es denominado «mapa», porque asocia un objeto real (el dato)
+con un elemento simbólico en el mapa que sirve de referencia al objeto (la
+dirección).
+
+Ese es el propósito de alto nivel. Muchas estructuras de datos pueden
+satisfacerlo. Los métodos de acceso que facilitan cada estructura son los que
+nos interesa conocer a la hora de alinearlos con nuestros diseños de sistemas.
+
+Digamos entonces que un mapa permite coleccionar datos, asignándoles direcciones
+y luego nos permite reclamar un dato usando dichas direcciones.
+
+Expresemos eso en Python:
+
+#+BEGIN_SRC python
+from abc import ABC, abstractmethod
+
+class Mapa(ABC):
+
+    @abstractmethod
+    def incluir(self, dirección, dato): pass
+
+    @abstractmethod
+    def reclamar(self, dirección): pass
+#+END_SRC
+
+* Listas
+
+La estructura de datos más intuitiva para «coleccionar» datos es la lista.
+Colecciona datos y a cada uno le asigna una dirección, que a su vez cumple con
+varias propiedades que se resumen en que todas las direcciones forman una
+secuencia numérica.
+
+Como consecuencia, el usuario de la lista no tiene control sobre las direcciones
+y hay un costo de mantenimiento de dicha propiedad cada vez que se manipula la
+estructura.
+
+Primero que nada, si por alguna razón, esas propiedades se alinean con los
+propósitos del sistema que va a utilizar, no necesitas un mapa, necesitas una
+lista.
+
+Ahora, enfocándonos en su característica de ser una estructura que colecciona
+datos, bien podemos utilizarla para implementar un mapa.
+
+El truco está en almacenar duplas, donde un componente sea la dirección y otro
+el dato.
+
+#+BEGIN_SRC python
+from collections import namedtuple
+
+Dupla = namedtuple('Dupla', ['dirección', 'dato'])
+
+@Mapa.register
+class MapaLista():
+
+    def __init__(self):
+        self._lista = []
+
+    def incluir(self, dirección, dato):
+        for i, dupla in (_ for _ in enumerate(self._lista) if _[1].dirección == dirección):
+            self._lista[i] = Dupla(dirección, dato) # Suplanta el dato original
+            break
+        else:
+            self._lista.append(Dupla(dirección, dato))
+
+    def reclamar(self, dirección):
+        return next((dupla.dato for dupla in self._lista if dupla.dirección == dirección), None)
+#+END_SRC
+
+Ahora podemos poner a prueba esta implementación:
+
+#+BEGIN_SRC python
+if __name__ == '__main__':
+    mapa = MapaLista()
+
+    mapa.incluir('fulano_de_tal@example.com', 'Fulano de Tal')
+    mapa.incluir('menga0@example.com', 'Mengano Ramírez')
+    mapa.incluir('pizza123@example.com', 'Miguel Ángel')
+    mapa.incluir('lasaña123@example.com', 'Güilfredo')
+    mapa.incluir('pizza123@example.com', 'Donatello')
+
+    assert(mapa.reclamar('fulano_de_tal@example.com') == 'Fulano de Tal')
+    assert(mapa.reclamar('moncho@example.com') == None)
+    assert(mapa.reclamar('pizza123@example.com') == 'Donatello')
+#+END_SRC
+
+Algo que decidí sin preguntar es qué hacer cuando la dirección ya está ocupada.
+Las opciones típicamente son, generar un error, ignorar la orden o suplantar el
+dato original con el nuevo. Como pueden ver con la última prueba, elegí
+suplantar el dato. Esta decisión no está determinada por la conducta del mapa,
+es una decisión de diseño.
+
+El costo de usar una lista para implementar un mapa es que cada orden de incluir
+o reclamar un dato, requiere que el procesador recorra todos los datos uno a uno
+hasta conseguir lo que busca, y es posible que le ordenemos buscar el dato que
+resulta estar de último en la lista, en cuyo caso recorrerá toda la estructura.
+
+
+* Árboles
+
+
+El problema de la lista es parecido al caso del rascacielos, pero suponiendo que
+en cada piso hay una sola oficina. Cada vez que pasamos un piso, descartamos una
+sola oficina.
+
+Pero si cada piso tuviera muchas oficinas, cada vez que subimos un piso que
+sabemos que no tiene la oficina que buscamos, estamos en efecto descartando
+muchas oficinas al mismo tiempo.
+
+La estructura de datos árbol puede modelar el ejemplo del edificio. Pero es más
+que eso, no está limitado a pisos y oficinas. De hecho, la relación de
+pertenencia puede extenderse ilimitadamente: Una cosa que contiene otra cosa
+(Edificio, oficina), que contiene otra cosa (oficina, cubículo), que contiene
+otra cosa (cubículo, escritorio), ... (molécula, átomo) ...
+
+Un árbol es una estructura recursiva porque su definición hace uso de si misma.
+
+Un árbol es una estructura denominada nodo, que se compone de un dato, y
+referencias a otros árboles, o es algo que denominamos nodo vacío, que no tiene
+ni dato ni árboles.
+
+Un tipo especial de árbol útil para implementar mapas es el árbol binario. Se
+llama así porque tiene la característica de que un nodo no vacío referencia
+exactamente a 2 árboles, que son también binarios.
+
+La utilidad es que podemos atribuirle propiedades a esos árboles que nos ayuden
+a descartar datos que no necesitemos cuando los estemos buscando. En vez de
+descartar un dato a la vez, al usar el árbol binario, cada vez que analicemos un
+nodo, si no tiene dato que buscamos, elegimos uno de los árboles dependiendo de
+su propiedad, y así, descartamos todo un árbol (el otro, que por ser árbol
+también es una colección de datos, no lo olviden).
+
+La propiedad típica que se le atribuye a los 2 árboles de un nodo es una función
+del dato que tiene en cuanto a la relación de orden que cumplen las direcciones.
+
+Con respecto al dato del nodo, uno de los árboles del nodo tiene todos los nodos
+cuyas direcciones son mayores y el otro tiene todos los nodos cuyas direcciones
+son menores.
+
+Una implementación de mapa con un árbol binario sería entonces:
+
+#+BEGIN_SRC python
+Nodo = namedtuple('Node', ('dupla', 'menores', 'mayores'))
+
+@Mapa.register
+class MapaArbolBin():
+
+    def __init__(self):
+        self._nodo = None
+
+    def incluir(self, dirección, dato):
+        if self._nodo == None:
+            self._nodo = Nodo(Dupla(dirección, dato), MapaArbolBin(), MapaArbolBin())
+        elif dirección == self._nodo.dupla.dirección:
+            self._nodo = Nodo(Dupla(dirección, dato), self._nodo.menores, self._nodo.mayores) # Suplanta el dato original
+        elif dirección < self._nodo.dupla.dirección:
+            self._nodo.menores.incluir(dirección, dato)
+        elif dirección > self._nodo.dupla.dirección:
+            self._nodo.mayores.incluir(dirección, dato)
+        else:
+            raise Exception('La dirección no respeta la relación de orden esperada')
+
+    def reclamar(self, dirección):
+        if self._nodo == None:
+            return None
+        elif dirección == self._nodo.dupla.dirección:
+            return self._nodo.dupla.dato
+        elif dirección < self._nodo.dupla.dirección:
+            return self._nodo.menores.reclamar(dirección)
+        elif dirección > self._nodo.dupla.dirección:
+            return self._nodo.mayores.reclamar(dirección)
+        else:
+            raise Exception('La dirección no respeta la relación de orden esperada')
+#+END_SRC python
+
+Otra decisión de diseño asumida en ambas implementaciones es devolver `None`
+cuando se reclama un dato que no esté en la colección. Pudimos haber generado un
+error en cambio. Pero la decisión fue arbitraria porque cualquiera de las
+opciones es suficiente para los motivos de esta explicación.
+
+Ahora puede podemos cambiar el mapa en las pruebas. Cambiando la línea `mapa =
+MapaLista()` por `mapa = MapaArbolBin()` la prueba debería ejecutarse sin
+errores.
+
+* Mapas
+
+Para el caso en particular de los árboles binarios, es difícil encontrar otro
+caso de uso que no sea a la final un mapa.
+
+Y sinceramente, para cualquier otro tipo de árboles, también.
+
+La razón para utilizar un árbol en particular es que conozcas la naturaleza de
+tus datos y justifiquen dicha implementación.
+
+En Python, en particular, los mapas se implementan utilizando diccionarios
+directamente. En el fondo están implementados utilizando tablas «hash», otra
+estructura de datos interesante del que no daré detalles en este artículo.
+
+Curiosamente, cuando a las personas les piden que implementen árboles en Python,
+lo «hacen» usando diccionarios, describiendo el nodo y sus subárboles.
+
+Pero tal vez a las personas siempre se les olvida preguntar ¿Para qué quieres el
+árbol?. No me sorprendería que después de analizar el problema, la respuesta
+sea, para tener un mapa.
