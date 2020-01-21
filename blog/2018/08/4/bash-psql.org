@@ -1,0 +1,105 @@
+What I learned: psql meta command \copy does not accept variables.kj
+
+In the journey, I exerciced a bit my bash Arrays (indexed and associative)
+abilities.
+
+Finally, a simplified design of what I was attempting, helped me to rewrite
+the solution in a simple Python solution.
+
+# Motivation
+
+Periodically, I need to execute some sql scripts that import CSV files to some
+databases. The scripts are hardcoded for the corresponding database and even for
+the file to be imported. This is justified by the fact that in our company we
+should all have the same folder structure, so the scripting have evidence of a
+lot of licence from this.
+
+But of course, this leaded to a lot of duplication, which mean each change or is
+replicated, or deliberated done in only one place, bringing divergence.
+
+I decided to at least parametrize the duplicated importing scripts into one
+generic importing script, making the old hardcoded one just wrappers around the
+generalized.
+
+# Description
+
+I designed the idea based on using *psql* variables interpolation. Sadly I
+discovered later the command \copy is a special case where the parameters can't
+be interpolated.
+
+The second design was based on interpolating the variables in the script itself,
+not in the psql. And for this reason, finding myself confident writing solutions
+in Python requiring templating, I wrote this second solution in Python. Because
+I don't want partners to install additional software, the script use Python
+Standard Library.
+
+Even if the bash script was discarded, I'll describe it because I find it
+interesting some of the techniques I ended using.
+
+# Current State
+
+There are 3 SQL scripts, one per table to import the data to. Each of them has
+this kind of form:
+
+-- file: table_1.sql
+UPDATE table_1 SET active=false;
+\copy table_1 (c1, c2, ..., cn) FROM '/home/genericuser/projects/.../scripts/table_1.csv' WITH (...);
+
+The other 2 files change the name of the table, the set of columns and the full
+path of the CSV file.
+
+To run one of them, we simply execute the psql command giving it the sql file to
+process. Something like:
+
+psql -U ... -h ... -d ... < table_1.sql
+
+# The first attempt
+
+The thing that I disliked the most was seeing the full path of the CSV file in
+the sql command.
+
+I though I could parametrize it easily with something like:
+
+\copy table_1 (c1, c2, ..., cn) FROM :'dataset_full_path' WITH (...);
+
+But instead of trying that line quickly from the psql console, and finding
+immediately that is not possible to expand the variable :dataset_full_path in
+the \copy meta command, my overconfidence allowed me to work on the design and
+implementation of a bash script that shouldn't exist in the first place.
+
+The design was:
+
+A script with the following Usage:
+
+importds.sh [-u user] [-h host] [-p port] [-d databse] dataset_name dataset_file
+
+Defaulting -u postgres -h localhost -p 5432 -d development
+
+(The databse defaulting is because we all have a database named development).
+
+Also, there is an assumption that beside the script, are .sql files. Actually,
+they are already there, so I'm respecting that convention, for now.
+
+The dataset_name is the name of the table to be updated with the new data. This
+value will be used actually to select the .sql file and not to interpolate in
+any SQL expression.
+
+And the dataset_file will allow the user to select the file to import.
+
+The implementation of this script should be basically a wrapper around psql
+itself, injecting the correct variables and selecting the correct sql file.
+
+# The second attempt
+
+Noticing that the script is actually a simple psql wrapper, I didn't want to
+manipulate any parameter at all and pass then directly to psql. But I needed at
+least 2: the dataset_name and the dataset_file.
+
+What I did, for now, was to truncate the argv array removing the last 2
+parameters and give it truncated to psql, letting psql to manage the arguments
+the way it knows.
+
+This time, the dataset_name was to be interpolated directly in the SQL, so there
+were not going to be Many repeated SQL files, but only one Template.
+
+For parametrizing the columns, I use the header of the CSV itself.
