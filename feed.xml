@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="http://jgomo3.info/" rel="self" type="application/rss+xml"/><title>Blog de Jesús Gómez (jgomo3)</title><link>http://jgomo3.info/</link><description>Información pública de mi persona y artículos en su mayoría de computación</description><lastBuildDate>Sat, 07 Nov 2020 21:59:58 -0330</lastBuildDate><generator>clj-rss</generator><item><guid>http://jgomo3.info/posts-output/2020-11-07-actualización-del-blog/</guid><link>http://jgomo3.info/posts-output/2020-11-07-actualización-del-blog/</link><title>Actualización del blog</title><description>Después de conocer un poco más al proyecto
+SciCloj, decidí copiarles cómo usan
+Cryogen para generar su sitio.Primero lo utilicé para crear un sitio para la comunidad
+Clojure Hispano.</description><pubDate>Sat, 07 Nov 2020 00:00:00 -0330</pubDate></item></channel></rss>
