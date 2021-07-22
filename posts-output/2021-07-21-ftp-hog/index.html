@@ -4,15 +4,13 @@
     <meta charset="utf-8"/>
     <title>Blog de Jesús Gómez (jgomo3): ftp-hog: sencillo servidor ftp a la MailHog</title>
     
-<meta name="keywords" content="es">
+<meta name="keywords" content="ftp-hog,MailHog,Clojure,es">
 
-<meta name="description" content="Hace tiempo me tocó trabajar con FTP en mi trabajo. Debía hacer que
-mis sistemas interactúen con algunos servidores FTP.Cuando uno desarrolla sistemas que deben interactuar con sistemas de
+<meta name="description" content="Hace tiempo tuve que trabajar con FTP.Cuando uno desarrolla sistemas que deben interactuar con sistemas de
 terceros, ayuda mucho tener un sustituto que podamos controlar
 totalmente.">
 
-<meta property="og:description" content="Hace tiempo me tocó trabajar con FTP en mi trabajo. Debía hacer que
-mis sistemas interactúen con algunos servidores FTP.Cuando uno desarrolla sistemas que deben interactuar con sistemas de
+<meta property="og:description" content="Hace tiempo tuve que trabajar con FTP.Cuando uno desarrolla sistemas que deben interactuar con sistemas de
 terceros, ayuda mucho tener un sustituto que podamos controlar
 totalmente.">
 
@@ -78,6 +76,12 @@ totalmente.">
                         <li class="divider"></li>
                         <li class="dropdown-header">Tags</li>
                         
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
                         <li><a href="/tags-output/es/">es</a></li>
                         
                         
@@ -106,20 +110,19 @@ totalmente.">
 </div>
 <div>
     
-    <p>Hace tiempo me tocó trabajar con FTP en mi trabajo. Debía hacer que
-mis sistemas interactúen con algunos servidores FTP.</p><p>Cuando uno desarrolla sistemas que deben interactuar con sistemas de
+    <p>Hace tiempo tuve que trabajar con FTP.</p><p>Cuando uno desarrolla sistemas que deben interactuar con sistemas de
 terceros, ayuda mucho tener un sustituto que podamos controlar
 totalmente.</p><p>Algunos ejemplos son servidores de base de datos locales, servicios
 web «impostores», servidores de correo electrónico locales, etc.</p><p>Obviamente necesitaba un servidor FTP local. En Linux, hay mil maneras
 de instalar uno.</p><p><code>vsftpd</code> es la opción más popular en Linux, y es lo que he estado
-utilizando para este trabajo.</p><p>Pero para enviar correos electrónicos, por suerte conocí hace tiempo
-<a href="https://github.com/mailhog/MailHog">MailHog</a>.</p><p>Es una herramienta que no me canso de recomendar.</p><p>En su forma más sencilla, es un simple ejecutable. Como los servidores
+utilizando para este trabajo.</p><p>Por otro lado, para enviar correos electrónicos, por suerte conocí
+hace tiempo <a href="https://github.com/mailhog/MailHog">MailHog</a>.</p><p>Es una herramienta que no me canso de recomendar.</p><p>En su forma más sencilla, es un simple ejecutable. Como los servidores
 web de desarrollo a los que estamos acostumbrados (Rils, Django,
 etc.), al ejecutarlo como un usuario no privilegiado, arranca el
-proceso de un «demonio» o «servidor» que escucha por el puerto 2025
-por mensajes SMTP. Luego puedes ver todos los mensajes que les han
-enviado en una interfaz web.</p><p>Lo que más me gusta de utilizar este tipo de herramientas para
-desarrollar software es:</p><ul><li>No está integrado al sistema</li><li>Correo en modo no privilegiado</li><li>Instalación y ejecución trivial</li></ul><p>Posiblemente lo que más me gusta es el último punto, porque puedes
+proceso de un «demonio» o «servidor» que espera mensajes SMTP en el
+puerto 2025. Todos los mensajes que les han enviado puedes verlos
+después en una interfaz web.</p><p>Lo que más me gusta de utilizar este tipo de herramientas para
+desarrollar software es que:</p><ul><li>No está integrado al sistema</li><li>Corre en modo no privilegiado</li><li>La instalación y ejecución es trivial</li></ul><p>Posiblemente lo que más me gusta es el último punto, porque puedes
 hacer que todo tu equipo de desarrolladores empiecen a trabajar en el
 asunto casi de inmediato.</p><p>Este último punto es lo que no conseguía con <code>vsftpd</code>.</p><p>Hace poco tuve que volver a trabajar con ese módulo que interactúa con
 FTP. Tenía que volver a recrear el entorno de desarrollo, instalar
@@ -133,11 +136,17 @@ expone tu carpeta temporal (<code>/tmp</code>).</p><p><code>Ctrl-C</code> y lo d
 Clojure.</p><p>Es una herramienta para programadores. No debe usarse para servidores
 FTP de verdad. En la medida que vaya mejorando y sofisticándose, lo
 restringiré lo más posible.</p><p>He estado utilizándolo últimamente y ha sido de la más útil. Si lo
-llegas a utilizar, espero que te sea de tanta utilidad para mi.</p>
+llegas a utilizar, espero que te sea de tanta utilidad como a mi.</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
+    
+    <a href="/tags-output/ftp-hog/">ftp-hog</a>
+    
+    <a href="/tags-output/MailHog/">MailHog</a>
+    
+    <a href="/tags-output/Clojure/">Clojure</a>
     
     <a href="/tags-output/es/">es</a>
     
