@@ -20,8 +20,8 @@
  :theme                        "blue_centered_jgomo3"
  :resources                    ["img" "CNAME"]
  :keep-files                   [".git"]
- :disqus?                      false
- :disqus-shortname             ""
+ :disqus?                      true
+ :disqus-shortname             "jgomo3-info"
  :ignored-files                [#"\.#.*" #".*\.swp$"]
  :previews?                    false
  :posts-per-page               5
