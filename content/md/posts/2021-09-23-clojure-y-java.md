@@ -4,7 +4,7 @@
 
 ## Clojure el jar (BORRADOR)
 
-Clojure es distribuído en realidad como un paquete `.jar`.
+Clojure es distribuido en realidad como un paquete `.jar`.
 
 La forma más básica de utilizarlo es ejecutando:
 
@@ -89,7 +89,7 @@ Las comillas simples son para indicarle al «shell» que no trate de
 interpretar nada del contenido que encierran. De esta manera, podemos
 escribir las comillas dobles (`"`) con la seguridad de que serán
 recibidas por Clojure, en cuyo momento, representan el inicio y el
-final de una cadena de carateres.
+final de una cadena de caracteres.
 
 Puedes pedirle a Clojure que evalúe varias expresiones a la
 vez. Producirá una línea por valor en la salida estándar:
@@ -111,7 +111,7 @@ este contenido:
 (ns hola)
 
 (defn -main [& args]
-  (println "Hola Infinitio"))
+  (println "Hola Infinito"))
 ```
 
 Entonces, esa función `-main` la podemos ejecutar de la siguiente manera:
@@ -144,7 +144,7 @@ necesarias para soportar todo el lenguaje.
 ## Clojure CLI
 
 Hasta ahora hemos visto cómo utilizar Clojure de forma muy
-trivial. Para claridad me refirire a esta forma como `clojure.main`.
+trivial. Para claridad me refreiré a esta forma como `clojure.main`.
 
 Para programas más complejos, dividido en módulos, que dependan de
 bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
@@ -153,7 +153,7 @@ acceder a dichas elementos.
 
 **clojure.org** pone a nuestra disposición unas herramientas que nos
 permite utilizar Clojure de una forma más simple desde la línea de
-órdenes, y organiza los elemntos mencionados en el párrafo anterior
+órdenes, y organiza los elementos mencionados en el párrafo anterior
 (en particular, construyen el Class Path por nosotros).
 
 Estas herramientas se conocen como «Las herramientas para el
@@ -210,7 +210,7 @@ Entonces recomiendo indicarle al sistema la ubicación de estas
 herramientas y sus manuales:
 
  - Añadiendo a la variable de entorno `PATH` la subcarpeta `bin`
- - Enseñandole a `man` cómo encontrar los manuales:
+ - Enseñándole a `man` cómo encontrar los manuales:
    - Si usas una distribución de Linux basada en Debian, añadiendo
      `MANDATORY_MANPATH` al archivo `.manpath` del «$HOME».
    - Añadiendo una entrada al MANPATH\_MAP que relacione la subcarpeta
@@ -223,7 +223,7 @@ $ echo 'export PATH="$HOME/clojure/bin/:$PATH"' >> ~/.bashrc
 $ echo 'MANDATORY_PATH home/ubuntu/clojure/share/man' >> ~/.manpath
 ```
 
-Cuando utilizamos Clojure desde la cónsola, normalmente utilizamos
+Cuando utilizamos Clojure desde la consola, normalmente utilizamos
 `clj` por ergonomía, y `clojure` en los libretos.
 
 Las Clojure CLI están dirigidas por un archivo llamado `deps.edn`, que
