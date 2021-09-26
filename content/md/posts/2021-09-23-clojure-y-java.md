@@ -1,8 +1,8 @@
 {:title "Clojure y Java"
  :layout :post
- :tags ["es" "Clojure" "Java"]}
+ :tags ["es" "Clojure" "Java" "borrador"]}
 
-## Clojure el jar
+## Clojure el jar (BORRADOR)
 
 Clojure es distribuído en realidad como un paquete `.jar`.
 
@@ -12,7 +12,7 @@ La forma más básica de utilizarlo es ejecutando:
 $ java -jar clojure.jar
 ```
 
-En cuyo caso el "REPL" arranca.
+En cuyo caso, una sesión interactiva con el "REPL" inicia.
 
 ```Clojure
 Clojure 1.11.0-master-SNAPSHOT
@@ -41,8 +41,9 @@ $ grep Main-Class META-INF/MANIFEST.MF
 Main-Class: clojure.main
 ```
 
-Pasar un libreto («script») como argumento evita el "REPL" y Clojure
-interpreta expresión por expresión dicho libreto.
+Pasar un libreto («script») como argumento evita la sesión interactiva
+con el "REPL" y Clojure interpreta expresión por expresión dicho
+libreto.
 
 Supongamos que tenemos un archivo llamado `hola.clj` con el siguiente
 contenido:
@@ -100,9 +101,34 @@ $ java -jar clojure.jar -e 1 -e 2 -e 3
 3
 ```
 
+Con la opción `-m`, Clojure llama la función `-main` del espacio de
+nombre que especifiquemos.
+
+Supongamos un archivo llamado `hola.clj` en la carpeta actual, con
+este contenido:
+
+```Clojure
+(ns hola)
+
+(defn -main [& args]
+  (println "Hola Infinitio"))
+```
+
+Entonces, esa función `-main` la podemos ejecutar de la siguiente manera:
+
+```Shell
+$ java -cp ".:clojure.jar" clojure.main -m hola
+```
+
+Nota que utilizamos la forma con el `-cp` en vez del `-jar`. Esto es
+debido a que debemos colocar en el Class Path el directorio actual
+(`.`) para que consiguiera nuestro archivo `hola.clj`.
+
 Pero ¿cómo obtener el `.jar`?
 
-Una forma de generarlo es siguiendo as instrucciones de la guía de iniciación («Getting Started») en la sección «Otras maneras de correr Clojure» («Other ways to run Clojure»)[1]:
+Una forma de generarlo es siguiendo as instrucciones de la guía de
+iniciación («Getting Started») en la sección «Otras maneras de correr
+Clojure» («Other ways to run Clojure»)[1]:
 
 ```
 git clone https://github.com/clojure/clojure.git
@@ -117,12 +143,22 @@ necesarias para soportar todo el lenguaje.
 
 ## Clojure CLI
 
-clojure.org pone a nuestra disposición unas herramientas que nos
-permite utilizar Clojure de una forma más simple y a su vez con más
-funcionalidades.
+Hasta ahora hemos visto cómo utilizar Clojure de forma muy
+trivial. Para claridad me refirire a esta forma como `clojure.main`.
+
+Para programas más complejos, dividido en módulos, que dependan de
+bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
+complicado preparar el entorno de ejecución para que el programa pueda
+acceder a dichas elementos.
+
+**clojure.org** pone a nuestra disposición unas herramientas que nos
+permite utilizar Clojure de una forma más simple desde la línea de
+órdenes, y organiza los elemntos mencionados en el párrafo anterior
+(en particular, construyen el Class Path por nosotros).
 
 Estas herramientas se conocen como «Las herramientas para el
-Intérprete de la Línea de Órdenes» («CLI Tools»).
+Intérprete de la Línea de Órdenes», a las cuales nos referiremos como
+«Clojure CLI»
 
 Hay varios métodos de instalación. Cada distribución de Sistema
 Operativo muy posiblemente las tendrá a disposición con el nombre de
@@ -137,20 +173,21 @@ Estas herramientas necesitan:
  - java
  - rlwrap (opcional)
 
-En clojure.org hay un libreto de instalación. Para el día de hoy, la
-versión estable de Clojure es la versión `1.10.3.986`, así que
+En **clojure.org** hay un libreto de instalación. Para el día de hoy,
+la versión estable de Clojure es la versión `1.10.3.986`, así que
 descargaremos el instalador de dicha versión y lo ejecutamos.
 
 Si no indicamos nada, el instalador intentará instalar las
 herramientas a nivel del sistema (`/usr/bin`, etc.). En ese caso,
 habría que tener permisos para hacerlo (`sudo` por ejemplo).
 
-Pero con la opción `--prefix` se puede indicar un destino alternativo. Hagamos eso, instalemos en `~/clojure`
+Pero con la opción `--prefix` se puede indicar un destino
+alternativo. Hagamos eso, instalemos en `~/clojure`
 
 ```bash
-wget https://download.clojure.org/install/linux-install-1.10.3.986.sh
-chmod linux-install-1.10.3.986.sh
-./linux-install-1.10.3.986.sh --prefix=~/clojure
+$ wget https://download.clojure.org/install/linux-install-1.10.3.986.sh
+$ chmod linux-install-1.10.3.986.sh
+$ ./linux-install-1.10.3.986.sh --prefix=~/clojure
 ...
 Installing libs into /home/.../clojure/lib/clojure
 Installing clojure and clj into /home/.../clojure/bin
@@ -173,5 +210,35 @@ Entonces recomiendo indicarle al sistema la ubicación de estas
 herramientas y sus manuales:
 
  - Añadiendo a la variable de entorno `PATH` la subcarpeta `bin`
- - Añadiendo una entrada `MANDATORY_MANPATH` al archivo `.manpath` del «$HOME».
+ - Enseñandole a `man` cómo encontrar los manuales:
+   - Si usas una distribución de Linux basada en Debian, añadiendo
+     `MANDATORY_MANPATH` al archivo `.manpath` del «$HOME».
+   - Añadiendo una entrada al MANPATH\_MAP que relacione la subcarpeta
+     `bin` con la subcarpeta `share/man`.
  
+En este caso de ejemplo, y suponiendo un sistema Ubuntu:
+ 
+ ```bash
+$ echo 'export PATH="$HOME/clojure/bin/:$PATH"' >> ~/.bashrc
+$ echo 'MANDATORY_PATH home/ubuntu/clojure/share/man' >> ~/.manpath
+```
+
+Cuando utilizamos Clojure desde la cónsola, normalmente utilizamos
+`clj` por ergonomía, y `clojure` en los libretos.
+
+Las Clojure CLI están dirigidas por un archivo llamado `deps.edn`, que
+merece su artículo completo.
+
+Como las Clojure CLI son unos envoltorios alrededor de `clojure.main`,
+todas las opciones del `clojure.main` están a nuestra
+disposición. `-M` indica ejecutar `clojure.main`:
+
+```Shell
+$ clj -M -e '(+ 1 1)'
+```
+
+Además de ellas, hay opciones para controlar las
+direcciones establecidas por el `deps.edn`.
+
+Creo que debo detener el artículo aquí. Mi intención era establecer un
+puente entre las Clojure CLI y el `clojure.main`.
