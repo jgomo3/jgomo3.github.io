@@ -3,7 +3,7 @@
  :tags ["es" "Clojure" "Java" "jar"]
  :author "Jesús Gómez"}
 
-Los clojuristas estamos acostumbrados a interactuar con Clojure con el
+Los clojuristas estamos acostumbrados a interactuar con Clojure con
 las órdenes `clojure` o `clj`.
 
 Lo que para muchos puede ser algo desconocido es el hecho de que esos
