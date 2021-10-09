@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clojure el Jar</title>
+    
+<meta name="keywords" content="Clojure,jar,es,Java,ftp-hog,MailHog">
+
+<meta name="description" content="Los clojuristas estamos acostumbrados a interactuar con Clojure con el
+las órdenes clojure o clj.Lo que para muchos puede ser algo desconocido es el hecho de que esos
+comandos son en realidad unos «scripts» escritos en Bash, conocidos
+como «Clojure CLI», y que en realidad, Clojure es un programa
+distribuido como un .jar.">
+
+<meta property="og:description" content="Los clojuristas estamos acostumbrados a interactuar con Clojure con el
+las órdenes clojure o clj.Lo que para muchos puede ser algo desconocido es el hecho de que esos
+comandos son en realidad unos «scripts» escritos en Bash, conocidos
+como «Clojure CLI», y que en realidad, Clojure es un programa
+distribuido como un .jar.">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/" />
+<meta property="og:title" content="Clojure el Jar" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar</a></li>
+                        
+                        <li><a href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java</a></li>
+                        
+                        <li><a href="/posts-output/2021-07-21-ftp-hog/">ftp-hog: sencillo servidor ftp a la MailHog</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 9, 2021</div>
+        
+        <span class="col-lg-6 right">By: Jesús Gómez</span>
+        
+    </div>
+    <h2>Clojure el Jar</h2>
+</div>
+<div>
+    
+    <p>Los clojuristas estamos acostumbrados a interactuar con Clojure con el
+las órdenes <code>clojure</code> o <code>clj</code>.</p><p>Lo que para muchos puede ser algo desconocido es el hecho de que esos
+comandos son en realidad unos <em>«scripts»</em> escritos en Bash, conocidos
+como <em>«Clojure CLI»</em>, y que en realidad, Clojure es un programa
+distribuido como un <code>.jar</code>.</p><p>Esta información es particularmente útil para entender por qué podemos
+determinar la versión específica de Clojure como una dependencia de
+nuestros proyectos de la misma manera que determinamos cualquier otro
+paquete de terceros.</p><p>Esta es una de las flexibilidades de Clojure que pasa
+desapercibido.</p><p>Si bien en otros lenguajes hay maneras para definir explícitamente en
+nuestros proyectos qué versión de dichos lenguajes utilizar,
+típicamente se hace de manera diferente a la que definimos las
+versiones de los paquetes de terceros.</p><p>En este artículo quiero demostrar cómo trabajar con Clojure sin la
+ayuda de «Clojure CLI».</p><h1 id="cómo-obtener-el-jar">¿Cómo obtener el jar?</h1><p>Antes de empezar, debo explicar cómo obtener el paquete <code>.jar</code>.</p><p>Recuerda que utilizar el <code>.jar</code> directamente no es la forma cotidiana
+de utilizar Clojure, y por ende, no existe una manera trivial de
+obtenerlo.</p><p>Una manera de hacerlo es seguir las instrucciones de la guía de
+iniciación («Getting Started») en la sección <a href="https://clojure.org/guides/getting_started#_other_ways_to_run_clojure">«Otras maneras de correr
+Clojure» («Other ways to run
+Clojure»)</a>.</p><p>La idea es clonar el repositorio de Clojure, y ejecutar la tarea de empaquetado.</p><p>En otras palabras:</p><pre><code>git clone https://github.com/clojure/clojure.git
+cd clojure
+mvn -Plocal -Dmaven.test.skip=true package
+</code></pre><p>El paquete <code>clojure.jar</code> generado tendrá todas las dependencias
+necesarias para soportar todo el lenguaje.</p><h1 id="ejecutar-clojure">Ejecutar Clojure</h1><p>Al ejecutar el <code>.jar</code> sin ningún argumento, una sesión interactiva con
+el "REPL" inicia:</p><pre><code class="shell">$ java -jar clojure.jar
+</code></pre><pre><code class="Clojure">Clojure 1.11.0-master-SNAPSHOT
+user=&gt; (+ 1 1)
+2
+</code></pre><p>Otra forma de interesante de invocar Clojure es incluyendo el paquete
+<code>clojure.jar</code> explícitamente en el "Class Path" y ejecutar su "clase
+principal".</p><pre><code class="shell">$ java -cp clojure.jar clojure.main
+Clojure 1.11.0-master-SNAPSHOT
+user=&gt; 
+</code></pre><p><a href="#determinar-el-punto-de-entrada-de-clojurejar">¿Cómo supe que la clase principal era clojure.main?</a></p><p>Al pasar un <em>«script»</em> como argumento, Clojure lo interpreta expresión
+por expresión (evita la sesión interactiva con el "REPL").</p><p>Supongamos que tenemos un archivo llamado <code>hola.clj</code> con el siguiente
+contenido:</p><pre><code class="Clojure">(println "Hola Infinito")
+</code></pre><p>Entonces la siguiente orden mostrará el Mensaje "Hola Infinito":</p><pre><code class="Shell">$ java -jar clojure.jar hola.clj
+Hola Infinito
+$ 
+</code></pre><p>Si en vez del nombre del <em>«script»</em>, colocas <code>-</code>, entonces Clojure
+interpreta la entrada estándar como si fuera dicho <em>«script»</em>.</p><pre><code class="Shell">$ echo '(println "Hola Infinito")' | java -jar clojure.jar -
+Hola Infinito
+</code></pre><p>La opción <code>-e</code> hace que Clojure evalúe la expresión determinada.</p><pre><code class="Shell">$ java -jar clojure.jar -e '"Hola Infinito"'
+Hola Infinito
+</code></pre><blockquote><p>En este caso, no hizo falta utilizar la función <code>println</code>, porque <code>-e</code>
+no sólo evalúa la expresión dada, sino que su resultado lo coloca en
+la salida estándar.</p><p>Las comillas simples son para indicarle al «shell» que no trate de
+interpretar nada del contenido que encierran. De esta manera, podemos
+escribir las comillas dobles (<code>"</code>) con la seguridad de que serán
+recibidas por Clojure, en cuyo momento, representan el inicio y el
+final de una cadena de caracteres.</p></blockquote><p>Puedes pedirle a Clojure que evalúe varias expresiones a la
+vez. Producirá una línea por valor en la salida estándar:</p><pre><code class="Shell">$ java -jar clojure.jar -e 1 -e 2 -e 3
+1
+2
+3
+</code></pre><p>Con la opción <code>-m</code>, Clojure llama la función <code>-main</code> del espacio de
+nombre que especifiquemos.</p><p>Supongamos un archivo llamado <code>hola.clj</code> en la carpeta actual, con
+este contenido:</p><pre><code class="Clojure">(ns hola)
+
+(defn -main [&amp; args]
+  (println "Hola Infinito"))
+</code></pre><p>Entonces, esa función <code>-main</code> la podemos ejecutar de la siguiente manera:</p><pre><code class="Shell">$ java -cp ".:clojure.jar" clojure.main -m hola
+</code></pre><p>Nota que utilizamos la forma con el <code>-cp</code> en vez del <code>-jar</code>. Esto es
+debido a que debemos colocar en el <em>"Class Path"</em> el directorio actual
+(<code>.</code>) para que Clojure pueda conseguir nuestro archivo <code>hola.clj</code>.</p><h1 id="por-qué-hicimos-esto">¿Por qué hicimos esto?</h1><p>Lo principal es entender que Clojure es simplemente un paquete como
+cualquier otro y que las órdenes <code>clojure</code> y <code>clj</code> son herramientas
+para trabajar con dicho paquete.</p><p>Entender esta diferencia nos puede ahorrar muchas confusiones.</p><p>En particular, a la hora de conversar, es importante distinguir de qué
+estamos hablando: Clojure o <em>Clojure CLI</em>.</p><p>También nos permite utilizar cualquier conocimiento general del manejo
+de archivos <code>.jar</code> para manipular <code>clojure.jar</code>, y estar claro en cuál
+es su posición en el ecosistema Java.</p><p>Finalmente quise explorar qué podemos hacer con el paquete
+<code>clojure.jar</code> independientemente de las herramientas. Porque me parece
+que entender las funciones básicas de cualquier programa es vital para
+aprovecharlo al máximo.</p><p>En un siguiente artículo exploraré <em>Clojure CLI</em> enfocándome en los
+detalles donde su relación con Java se hace necesariamente explícita.</p><h1 id="apéndice">Apéndice</h1><h2 id="determinar-el-punto-de-entrada-de-clojurejar">Determinar el punto de entrada de clojure.jar</h2><p>La clase principal de un paquete ".jar" está definida en su
+manifiesto (META-INF/MANIFEST.MF).</p><pre><code class="shell">$ jar xf clojure.jar META-INF/MANIFEST.MF
+$ grep Main-Class META-INF/MANIFEST.MF 
+Main-Class: clojure.main
+</code></pre>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Clojure/">Clojure</a>
+    
+    <a href="/tags-output/jar/">jar</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/Java/">Java</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/";
+            this.page.identifier = "Clojure el Jar";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2021 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>

@@ -7,7 +7,7 @@
     <meta name="description" content="Información pública de mi persona y artículos en su mayoría de computación">
     <meta name="keywords" content="">
     
-    <link rel="canonical" href="http://jgomo3.info/">
+    <link rel="canonical" href="http://jgomo3.info">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -55,11 +55,11 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar</a></li>
+                        
                         <li><a href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java</a></li>
                         
                         <li><a href="/posts-output/2021-07-21-ftp-hog/">ftp-hog: sencillo servidor ftp a la MailHog</a></li>
-                        
-                        <li><a href="/posts-output/2020-11-07-actualización-del-blog/">Actualización del blog</a></li>
                         
                         
 
@@ -69,11 +69,11 @@
                         
                         <li><a href="/tags-output/Clojure/">Clojure</a></li>
                         
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
                         <li><a href="/tags-output/es/">es</a></li>
                         
                         <li><a href="/tags-output/Java/">Java</a></li>
-                        
-                        <li><a href="/tags-output/borrador/">borrador</a></li>
                         
                         <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
                         
@@ -96,138 +96,67 @@
             <div id="content">
                 
 <div id="post">
+    
     <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">September 23, 2021</div>
-        
+        <h2>Clojure el Jar</h2>
+        <div id="post-meta">
+            
+            <div class="author">Jesús Gómez</div>
+            
+            <div class="date">October 9, 2021</div>
+        </div>
     </div>
-    <h2>Clojure y Java</h2>
-</div>
-<div>
+    <p>Los clojuristas estamos acostumbrados a interactuar con Clojure con el
+las órdenes <code>clojure</code> o <code>clj</code>.</p><p>Lo que para muchos puede ser algo desconocido es el hecho de que esos
+comandos son en realidad unos <em>«scripts»</em> escritos en Bash, conocidos
+como <em>«Clojure CLI»</em>, y que en realidad, Clojure es un programa
+distribuido como un <code>.jar</code>.</p>
+    <a href="/posts-output/2021-10-09-clojure-el-jar/">Continue reading &#8594;</a>
+    <hr>
     
-    <h2 id="clojure-el-jar-borrador">Clojure el jar (BORRADOR)</h2><p>Clojure es distribuido en realidad como un paquete <code>.jar</code>.</p><p>La forma más básica de utilizarlo es ejecutando:</p><pre><code class="shell">$ java -jar clojure.jar
-</code></pre><p>En cuyo caso, una sesión interactiva con el "REPL" inicia.</p><pre><code class="Clojure">Clojure 1.11.0-master-SNAPSHOT
-user=&gt; (+ 1 1)
-2
-</code></pre><p>Otra forma de interesante de invocar Clojure es incluyendo el paquete
-<code>clojure.jar</code> explícitamente en el "Class Path" y ejecutar su "clase
-principal".</p><pre><code class="shell">$ java -cp clojure.jar clojure.main
-Clojure 1.11.0-master-SNAPSHOT
-user=&gt; 
-</code></pre><p>Nota:</p><p>La clase principal de un paquete ".jar" está definida en su
-manifiesto (META-INF/MANIFEST.MF).</p><pre><code class="shell">$ jar xf clojure.jar META-INF/MANIFEST.MF
-$ grep Main-Class META-INF/MANIFEST.MF 
-Main-Class: clojure.main
-</code></pre><p>Pasar un libreto («script») como argumento evita la sesión interactiva
-con el "REPL" y Clojure interpreta expresión por expresión dicho
-libreto.</p><p>Supongamos que tenemos un archivo llamado <code>hola.clj</code> con el siguiente
-contenido:</p><pre><code class="Clojure">(println "Hola Infinito")
-</code></pre><p>Entonces el mensaje "Hola Infinito" será producido por la salida
-estándar después de ejecutar lo siguiente:</p><pre><code class="Shell">$ java -jar clojure.jar hola.clj
-Hola Infinito
-$ 
-</code></pre><p>Si el libreto es <code>-</code>, entonces lee dicho libreto de la entrada
-estándar. Es decir, otra forma de lograr el mismo resultado de
-ejecutar el libreto "hola.clj", hubiera sido:</p><pre><code class="Shell">$ echo '(println "Hola Infinito")' | java -jar clojure.jar -
-Hola Infinito
-</code></pre><p>Que también podría haberse logrado usando la opción <code>-e</code>, que hace que
-clojure evalúe la expresión determinada Y la produzca por la salida
-estándar.</p><pre><code class="Shell">$ java -jar clojure.jar -e '"Hola Infinito"'
-Hola Infinito
-</code></pre><p>Nota:</p><p>En este caso, no hizo falta utilizar la función <code>println</code>, porque <code>-e</code>
-no sólo evalúa la expresión dada, sino que su resultado lo coloca en
-la salida estándar.</p><p>Las comillas simples son para indicarle al «shell» que no trate de
-interpretar nada del contenido que encierran. De esta manera, podemos
-escribir las comillas dobles (<code>"</code>) con la seguridad de que serán
-recibidas por Clojure, en cuyo momento, representan el inicio y el
-final de una cadena de caracteres.</p><p>Puedes pedirle a Clojure que evalúe varias expresiones a la
-vez. Producirá una línea por valor en la salida estándar:</p><pre><code class="Shell">$ java -jar clojure.jar -e 1 -e 2 -e 3
-1
-2
-3
-</code></pre><p>Con la opción <code>-m</code>, Clojure llama la función <code>-main</code> del espacio de
-nombre que especifiquemos.</p><p>Supongamos un archivo llamado <code>hola.clj</code> en la carpeta actual, con
-este contenido:</p><pre><code class="Clojure">(ns hola)
-
-(defn -main [&amp; args]
-  (println "Hola Infinito"))
-</code></pre><p>Entonces, esa función <code>-main</code> la podemos ejecutar de la siguiente manera:</p><pre><code class="Shell">$ java -cp ".:clojure.jar" clojure.main -m hola
-</code></pre><p>Nota que utilizamos la forma con el <code>-cp</code> en vez del <code>-jar</code>. Esto es
-debido a que debemos colocar en el Class Path el directorio actual
-(<code>.</code>) para que consiguiera nuestro archivo <code>hola.clj</code>.</p><p>Pero ¿cómo obtener el <code>.jar</code>?</p><p>Una forma de generarlo es siguiendo as instrucciones de la guía de
-iniciación («Getting Started») en la sección «Otras maneras de correr
-Clojure» («Other ways to run Clojure»)[1]:</p><pre><code>git clone https://github.com/clojure/clojure.git
-cd clojure
-mvn -Plocal -Dmaven.test.skip=true package
-</code></pre><p>El paquete <code>clojure.jar</code> generado tendrá todas las dependencias
-necesarias para soportar todo el lenguaje.</p><p>[1] https://clojure.org/guides/getting_started#_other_ways_to_run_clojure</p><h2 id="clojure-cli">Clojure CLI</h2><p>Hasta ahora hemos visto cómo utilizar Clojure de forma muy
-trivial. Para claridad me refreiré a esta forma como <code>clojure.main</code>.</p><p>Para programas más complejos, dividido en módulos, que dependan de
-bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
-complicado preparar el entorno de ejecución para que el programa pueda
-acceder a dichas elementos.</p><p><strong>clojure.org</strong> pone a nuestra disposición unas herramientas que nos
-permite utilizar Clojure de una forma más simple desde la línea de
-órdenes, y organiza los elementos mencionados en el párrafo anterior
-(en particular, construyen el Class Path por nosotros).</p><p>Estas herramientas se conocen como «Las herramientas para el
-Intérprete de la Línea de Órdenes», a las cuales nos referiremos como
-«Clojure CLI»</p><p>Hay varios métodos de instalación. Cada distribución de Sistema
-Operativo muy posiblemente las tendrá a disposición con el nombre de
-<code>clojure</code>.</p><p>Exploraremos aquí la manera de instalar estas herramientas
-independientemente de la distribución de Sistema Operativo.</p><p>Estas herramientas necesitan:</p><ul><li>bash</li><li>java</li><li>rlwrap (opcional)</li></ul><p>En <strong>clojure.org</strong> hay un libreto de instalación. Para el día de hoy,
-la versión estable de Clojure es la versión <code>1.10.3.986</code>, así que
-descargaremos el instalador de dicha versión y lo ejecutamos.</p><p>Si no indicamos nada, el instalador intentará instalar las
-herramientas a nivel del sistema (<code>/usr/bin</code>, etc.). En ese caso,
-habría que tener permisos para hacerlo (<code>sudo</code> por ejemplo).</p><p>Pero con la opción <code>--prefix</code> se puede indicar un destino
-alternativo. Hagamos eso, instalemos en <code>~/clojure</code></p><pre><code class="bash">$ wget https://download.clojure.org/install/linux-install-1.10.3.986.sh
-$ chmod linux-install-1.10.3.986.sh
-$ ./linux-install-1.10.3.986.sh --prefix=~/clojure
-...
-Installing libs into /home/.../clojure/lib/clojure
-Installing clojure and clj into /home/.../clojure/bin
-Installing man pages into /home/.../clojure/share/man/man1
-</code></pre><p>En la carpeta donde se instaló, las herramientas están en la
-subcarpeta <code>bin</code>: <code>clojure</code> y <code>clj</code>.</p><p><code>clojure</code> es la herramienta principal, es una herramienta de línea de
-órdenes para iniciar programas escritos en Clojure (el lenguaje).</p><p><code>clj</code> es un simple envoltorio alrededor de <code>clojure</code> para hacer más
-amena la interacción con el "REPL".</p><p>En la subcarpeta <code>share/man</code> se encuentra el manual en línea de estas
-herramientas.</p><p>Entonces recomiendo indicarle al sistema la ubicación de estas
-herramientas y sus manuales:</p><ul><li>Añadiendo a la variable de entorno <code>PATH</code> la subcarpeta <code>bin</code></li><li>Enseñándole a <code>man</code> cómo encontrar los manuales:
-<ul><li>Si usas una distribución de Linux basada en Debian, añadiendo
-<code>MANDATORY_MANPATH</code> al archivo <code>.manpath</code> del «$HOME».</li><li>Añadiendo una entrada al MANPATH_MAP que relacione la subcarpeta
-<code>bin</code> con la subcarpeta <code>share/man</code>.</li></ul></li></ul><p>En este caso de ejemplo, y suponiendo un sistema Ubuntu:</p><pre><code class="bash">$ echo 'export PATH="$HOME/clojure/bin/:$PATH"' &gt;&gt; ~/.bashrc
-$ echo 'MANDATORY_PATH home/ubuntu/clojure/share/man' &gt;&gt; ~/.manpath
-</code></pre><p>Cuando utilizamos Clojure desde la consola, normalmente utilizamos
-<code>clj</code> por ergonomía, y <code>clojure</code> en los libretos.</p><p>Las Clojure CLI están dirigidas por un archivo llamado <code>deps.edn</code>, que
-merece su artículo completo.</p><p>Como las Clojure CLI son unos envoltorios alrededor de <code>clojure.main</code>,
-todas las opciones del <code>clojure.main</code> están a nuestra
-disposición. <code>-M</code> indica ejecutar <code>clojure.main</code>:</p><pre><code class="Shell">$ clj -M -e '(+ 1 1)'
-</code></pre><p>Además de ellas, hay opciones para controlar las
-direcciones establecidas por el <code>deps.edn</code>.</p><p>Creo que debo detener el artículo aquí. Mi intención era establecer un
-puente entre las Clojure CLI y el <code>clojure.main</code>.</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
-    
-    <a href="/tags-output/Clojure/">Clojure</a>
-    
-    <a href="/tags-output/es/">es</a>
-    
-    <a href="/tags-output/Java/">Java</a>
-    
-    <a href="/tags-output/borrador/">borrador</a>
-    
-</div>
-
-
-    
-    <div id="comments">
-        <a href="/posts-output/2021-09-23-clojure-y-java/#disqus_thread">View Comments</a>
+    <div class="post-header">
+        <h2>Clojure y Java</h2>
+        <div id="post-meta">
+            
+            <div class="date">September 23, 2021</div>
+        </div>
     </div>
+    <p>Clojure es un lenguaje «hospedado», lo que significa que el entorno de
+ejecución es uno que define y controla un tercero (el anfitrión) que
+típicamente es otro lenguaje de programación.</p><p>Los anfitriones más conocidos de Clojure son Java y Javascript.</p>
+    <a href="/posts-output/2021-09-23-clojure-y-java/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2>ftp-hog: sencillo servidor ftp a la MailHog</h2>
+        <div id="post-meta">
+            
+            <div class="date">July 21, 2021</div>
+        </div>
+    </div>
+    <p>Hace tiempo tuve que trabajar con FTP.</p><p>Cuando uno desarrolla sistemas que deben interactuar con sistemas de
+terceros, ayuda mucho tener un sustituto que podamos controlar
+totalmente.</p>
+    <a href="/posts-output/2021-07-21-ftp-hog/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2>Actualización del blog</h2>
+        <div id="post-meta">
+            
+            <div class="date">November 7, 2020</div>
+        </div>
+    </div>
+    <p>Después de conocer un poco más al proyecto
+<a href="https://scicloj.github.io/">SciCloj</a>, decidí copiarles cómo usan
+<a href="http://cryogenweb.org/">Cryogen</a> para generar su sitio.</p><p>Primero lo utilicé para crear un sitio para la comunidad
+<a href="http://clojurehispano.org/">Clojure Hispano</a>.</p>
+    <a href="/posts-output/2020-11-07-actualización-del-blog/">Continue reading &#8594;</a>
+    <hr>
     
 
     <div id="prev-next">
         
-        
-        <a class="right" href="/posts-output/2021-07-21-ftp-hog/">ftp-hog: sencillo servidor ftp a la MailHog &raquo;</a>
         
     </div>
 </div>
