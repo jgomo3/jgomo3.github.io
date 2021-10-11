@@ -3,7 +3,7 @@
  :author "Jesús Gómez"
  :tags ["es" "Clojure" "Java" "Clojure CLI" "CLI"]}
 
-En el artículo [Clojure el Jar](/posts-output/2021-10-09-clojure-el-jar/)
+En el artículo [Clojure el Jar](https://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/)
 exploré cómo utilizar `clojure.main` de forma «primitiva».
 
 Para programas más complejos, dividido en módulos, que dependan de
@@ -114,7 +114,7 @@ user=>
 En este caso, lo mínimo necesario para utilizar Clojure son los
 paquetes `clojure`, `spec.alpha` y `core.specs.alpha`.
 
-En el artículo anterior [Clojure el Jar](/posts-output/2019-10-09-clojure-el-jar)
+En el artículo anterior [Clojure el Jar](https://jgomo3.info/posts-output/2021-10-09-clojure-el-jar)
 , habíamos creado a mano un único `jar` llamado `clojure.jar`.
 En ese caso, ese `jar` tenía incluido a los demás.
 
