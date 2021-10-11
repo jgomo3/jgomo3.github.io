@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Blog de Jesús Gómez (jgomo3): Clojure el Jar</title>
     
-<meta name="keywords" content="Clojure,jar,es,Java,ftp-hog,MailHog">
+<meta name="keywords" content="CLI,Clojure CLI,Clojure,es,Java,jar,ftp-hog,MailHog">
 
 <meta name="description" content="Los clojuristas estamos acostumbrados a interactuar con Clojure con
 las órdenes clojure o clj.Lo que para muchos puede ser algo desconocido es el hecho de que esos
@@ -70,11 +70,11 @@ distribuido como un .jar.">
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts-output/2021-10-11-clojure-cli/">Clojure CLI</a></li>
+                        
                         <li><a href="/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar</a></li>
                         
                         <li><a href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java</a></li>
-                        
-                        <li><a href="/posts-output/2021-07-21-ftp-hog/">ftp-hog: sencillo servidor ftp a la MailHog</a></li>
                         
                         
 
@@ -82,13 +82,17 @@ distribuido como un .jar.">
                         <li class="divider"></li>
                         <li class="dropdown-header">Tags</li>
                         
-                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
                         
-                        <li><a href="/tags-output/jar/">jar</a></li>
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
                         
                         <li><a href="/tags-output/es/">es</a></li>
                         
                         <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
                         
                         <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
                         
@@ -139,9 +143,9 @@ de utilizar Clojure, y por ende, no existe una manera trivial de
 obtenerlo.</p><p>Una manera de hacerlo es seguir las instrucciones de la guía de
 iniciación («Getting Started») en la sección <a href="https://clojure.org/guides/getting_started#_other_ways_to_run_clojure">«Otras maneras de correr
 Clojure» («Other ways to run
-Clojure»)</a>.</p><p>La idea es clonar el repositorio de Clojure, y ejecutar la tarea de empaquetado.</p><p>En otras palabras:</p><pre><code>git clone https://github.com/clojure/clojure.git
-cd clojure
-mvn -Plocal -Dmaven.test.skip=true package
+Clojure»)</a>.</p><p>La idea es clonar el repositorio de Clojure, y ejecutar la tarea de empaquetado.</p><p>En otras palabras:</p><pre><code class="shell">$ git clone https://github.com/clojure/clojure.git
+$ cd clojure
+$ mvn -Plocal -Dmaven.test.skip=true package
 </code></pre><p>El paquete <code>clojure.jar</code> generado tendrá todas las dependencias
 necesarias para soportar todo el lenguaje.</p><h1 id="ejecutar-clojure">Ejecutar Clojure</h1><p>Al ejecutar el <code>.jar</code> sin ningún argumento, una sesión interactiva con
 el "REPL" inicia:</p><pre><code class="shell">$ java -jar clojure.jar
@@ -215,6 +219,8 @@ Main-Class: clojure.main
 
 
     <div id="prev-next">
+        
+        <a href="/posts-output/2021-10-11-clojure-cli/">&laquo; Clojure CLI</a>
         
         
         <a class="right" href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java &raquo;</a>

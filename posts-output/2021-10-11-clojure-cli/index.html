@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clojure CLI</title>
+    
+<meta name="keywords" content="CLI,Clojure CLI,Clojure,es,Java,jar,ftp-hog,MailHog">
+
+<meta name="description" content="En el artículo Clojure el Jar
+exploré cómo utilizar clojure.main de forma «primitiva».Para programas más complejos, dividido en módulos, que dependan de
+bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
+complicado preparar el entorno de ejecución para que el programa pueda
+acceder a dichas elementos.">
+
+<meta property="og:description" content="En el artículo Clojure el Jar
+exploré cómo utilizar clojure.main de forma «primitiva».Para programas más complejos, dividido en módulos, que dependan de
+bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
+complicado preparar el entorno de ejecución para que el programa pueda
+acceder a dichas elementos.">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2021-10-11-clojure-cli/" />
+<meta property="og:title" content="Clojure CLI" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2021-10-11-clojure-cli/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2021-10-11-clojure-cli/">Clojure CLI</a></li>
+                        
+                        <li><a href="/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar</a></li>
+                        
+                        <li><a href="/posts-output/2021-09-23-clojure-y-java/">Clojure y Java</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 11, 2021</div>
+        
+        <span class="col-lg-6 right">By: Jesús Gómez</span>
+        
+    </div>
+    <h2>Clojure CLI</h2>
+</div>
+<div>
+    
+    <p>En el artículo <a href="https://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar</a>
+exploré cómo utilizar <code>clojure.main</code> de forma «primitiva».</p><p>Para programas más complejos, dividido en módulos, que dependan de
+bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
+complicado preparar el entorno de ejecución para que el programa pueda
+acceder a dichas elementos.</p><p><a href="https://clojure.org/">clojure.org</a> pone a nuestra disposición unas
+herramientas que nos permite programar en Clojure de una forma más
+simple desde la línea de órdenes.</p><p>Estas herramientas se conocen como «Interfaz de Línea de órdenes de
+Clojure» a la cual me referiré como <em>Clojure CLI</em>.</p><h1 id="instalación">Instalación</h1><p>Hay varios métodos de instalación. Cada distribución de Sistema
+Operativo muy posiblemente las tendrá a disposición con el nombre de
+<code>clojure</code>.</p><p>Exploraremos aquí la manera de instalar <em>Clojure CLI</em>
+independientemente de la distribución de Sistema Operativo.</p><p><em>Clojure CLI</em> necesita:</p><ul><li>bash</li><li>java</li><li>rlwrap (opcional)</li></ul><p>En <a href="https://clojure.org">clojure.org</a> hay un <em>«script»</em> de
+instalación.</p><p>Para el día de hoy, la versión estable de Clojure es la versión
+<code>1.10.3.986</code>. Así que descargaremos el instalador de dicha versión y
+lo ejecutamos.</p><p>Si no indicamos nada, el <em>«script»</em> intentará instalar <em>Clojure CLI</em> a
+nivel del sistema (<code>/usr/bin</code>, etc.). En ese caso, habría que tener
+permisos para hacerlo (<code>sudo</code> por ejemplo).</p><p>Pero con la opción <code>--prefix</code> podemos indicar un destino
+alternativo. Hagamos eso, instalemos <em>Clojure CLI</em> en <code>~/clojure</code>.</p><pre><code class="bash">$ wget https://download.clojure.org/install/linux-install-1.10.3.986.sh
+$ chmod +x linux-install-1.10.3.986.sh
+$ ./linux-install-1.10.3.986.sh --prefix ~/clojure
+...
+Installing libs into /home/.../clojure/lib/clojure
+Installing clojure and clj into /home/.../clojure/bin
+Installing man pages into /home/.../clojure/share/man/man1
+</code></pre><p>Una vez instalado, <em>Clojure CLI</em> queda en la subcarpeta <code>bin</code>:
+<code>clojure</code> y <code>clj</code>.</p><p><code>clojure</code> es la interfaz principal. Es una herramienta de línea de
+órdenes para iniciar programas escritos en Clojure (el lenguaje).</p><p><code>clj</code> es un simple envoltorio alrededor de <code>clojure</code> para hacer más
+amena la interacción con el <em>«REPL»</em> (<a href="https://clojure.org/guides/learn/syntax#_repl">Read Eval Print Loop</a>).</p><p>En la subcarpeta <code>share/man</code> se encuentra el manual en línea de estas
+herramientas.</p><p>Recomiendo <a href="#enseñarle-al-sistema-cómo-conseguir-los-ejecutables-y-el-manual-de-clojure-cli">enseñarle al sistema cómo conseguir los ejecutables y el manual de Clojure CLI</a>.</p><h1 id="uso">Uso</h1><p>Cuando utilizamos Clojure desde la consola, normalmente utilizamos
+<code>clj</code> por ergonomía, y <code>clojure</code> en los <em>«scripts»</em>.</p><p>En cualquier caso, escribir simplemente la orden inicia un REPL
+interactivo de Clojure:</p><pre><code class="shell">$ clj
+[ . . . ]
+Clojure 1.10.3
+user=&gt; (+ 1 1)
+2
+</code></pre><h1 id="clojure-cli-y-clojurejar">Clojure CLI y clojure.jar</h1><p>Dejé marcado con puntos suspensivos <code>[ . . . ]</code> un contenido que puede
+que haya salido o no dependiendo de si es la primera vez que se
+ejecuta la orden o no.</p><p>La primera vez que invocamos <code>clj</code> o <code>clojure</code>, Clojure CLI procede a
+descargar al mismísimo Clojure y otros paquetes básicos.</p><p>Esta es la imagen completa de lo que sucedería:</p><pre><code class="shell">$ clj
+Downloading: org/clojure/clojure/1.10.3/clojure-1.10.3.pom from central
+Downloading: org/clojure/spec.alpha/0.2.194/spec.alpha-0.2.194.pom from central
+Downloading: org/clojure/core.specs.alpha/0.2.56/core.specs.alpha-0.2.56.pom from central
+Downloading: org/clojure/pom.contrib/0.3.0/pom.contrib-0.3.0.pom from central
+Downloading: org/clojure/spec.alpha/0.2.194/spec.alpha-0.2.194.jar from central
+Downloading: org/clojure/core.specs.alpha/0.2.56/core.specs.alpha-0.2.56.jar from central
+Downloading: org/clojure/clojure/1.10.3/clojure-1.10.3.jar from central
+Clojure 1.10.3
+user=&gt;
+</code></pre><p>En este caso, lo mínimo necesario para utilizar Clojure son los
+paquetes <code>clojure</code>, <code>spec.alpha</code> y <code>core.specs.alpha</code>.</p><p>En el artículo anterior <a href="https://jgomo3.info/posts-output/2021-10-09-clojure-el-jar">Clojure el Jar</a>
+, habíamos creado a mano un único <code>jar</code> llamado <code>clojure.jar</code>.
+En ese caso, ese <code>jar</code> tenía incluido a los demás.</p><p>Como <em>Clojure CLI</em> es, entre otras cosas, un envoltorio alrededor de
+<code>clojure.main</code>, todas las opciones del <code>clojure.main</code> están a nuestra
+disposición.</p><p>Con <code>-M</code> tenemos acceso directo a <code>clojure.main</code>:</p><pre><code class="Shell">$ clj -M -e '(+ 1 1)'
+</code></pre><p><em>«Clojure CLI»</em> está dirigido por un archivo llamado <code>deps.edn</code>.</p><p>Además <code>-M</code>, hay opciones para controlar las direcciones establecidas
+por el <code>deps.edn</code>.</p><p>Para ver qué opciones soporta <em>Clojure CLI</em>, utiliza la opción <code>-h</code>.</p><p>Algo interesante es comparar el texto de ayuda de <em>Clojure CLI</em> con el
+texto de ayuda de <code>clojure.main</code>. Al hacerlo, te darás cuenta que un
+texto está incluido en el otro. Inténtalo:</p><pre><code class="Shell">$ clj -h
+$ clj -M -h
+</code></pre><p>Dejo el artículo hasta aquí porque mi intención no es escribir un
+manual de <em>Clojure CLI</em>, sino más bien señalar y exponer la relación
+que existe entre ella y el <code>clojure.jar</code>.</p><p>Para saber cómo utilizar bien <em>Clojure CLI</em>, lee al menos la guía
+<a href="https://clojure.org/guides/deps_and_cli">Deps and CLI Guide</a>.</p><p>En un próximo artículo exploraré cómo crear un archivo <code>jar</code> a partir
+de un programa escrito en Clojure.</p><h1 id="apéndice">Apéndice</h1><h2 id="enseñarle-al-sistema-cómo-conseguir-los-ejecutables-y-el-manual-de-clojure-cli">Enseñarle al sistema cómo conseguir los ejecutables y el manual de Clojure CLI</h2><p>Para que el sistema consiga fácilmente Los *«scripts» <code>clojure</code> y
+<code>cli</code> añade a la variable de entorno <code>PATH</code> la subcarpeta <code>bin</code>.</p><p>Para que el manual en línea <code>man</code> encuentre los manuales de <code>clojure</code>
+y <code>cli</code>, hay que añadir información acerca de la subcarpeta
+<code>share/man</code> en diferentes lugares, dependiendo del sistema que uses.</p><p>Si usas una distribución de Linux basada en Debian, añade
+<code>MANDATORY_MANPATH</code> al archivo <code>.manpath</code> del «$HOME».</p><p>En caso contrario, añade una entrada al <code>MANPATH\_MAP</code> que relacione la
+subcarpeta <code>bin</code> con la subcarpeta <code>share/man</code>.</p><p>En este caso de ejemplo, y suponiendo un sistema <em>Ubuntu</em>:</p><pre><code class="bash">$ echo 'export PATH="$HOME/clojure/bin/:$PATH"' &gt;&gt; ~/.bashrc
+$ echo 'MANDATORY_PATH home/ubuntu/clojure/share/man' &gt;&gt; ~/.manpath
+</code></pre>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/CLI/">CLI</a>
+    
+    <a href="/tags-output/Clojure%20CLI/">Clojure CLI</a>
+    
+    <a href="/tags-output/Clojure/">Clojure</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/Java/">Java</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2021-10-09-clojure-el-jar/">Clojure el Jar &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2021-10-11-clojure-cli/";
+            this.page.identifier = "Clojure CLI";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2021 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
