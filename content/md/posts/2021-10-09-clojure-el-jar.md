@@ -44,10 +44,10 @@ La idea es clonar el repositorio de Clojure, y ejecutar la tarea de empaquetado.
 
 En otras palabras:
 
-```
-git clone https://github.com/clojure/clojure.git
-cd clojure
-mvn -Plocal -Dmaven.test.skip=true package
+```shell
+$ git clone https://github.com/clojure/clojure.git
+$ cd clojure
+$ mvn -Plocal -Dmaven.test.skip=true package
 ```
 
 El paquete `clojure.jar` generado tendrá todas las dependencias
