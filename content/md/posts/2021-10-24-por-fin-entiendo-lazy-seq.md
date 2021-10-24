@@ -7,9 +7,9 @@
 mucho.
 
 La explicación que le doy a ese fenómeno es que la biblioteca estándar
-nos ofrece una colección de funciones superiores que, usando
-`lazy-seq` en el fondo, me ha permitido resolver todos los problemas
-en los cuales dicha función es pertinente para la solución.
+de Clojure nos ofrece una colección de funciones superiores que,
+usando `lazy-seq` en el fondo, me ha permitido resolver todos los
+problemas en los cuales dicha función es pertinente para la solución.
 
 Esta colección de funciones que menciono contiene por ejemplo a `map`
 y `reduce`.
