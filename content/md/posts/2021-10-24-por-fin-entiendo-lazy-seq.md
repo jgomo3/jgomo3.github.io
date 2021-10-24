@@ -1,6 +1,6 @@
 {:title "¡Por fin entiendo lazy-seq!"
  :layout :post
- :tags ["es" "Clojure" "lazy" "evaluación perezosa"]
+ :tags ["es" "Clojure" "lazy" "evaluación perezosa" "lazy-seq" "seq" "Python" "generadores" "generators"]
  :author "Jesús Gómez"}
 
 `lazy-seq` es una de esas funciones que no he tenido que utilizar
@@ -15,8 +15,7 @@ Esta colección de funciones que menciono contiene por ejemplo a `map`
 y `reduce`.
 
 Nunca había entendido bien cómo utilizarlo. Y tal vez por la falta de
-necesidad práctica, no me había propuesto a entender bien cómo
-utilizarla.
+necesidad práctica, no me había propuesto a quitarme esa duda.
 
 Hasta hoy (o bueno, hasta hace un par de días).
 
@@ -59,28 +58,26 @@ expresión. Dicha expresión debe ser una secuencia, una colección o
 «latente». Ese objeto es un `LazySeq`.
 
 El objeto `LazySeq` reacciona cuando se invoca la función `seq` con él
-como argumento.
+como argumento, y sólo entonces es que Clojure evalúa la expresión,
+para así obtener la secuencia deseada.
 
-Así de claro estaba en la mismísima documentación de `lazy-seq`:
+Así de claro estaba en la mismísima documentación de `lazy-seq`.
 
-> Takes a body of expressions that returns an ISeq or nil, and yields
-> a Seqable object that will invoke the body only the first time seq
-> is called, and will cache the result and return it on all subsequent
-> seq calls. See also - realized?
-
-> Recibe un cuerpo de expresiones que devuelven un ISeq o nil, y
-> entrega un objeto «Secuenciable» que invocará el cuerpo sólo la
-> primera vez que seq sea llamada, y recordará en «caché» el resultado
+> Traducción al español de la documentación en inglés de `lazy-seq`:
+>
+> «Recibe un cuerpo de expresiones que devuelven un ISeq o nil, y
+> entrega un objeto "Secuenciable" que invocará el cuerpo sólo la
+> primera vez que seq sea llamada, y recordará en "caché" el resultado
 > y lo devolverá en todas las llamadas subsecuentes a seq. Ver
-> también - realized?
+> también - realized?»
 
 [1] Técnicamente una `ISeq` o `nil`
 
 # Realización
 
-La clave para mi entendimiento fue entender que los que recibe
-`lazy-seq` es una expresión para definir una secuencia completa. No es
-un «paso a paso» de cómo generar uno a uno los elementos.
+La clave para mi fue entender que los que recibe `lazy-seq` es una
+expresión para definir una secuencia completa. No es un «paso a paso»
+de cómo generar uno a uno los elementos.
 
 Es decir, esta expresión es válida:
 
