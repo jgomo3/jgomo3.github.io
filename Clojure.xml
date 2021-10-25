@@ -2,19 +2,16 @@
 mucho.La explicación que le doy a ese fenómeno es que la biblioteca estándar
 de Clojure nos ofrece una colección de funciones superiores que,
 usando lazy-seq en el fondo, me ha permitido resolver todos los
-problemas en los cuales dicha función es pertinente para la solución.</description><author>Jesús Gómez</author><pubDate>Sun, 24 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-10-11-clojure-cli/</guid><link>http://jgomo3.info/posts-output/2021-10-11-clojure-cli/</link><title>Clojure CLI</title><description>En el artículo Clojure el Jar
+problemas en los cuales dicha función es pertinente para la solución.</description><pubDate>Sun, 24 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-10-11-clojure-cli/</guid><link>http://jgomo3.info/posts-output/2021-10-11-clojure-cli/</link><title>Clojure CLI</title><description>En el artículo Clojure el Jar
 exploré cómo utilizar clojure.main de forma «primitiva».Para programas más complejos, dividido en módulos, que dependan de
 bibliotecas de terceros, que requieran «recursos», etc., puede ser muy
 complicado preparar el entorno de ejecución para que el programa pueda
-acceder a dichas elementos.</description><author>Jesús Gómez</author><pubDate>Mon, 11 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/</guid><link>http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/</link><title>Clojure el Jar</title><description>Los clojuristas estamos acostumbrados a interactuar con Clojure con
+acceder a dichas elementos.</description><pubDate>Mon, 11 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/</guid><link>http://jgomo3.info/posts-output/2021-10-09-clojure-el-jar/</link><title>Clojure el Jar</title><description>Los clojuristas estamos acostumbrados a interactuar con Clojure con
 las órdenes clojure o clj.Lo que para muchos puede ser algo desconocido es el hecho de que esos
 comandos son en realidad unos «scripts» escritos en Bash, conocidos
 como «Clojure CLI», y que en realidad, Clojure es un programa
-distribuido como un .jar.</description><author>Jesús Gómez</author><pubDate>Sat, 09 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-09-23-clojure-y-java/</guid><link>http://jgomo3.info/posts-output/2021-09-23-clojure-y-java/</link><title>Clojure y Java</title><description>Clojure es un lenguaje «hospedado», lo que significa que el entorno de
+distribuido como un .jar.</description><pubDate>Sat, 09 Oct 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-09-23-clojure-y-java/</guid><link>http://jgomo3.info/posts-output/2021-09-23-clojure-y-java/</link><title>Clojure y Java</title><description>Clojure es un lenguaje «hospedado», lo que significa que el entorno de
 ejecución es uno que define y controla un tercero (el anfitrión) que
 típicamente es otro lenguaje de programación.Los anfitriones más conocidos de Clojure son Java y Javascript.</description><pubDate>Thu, 23 Sep 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2021-07-21-ftp-hog/</guid><link>http://jgomo3.info/posts-output/2021-07-21-ftp-hog/</link><title>ftp-hog: sencillo servidor ftp a la MailHog</title><description>Hace tiempo tuve que trabajar con FTP.Cuando uno desarrolla sistemas que deben interactuar con sistemas de
 terceros, ayuda mucho tener un sustituto que podamos controlar
-totalmente.</description><pubDate>Wed, 21 Jul 2021 00:00:00 -0230</pubDate></item><item><guid>http://jgomo3.info/posts-output/2020-11-07-actualización-del-blog/</guid><link>http://jgomo3.info/posts-output/2020-11-07-actualización-del-blog/</link><title>Actualización del blog</title><description>Después de conocer un poco más al proyecto
-SciCloj, decidí copiarles cómo usan
-Cryogen para generar su sitio.Primero lo utilicé para crear un sitio para la comunidad
-Clojure Hispano.</description><pubDate>Sat, 07 Nov 2020 00:00:00 -0330</pubDate></item></channel></rss>
+totalmente.</description><pubDate>Wed, 21 Jul 2021 00:00:00 -0230</pubDate></item></channel></rss>
