@@ -76,7 +76,7 @@ lein run
 Y copio su contenido completo en el «worktree» de `master`:
 
 ```shell
-rsync -av public/ ../jgomo3.github.io-master/`
+rsync -av public/ ../jgomo3.github.io-master/
 ```
 
 Finalmente publico el cambio en Github:

@@ -159,13 +159,14 @@ Gracias al dinamismo de Ruby, podemos explorar esta técnica
 modificando tareas específicas, y si percibimos un patrón podemos
 expresarlo en una clase especializada de `Rake::Task`.
 
-Esta técnica me parece muy valiosa porque le nos permite usar **Rake**
+Esta técnica me parece muy valiosa porque nos permite usar **Rake**
 para controlar la ejecución de las tareas basandonos en condiciones
 arbitrarias del estado de sistemas, no necesariamente relacionadas con
 archivos.
 
-Ahora sabemos que podemos asociar una tarea con el estado de sistemas
-como los contenedores de Linux, variables de entorno.
+Ahora sabemos que podemos asociar una tarea con diferentes condiciones
+del sistema como el estado de algún contenedor de Linux o la presencia
+de variables de entorno.
 
 Pero más importante aún, sabemos que podemos verificar cualquier
 condición, como objetos en bases de datos, usuarios, retos (palabras
