@@ -88,7 +88,7 @@ ejecuta la tarea A.
 
 Por ejemplo, supongamos que estamos redactando un documento en Libre
 Office Writer (.odt) y queremos generar un archivo PDF (.pdf) a
-partir del documento. El comando para lograr esto es:
+partir del documento. La orden para lograr esto es:
 
 ```sh
 lowriter --convert-to pdf <el-nombre-del-documento>
@@ -121,3 +121,171 @@ sucederán sólo si el archivo `el-documento.odt` se ha modificado
 recientemente o si el archivo `el-documento.pdf`. Si no, no hace falta
 y por ende no se ejecutan las acciones.
 
+Veamoslo en acción. Supongamos que sólo tenemos en una carpeta el
+archivo Rakefile con las tareas `el-documento.odt` y
+`el-documento.pdf` definidas, y el archivo `el-documento.odt` con
+algún contenido.
+
+Entonces, desde esa carpeta, ejectamos lo siguiente:
+
+```sh
+rake --trace el-documento.pdf
+```
+
+La opción --trace hace que **Rake** reporte qué tareas está
+considerando realizar y si las realiza o no, y en qué orden.
+
+El resultado de la orden anterior es que el archivo `el-documento.pdf`
+existe y el siguiente reporte de **Rake**:
+
+```sh
+** Invoke el-documento.pdf (first_time)
+** Invoke el-documento.odt (first_time, not_needed)
+** Execute el-documento.pdf
+```
+
+Con `Invoke el-documento.pdf (first_time)` **Rake** nos está indicando
+que va a procesar la tarea `el-documento.pdf` por primera vez durante
+la ejecución de esta orden.
+
+Luego, con `Invoke el-documento.odt (first_time, not_needed)` nos
+indica algo similar pero con la tarea `el-documento.odt` pero además
+nos indica que no es necesario ejecutar las acciones de la tarea. Si
+revisas la definición de la tarea, verás que no tiene acciones.
+
+Por último, con `Execute el-documento.pdf` **Rake** nos está indicando
+que está ejecutando las acciones de la tarea `el-documento.pdf`.
+
+Si volvemos a ejecutar la misma orden inmediatamente:
+
+```sh
+rake --trace el-documento.pdf
+```
+
+Obtenemos este reporte:
+
+```sh
+** Invoke el-documento.pdf (first_time, not_needed)
+** Invoke el-documento.odt (first_time, not_needed)
+```
+
+**Rake** concluyó que no hace falta ejecutar ninguna tarea, y en
+efecto, no lo hace.
+
+Si en algún momento modificamos el archivo fuente `el-documento.odt` o
+eliminamos el archivo derivado `el-documento.pdf`, **Rake** volverá a
+ejecutar las acciones de la tarea `el-documento.pdf` si se lo pedimos.
+
+**Rake** hace esta verificacion de la fecha de última modificación de
+los archivos para determinar si ejecutar o no una tarea definida con
+el método `file`.
+
+Pero algo no muy conocido es el hecho de que **Rake** hace esta
+verificación **SIEMPRE** antes de ejecutar cualquier tipo de tarea
+(sea creada con el método `file`, con el método `task` o como sea que
+haya sido creada la tarea).
+
+Sucede que a menos que se diga lo contrario, una tarea siempre
+necesita ser ejecutada. Pero `file` crea una tarea especial que
+necesita ser ejecutada según las fechas de última modificación del
+archivo correspondiente y el de los archivos asociados a las tareas de
+las cuales depende.
+
+**Rake** le pregunta a la tarea misma si necesita ser ejecutada. Para
+ello invoca el método `needed?` de la tarea.
+
+Podemos verificar esto desde la consola de Ruby. Supongamos que
+`el-documento.pdf` está recien creado:
+
+```ruby
+require 'rake'
+load 'Rakefile'
+Rake::Task['el-documento.pdf'].needed? # => false
+```
+
+La tarea `el-documento.pdf` no necesita ser ejecutada. Pero si
+modificamos el archivo `el-documento.odt` y volvemos a preguntar:
+
+```ruby
+Rake::Task['el-documento.pdf'].needed? # => true
+```
+
+**Rake** considera que la tarea `el-documento.pdf` necesita ser
+ejecutada.
+
+¿Pero qué pasa si queremos que nuestras tareas se ejecuten
+condicionalmente independientemente de si son tareas asociadas a
+archivos, y con condiciones arbitrarias determinadas por otros
+contextos?
+
+Gracias al dinamísmo de Ruby, es muy sencillo. Sólo debemo
+sobreescribir el métdo `needed?` de nuestras tareas con dicha lógica
+arbitraria.
+
+Un ejemplo muy sencillo sería definir tareas que vamos a ejecutar sí y
+sólo si una variable de entorno tiene un valor específico. El
+siguiente archivo `Rakefile` ilustra la idea
+
+```ruby
+def luz_verde?
+  !!ENV['LUZ_VERDE']
+end
+
+task :una_tarea do
+  puts "Una tarea dice: ¡Hola!"
+end
+def (Rake::Task[:una_tarea]).needed?
+  luz_verde?
+end
+```
+
+Entonces, desde la consola del sistema podemos pedirle a **Rake** que
+ejecute la tarea `una_tarea`, pero al menos que la variable de entorno
+`LUZ_VERDE` esté definida, sus acciones no se van a ejectuar:
+
+```sh
+rake una_tarea
+LUZ_VERDE= rake una_tarea
+Una tarea dice: ¡Hola!
+```
+
+Un caso de uso para este ejemplo de la variable de entorno sería
+proteger tareas para que sean ejecutadas sólo en ciertos entornos. Por
+ejemplo, tareas de prueba que no puedas ser ejecutadas en entornos de
+producción para evitar pérdidas de datos accidentales.
+
+Un caso de uso donde estoy utilizando esta técnica por los momentos
+(hasta que encuentre una mejor) es en la gestión de contenedores Linux
+(LXC).
+
+Una tarea que «lance» un contenedor puede verificar primero si existe
+o no dicho contenedor. Igualmente una tarea que «elimine» un
+contenedor, puede verificar si existe antes de intentarlo.
+
+En este caso en particular de los contenedores, estoy considerando la
+alternativa de utilizar gestión de errores en vez de estas
+precondiciones.
+
+Pero en todo caso, las precondiciones arbitrarias son una idea
+interesante que merece ser explorada aún más.
+
+El siguiente paso es crear módulos o clases especializadas de
+`Rake::Task` para casos de uso específicos.
+
+**Rake** mismo tiene varias especializaciones que pueden servir de
+inspiración:
+
+ - `FileTask`: The one created by the method `file`
+ - `FileCreationTask`: especial case of `FileTask`
+ - `MultiTask`: Run dependencies in parallel
+ - `PackageTask`: Creates tasks for packaging files in archive files
+   (tar, zip, etc).
+ - `TestTask`: Task for running tests
+
+En particular, `FileTask` y `FileCreationTask` sobreescriben el método
+`needed?`.
+
+Esta técnica me parece muy valiosa porque le abre las puertas a
+**Rake** para controlar la ejecución de las tareas basado en el estado
+de sistemas que no tengan que depender de la existencia o condiciones
+de archivos. El estado puede ser cualquier cosa que quieras.
