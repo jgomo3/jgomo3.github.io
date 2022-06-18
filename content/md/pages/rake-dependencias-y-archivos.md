@@ -1,7 +1,8 @@
-{:title "Rake y precondiciones arbitrarias"
- :layout :post
+{:title "Rake, dependencias y archivos"
+ :layout :page
+ :page-index 1
  :tags ["es" "Ruby" "Rake"]}
-
+ 
 [Rake](https://ruby.github.io/rake/index.html), el
 [Make](https://www.gnu.org/software/make/) de
 [Ruby](https://www.ruby-lang.org/es/), pone a nuestra disposición un
@@ -17,11 +18,15 @@ ejecute mencionando el nombre de la tarea.
 
 Nada del otro mundo por ahora. Lo que hace de estas herramientas algo
 casi necesario en el arsenal de los programadores, es que puedemos
-expresar relaciones de dependencia entre una tarea y otra. De esta
-manera, al solicitarle al computador que realize una simple tarea, es
-posible que realice muchas si dicha tarea depende de otras.
+expresar relaciones de dependencia entre una tarea y otra.
 
-Antes de proceguir, veamos un ejemplo.
+## Dependencia entre tareas
+
+Al expresar que unas tareas dependen de otras, si le pedimos a
+**Rake** que realice una tarea, es posible que realice muchas si dicha
+tarea depende de otras.
+
+Veamos un ejemplo.
 
 Expresemos 2 tareas:
 
@@ -58,6 +63,7 @@ end
 Y así obtemos el resultado esperado. Nota que además de poder «pedir
 algo», podemos «decir por favor» independientemente:
 
+
 ```sh
 rake decir_por_favor
 ```
@@ -69,6 +75,8 @@ Por favor
 ```
 
 También nota que no se puede «pedir algo» si «decir por favor».
+
+## Rake y la generación de archivos
 
 Cuando las tareas producen archivos (derivados) a partir de otros
 (fuentes), **Rake** (y las otras herramientas de este tipo) aprovechan
@@ -106,7 +114,7 @@ en el archivo `Rakefile`:
 file 'el-documento.odt'
 
 file 'el-documento.pdf' => ['el-documento.odt'] do
-  `lowriter --convert-to pdf el-documento.odt`
+  sh "lowriter --convert-to pdf el-documento.odt"
 end
 ```
 
@@ -116,12 +124,7 @@ asociada a un archivo (el archivo tiene como nombre el mismo nombre de
 la tarea). De esta manera le indicamos a **Rake** que se comporte como
 ya hemos descrito.
 
-Es decir, si ejecutamos la tarea `el-documento.pdf`, las acciones
-sucederán sólo si el archivo `el-documento.odt` se ha modificado
-recientemente o si el archivo `el-documento.pdf`. Si no, no hace falta
-y por ende no se ejecutan las acciones.
-
-Veamoslo en acción. Supongamos que sólo tenemos en una carpeta el
+Veamos esto en acción. Supongamos que sólo tenemos en una carpeta el
 archivo Rakefile con las tareas `el-documento.odt` y
 `el-documento.pdf` definidas, y el archivo `el-documento.odt` con
 algún contenido.
@@ -136,12 +139,13 @@ La opción --trace hace que **Rake** reporte qué tareas está
 considerando realizar y si las realiza o no, y en qué orden.
 
 El resultado de la orden anterior es que el archivo `el-documento.pdf`
-existe y el siguiente reporte de **Rake**:
+existe en la carpeta y además **Rake** muestra el siguiente reporte:
 
 ```sh
 ** Invoke el-documento.pdf (first_time)
 ** Invoke el-documento.odt (first_time, not_needed)
 ** Execute el-documento.pdf
+lowriter --convert-to pdf el-documento.odt
 ```
 
 Con `Invoke el-documento.pdf (first_time)` **Rake** nos está indicando
@@ -153,8 +157,12 @@ indica algo similar pero con la tarea `el-documento.odt` pero además
 nos indica que no es necesario ejecutar las acciones de la tarea. Si
 revisas la definición de la tarea, verás que no tiene acciones.
 
-Por último, con `Execute el-documento.pdf` **Rake** nos está indicando
+Con `Execute el-documento.pdf` **Rake** nos está indicando
 que está ejecutando las acciones de la tarea `el-documento.pdf`.
+
+Finalmente nos muestra la acción (`lowriter ...`) porque utilizamos el
+método `sh` en la definición de las acciones de la tarea. Una forma
+más de ratificar que las acciones se ejecutaron.
 
 Si volvemos a ejecutar la misma orden inmediatamente:
 
@@ -180,112 +188,24 @@ ejecutar las acciones de la tarea `el-documento.pdf` si se lo pedimos.
 los archivos para determinar si ejecutar o no una tarea definida con
 el método `file`.
 
-Pero algo no muy conocido es el hecho de que **Rake** hace esta
-verificación **SIEMPRE** antes de ejecutar cualquier tipo de tarea
-(sea creada con el método `file`, con el método `task` o como sea que
-haya sido creada la tarea).
+## Conclusión
 
-Sucede que a menos que se diga lo contrario, una tarea siempre
-necesita ser ejecutada. Pero `file` crea una tarea especial que
-necesita ser ejecutada según las fechas de última modificación del
-archivo correspondiente y el de los archivos asociados a las tareas de
-las cuales depende.
+Gracias a las dependencias entre tareas, podemos desencadenar una gran
+cantidad de tareas con tan solo ejecutar una, si diseñamos bien la red
+de interdependencias, con lo cual podemos ahorrar mucho tiempo en
+tareas repetitivas.
 
-**Rake** le pregunta a la tarea misma si necesita ser ejecutada. Para
-ello invoca el método `needed?` de la tarea.
+Adicionalmente, el trato especial que le da **Rake** a las tareas
+creadas con el método `file` permite que **Rake** omita tareas
+innecesarias cuando no haga falta derivar un archivo que ya está
+derivado y sus fuentes no han cambiado.
 
-Podemos verificar esto desde la consola de Ruby. Supongamos que
-`el-documento.pdf` está recien creado:
+Gracias a esto, no tenemos que pensar a la hora de ejecutar tareas
+repetitivas. Simplemente le indicamos a **Rake** que realice las
+tareas y él determinará si las realiza o no.
 
-```ruby
-require 'rake'
-load 'Rakefile'
-Rake::Task['el-documento.pdf'].needed? # => false
-```
+## Más información
 
-La tarea `el-documento.pdf` no necesita ser ejecutada. Pero si
-modificamos el archivo `el-documento.odt` y volvemos a preguntar:
-
-```ruby
-Rake::Task['el-documento.pdf'].needed? # => true
-```
-
-**Rake** considera que la tarea `el-documento.pdf` necesita ser
-ejecutada.
-
-¿Pero qué pasa si queremos que nuestras tareas se ejecuten
-condicionalmente independientemente de si son tareas asociadas a
-archivos, y con condiciones arbitrarias determinadas por otros
-contextos?
-
-Gracias al dinamísmo de Ruby, es muy sencillo. Sólo debemo
-sobreescribir el métdo `needed?` de nuestras tareas con dicha lógica
-arbitraria.
-
-Un ejemplo muy sencillo sería definir tareas que vamos a ejecutar sí y
-sólo si una variable de entorno tiene un valor específico. El
-siguiente archivo `Rakefile` ilustra la idea
-
-```ruby
-def luz_verde?
-  !!ENV['LUZ_VERDE']
-end
-
-task :una_tarea do
-  puts "Una tarea dice: ¡Hola!"
-end
-def (Rake::Task[:una_tarea]).needed?
-  luz_verde?
-end
-```
-
-Entonces, desde la consola del sistema podemos pedirle a **Rake** que
-ejecute la tarea `una_tarea`, pero al menos que la variable de entorno
-`LUZ_VERDE` esté definida, sus acciones no se van a ejectuar:
-
-```sh
-rake una_tarea
-LUZ_VERDE= rake una_tarea
-Una tarea dice: ¡Hola!
-```
-
-Un caso de uso para este ejemplo de la variable de entorno sería
-proteger tareas para que sean ejecutadas sólo en ciertos entornos. Por
-ejemplo, tareas de prueba que no puedas ser ejecutadas en entornos de
-producción para evitar pérdidas de datos accidentales.
-
-Un caso de uso donde estoy utilizando esta técnica por los momentos
-(hasta que encuentre una mejor) es en la gestión de contenedores Linux
-(LXC).
-
-Una tarea que «lance» un contenedor puede verificar primero si existe
-o no dicho contenedor. Igualmente una tarea que «elimine» un
-contenedor, puede verificar si existe antes de intentarlo.
-
-En este caso en particular de los contenedores, estoy considerando la
-alternativa de utilizar gestión de errores en vez de estas
-precondiciones.
-
-Pero en todo caso, las precondiciones arbitrarias son una idea
-interesante que merece ser explorada aún más.
-
-El siguiente paso es crear módulos o clases especializadas de
-`Rake::Task` para casos de uso específicos.
-
-**Rake** mismo tiene varias especializaciones que pueden servir de
-inspiración:
-
- - `FileTask`: The one created by the method `file`
- - `FileCreationTask`: especial case of `FileTask`
- - `MultiTask`: Run dependencies in parallel
- - `PackageTask`: Creates tasks for packaging files in archive files
-   (tar, zip, etc).
- - `TestTask`: Task for running tests
-
-En particular, `FileTask` y `FileCreationTask` sobreescriben el método
-`needed?`.
-
-Esta técnica me parece muy valiosa porque le abre las puertas a
-**Rake** para controlar la ejecución de las tareas basado en el estado
-de sistemas que no tengan que depender de la existencia o condiciones
-de archivos. El estado puede ser cualquier cosa que quieras.
+Para indagar más acerca de **Rake**, consulta [la documentación
+oficial del proyecto](https://ruby.github.io/rake/) (por los momentos,
+en inglés).
