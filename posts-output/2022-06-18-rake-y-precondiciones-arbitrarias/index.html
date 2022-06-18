@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Rake y precondiciones arbitrarias</title>
+    
+<meta name="keywords" content="seq,ftp-hog,CLI,evaluación perezosa,Python,MailHog,Rake,Ruby,Clojure CLI,lazy-seq,Clojure,jar,es,generators,lazy,Java,generadores">
+
+<meta name="description" content="Rake es una herramienta muy poderosa que nos permite automatizar
+tareas repetitivas de manera eficiente.En el artículo Rake, dependencias y
+archivos
+doy una pequeña introducción de Rake. Si no estás familiarizado
+con Rake, te invito a leer ese artículo antes de continuar con
+este.">
+
+<meta property="og:description" content="Rake es una herramienta muy poderosa que nos permite automatizar
+tareas repetitivas de manera eficiente.En el artículo Rake, dependencias y
+archivos
+doy una pequeña introducción de Rake. Si no estás familiarizado
+con Rake, te invito a leer ese artículo antes de continuar con
+este.">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/" />
+<meta property="og:title" content="Rake y precondiciones arbitrarias" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">Rake y precondiciones arbitrarias</a></li>
+                        
+                        <li><a href="/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/">¡Por fin entiendo lazy-seq!</a></li>
+                        
+                        <li><a href="/posts-output/2021-10-11-clojure-cli/">Clojure CLI</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">June 18, 2022</div>
+        
+    </div>
+    <h2>Rake y precondiciones arbitrarias</h2>
+</div>
+<div>
+    
+    <p><strong>Rake</strong> es una herramienta muy poderosa que nos permite automatizar
+tareas repetitivas de manera <strong>eficiente</strong>.</p><p>En el artículo <a href="https://jgomo3.info/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y
+archivos</a>
+doy una pequeña introducción de <strong>Rake</strong>. Si no estás familiarizado
+con <strong>Rake</strong>, te invito a leer ese artículo antes de continuar con
+este.</p><p>La eficiencia de <strong>Rake</strong> es evidente sobre todo cuando lo utilizamos
+para derivar archivos a partir de archivos fuente.</p><p>Pero esa eficiencia aparentemente limitada a tareas relacionadas con
+archivos, puede ser explotada para cualquier tipo de tarea arbitraria.</p><p>En este artículo pretendo explicar cómo lograrlo.</p><p>Para ello empecemos repasando cómo <strong>Rake</strong> nos brinda dicha
+eficiencia cuando trabajamos con archivos.</p><h2 id="cómo-rake-omite-la-reconstrucción-innecesaria-de-archivos">Cómo Rake omite la reconstrucción innecesaria de archivos</h2><p>Una característica bien conocida de <strong>Rake</strong> es que puede ahorrar
+tiempo evitando ejecutar tareas que dependen de archivos fuentes que
+no hayan sido modificados.</p><p>El ejemplo con el que trato de explicar este concepto en el artículo
+que dediqué a <strong>Rake</strong> es el siguiente:</p><pre><code class="ruby">file 'el-documento.odt'
+
+file 'el-documento.pdf' =&gt; ['el-documento.odt'] do
+  sh "lowriter --convert-to pdf el-documento.odt"
+end
+</code></pre><p>Sabemos que, a menos que modifiquemos el archivo <code>el-documento.odt</code> o
+que el archivo <code>el-documento.pdf</code> no exista, la tarea
+<code>el-documento.pdf</code> no será ejecutada (lo que nos ahorra tiempo).</p><p>Pero algo no muy conocido es el hecho de que <strong>Rake</strong> hace esta
+verificación <strong>SIEMPRE</strong> antes de ejecutar cualquier tipo de tarea,
+sea creada con el método <code>file</code>, con el método <code>task</code> o como sea que
+haya sido creada la tarea.</p><p>Lo que sucede es que cuando una tarea es creada convencionalmente (por
+ejemplo, con el método <code>task</code>) esta tarea siempre necesita ejecutarse.</p><p>Por el contrario, cuando una tarea es creada con el método <code>file</code>,
+ella es una tarea especial que necesita ser ejecutada según las fechas
+de última modificación del archivo correspondiente y el de los
+archivos asociados a las tareas de las cuales depende.</p><p>En cualquier caso, <strong>Rake</strong> le pregunta a la tarea misma si necesita
+ser ejecutada. Para ello invoca el método <code>needed?</code> de la tarea.</p><p>Podemos verificar esto desde la consola de <strong>Ruby</strong>. Supongamos que
+<code>el-documento.pdf</code> está recién creado y ejecutemos lo siguiente en la
+consola de <strong>Ruby</strong>:</p><pre><code class="ruby">&gt; require 'rake'
+&gt; load 'Rakefile'
+&gt; Rake::Task['el-documento.pdf'].needed?
+false
+</code></pre><p>Como esperábamos, la tarea <code>el-documento.pdf</code> no necesita ser
+ejecutada (porque el PDF está recién creado). Pero si modificamos el
+archivo <code>el-documento.odt</code> y volvemos a preguntar:</p><pre><code class="ruby">&gt; Rake::Task['el-documento.pdf'].needed?
+true
+</code></pre><p><strong>Rake</strong> considera que la tarea <code>el-documento.pdf</code> necesita ser
+ejecutada.</p><h2 id="cómo-hacer-que-rake-omita-cualquier-tipo-de-tarea-con-condiciones-arbitrarias">Cómo hacer que Rake omita cualquier tipo de tarea con condiciones arbitrarias</h2><p>¿Podemos aprovechar este mecanismo para omitir tareas por otras
+razones que no sean la fecha de última modificación de algún archivo?</p><p>Sí. Gracias al dinamismo de Ruby, es muy sencillo. Sólo debemos
+sobrescribir el método <code>needed?</code> de las tareas a precondicionar.</p><p>Un ejemplo muy sencillo sería definir tareas que debería ejecutarse sí
+y sólo si una variable de entorno está definida.</p><p>El siguiente archivo <code>Rakefile</code> ilustra la idea</p><pre><code class="ruby">def luz_verde?
+  !!ENV['LUZ_VERDE']
+end
+
+task :una_tarea do
+  puts "Una tarea dice: ¡Hola!"
+end
+def (Rake::Task[:una_tarea]).needed?
+  luz_verde?
+end
+</code></pre><p>Con esta tarea así definida, desde la consola del sistema podemos
+pedirle a <strong>Rake</strong> que ejecute la tarea <code>una_tarea</code>, pero a menos que
+la variable de entorno <code>LUZ_VERDE</code> esté definida, sus acciones no se
+van a ejecutar:</p><pre><code class="sh">$ rake una_tarea
+# Nada pasa
+$ LUZ_VERDE= rake una_tarea
+Una tarea dice: ¡Hola!
+</code></pre><p>Limitar una tarea con variables de entorno podría ser útil para
+proteger sistemas de tareas que sólo deberían ejecutarse en ciertos
+entornos.</p><p>Por ejemplo, algunas tareas de prueba que modifiquen bases de datos
+pueden ser peligrosas en entornos de producción.</p><p>Un caso de uso donde estoy utilizando esta técnica es en la gestión de
+<a href="https://linuxcontainers.org/">contenedores Linux (LXC)</a>.</p><p>Una tarea que «lance» un contenedor puede verificar primero si existe
+o no dicho contenedor.</p><p>Igualmente una tarea que «elimine» un contenedor, puede verificar si
+existe antes de intentarlo.</p><h2 id="refinamiento">Refinamiento</h2><p>En vez de modificar cada tarea una y otra vez, podemos crear una clase
+especializada de <code>Rake::Task</code> que redefina el método <code>needed?</code></p><p><strong>Rake</strong> mismo tiene varias especializaciones que pueden servir de
+inspiración:</p><ul><li><a href="https://github.com/ruby/rake/blob/73a21161bbd0db02804bbd11606a7529e2a0aaa2/lib/rake/file_task.rb">FileTask</a>: Es el tipo de tarea especial que crea <code>file</code>.</li><li><a href="https://github.com/ruby/rake/blob/73a21161bbd0db02804bbd11606a7529e2a0aaa2/lib/rake/file_creation_task.rb">FileCreationTask</a>: caso especial de <code>FileTask</code>.</li><li><a href="https://github.com/ruby/rake/blob/73a21161bbd0db02804bbd11606a7529e2a0aaa2/lib/rake/multi_task.rb">MultiTask</a>: Ejecuta las tareas de las que depende en forma paralela.</li><li><a href="https://github.com/ruby/rake/blob/73a21161bbd0db02804bbd11606a7529e2a0aaa2/lib/rake/packagetask.rb">PackageTask</a>: Crea tareas para empaquetar archivos (tar, zip, etc).</li><li><a href="https://github.com/ruby/rake/blob/73a21161bbd0db02804bbd11606a7529e2a0aaa2/lib/rake/testtask.rb">TestTask</a>: Tarea especializada en ejecutar pruebas.</li></ul><p>En particular, <code>FileTask</code> y <code>FileCreationTask</code> sobreescriben el método
+<code>needed?</code>.</p><h2 id="conclusiones">Conclusiones</h2><p>Gracias al dinamismo de Ruby, podemos explorar esta técnica
+modificando tareas específicas, y si percibimos un patrón podemos
+expresarlo en una clase especializada de <code>Rake::Task</code>.</p><p>Esta técnica me parece muy valiosa porque le nos permite usar <strong>Rake</strong>
+para controlar la ejecución de las tareas basandonos en condiciones
+arbitrarias del estado de sistemas, no necesariamente relacionadas con
+archivos.</p><p>Ahora sabemos que podemos asociar una tarea con el estado de sistemas
+como los contenedores de Linux, variables de entorno.</p><p>Pero más importante aún, sabemos que podemos verificar cualquier
+condición, como objetos en bases de datos, usuarios, retos (palabras
+clave), fechas (días festivos por ejemplo), etc.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/Rake/">Rake</a>
+    
+    <a href="/tags-output/Ruby/">Ruby</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/">¡Por fin entiendo lazy-seq! &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/";
+            this.page.identifier = "Rake y precondiciones arbitrarias";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2022 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
