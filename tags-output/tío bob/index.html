@@ -2,27 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Blog de Jesús Gómez (jgomo3): ¡Por fin entiendo lazy-seq!</title>
+    <title>Blog de Jesús Gómez (jgomo3): Posts Tagged &quot;tío bob&quot;</title>
     
-<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,Rake,limpio,organizado,software,desarrollo,organizada,Ruby,Clojure CLI,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
-
-<meta name="description" content="lazy-seq es una de esas funciones que no he tenido que utilizar
-mucho.La explicación que le doy a ese fenómeno es que la biblioteca estándar
-de Clojure nos ofrece una colección de funciones superiores que,
-usando lazy-seq en el fondo, me ha permitido resolver todos los
-problemas en los cuales dicha función es pertinente para la solución.">
-
-<meta property="og:description" content="lazy-seq es una de esas funciones que no he tenido que utilizar
-mucho.La explicación que le doy a ese fenómeno es que la biblioteca estándar
-de Clojure nos ofrece una colección de funciones superiores que,
-usando lazy-seq en el fondo, me ha permitido resolver todos los
-problemas en los cuales dicha función es pertinente para la solución.">
-
-<meta property="og:url" content="http://jgomo3.info/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/" />
-<meta property="og:title" content="¡Por fin entiendo lazy-seq!" />
-<meta property="og:type" content="article" />
-
-    <link rel="canonical" href="http://jgomo3.info/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/">
+    <meta name="description" content="Información pública de mi persona y artículos en su mayoría de computación">
+    <meta name="keywords" content="">
+    
+    <link rel="canonical" href="http://jgomo3.info/tags-output/t%C3%ADo%20bob/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -156,106 +141,17 @@ problemas en los cuales dicha función es pertinente para la solución.">
         <div class="col-lg-12">
             <div id="content">
                 
-<div id="post">
-    <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">October 24, 2021</div>
-        
-        <span class="col-lg-6 right">By: Jesús Gómez</span>
-        
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged &quot;tío bob&quot;</h2>
     </div>
-    <h2>¡Por fin entiendo lazy-seq!</h2>
-</div>
-<div>
+    <ul>
     
-    <p><code>lazy-seq</code> es una de esas funciones que no he tenido que utilizar
-mucho.</p><p>La explicación que le doy a ese fenómeno es que la biblioteca estándar
-de Clojure nos ofrece una colección de funciones superiores que,
-usando <code>lazy-seq</code> en el fondo, me ha permitido resolver todos los
-problemas en los cuales dicha función es pertinente para la solución.</p><p>Esta colección de funciones que menciono contiene por ejemplo a <code>map</code>
-y <code>reduce</code>.</p><p>Nunca había entendido bien cómo utilizarlo. Y tal vez por la falta de
-necesidad práctica, no me había propuesto a quitarme esa duda.</p><p>Hasta hoy (o bueno, hasta hace un par de días).</p><p>En la literatura, cuando nos presentan <code>lazy-seq</code>, el ejemplo clásico
-es este:</p><pre><code class="clojure">(defn números-desde [n]
-	(lazy-seq (cons n (números-desde (inc n)))))
-
-(take 3 (números-desde 1)) ;; (1 2 3)
-</code></pre><p>Todos los ejemplos que he visto implican una llamada recursiva.</p><p>Algo que entiendo ahora es que si bien, para efectos prácticos,
-<code>lazy-seq</code> viene casi siempre acompañada de una definición recursiva,
-esto en realidad no es necesario.</p><p>Otro bloque mental que yo tenía es que me esperaba algo parecido a los
-generadores de Python.</p><p>Un generador en Python, es una expresión similar a la definición de
-una función, que determina cómo generar un valor y entregarlo bajo
-demanda y tal vez generar y entregar más valores de la misma manera.</p><p>Pero al ver el ejemplo canónico del uso de <code>lazy-seq</code>, es difícil
-encontrar una regla clara y general de cómo y donde expresar ese
-«nuevo valor». En el ejemplo, el valor nuevo lo genera es la misma
-<code>n</code>, y el siguiente se genera con <code>(inc n)</code>.</p><p>La razón de tal confusión es que <code>lazy-seq</code> no es lo mismo que un
-generador en Python.</p><h1 id="def-lazy-seq-">(def lazy-seq ...)</h1><p><code>lazy-seq</code> es simplemente un «macro» que recibe una (1)
-expresión. Dicha expresión debe ser una secuencia, una colección o
-<code>nil</code>[1]. Luego retorna un objeto que tiene esa expresión
-«latente». Ese objeto es un <code>LazySeq</code>.</p><p>El objeto <code>LazySeq</code> reacciona cuando se invoca la función <code>seq</code> con él
-como argumento, y sólo entonces es que Clojure evalúa la expresión,
-para así obtener la secuencia deseada.</p><p>Así de claro estaba en la mismísima documentación de <code>lazy-seq</code>.</p><blockquote><p>Traducción al español de la documentación en inglés de <code>lazy-seq</code>:</p><p>«Recibe un cuerpo de expresiones que devuelven un ISeq o nil, y
-entrega un objeto "Secuenciable" que invocará el cuerpo sólo la
-primera vez que seq sea llamada, y recordará en "caché" el resultado
-y lo devolverá en todas las llamadas subsecuentes a seq. Ver
-también - realized?»</p></blockquote><p>[1] Técnicamente una <code>ISeq</code> o <code>nil</code></p><h1 id="realización">Realización</h1><p>La clave para mi fue entender que los que recibe <code>lazy-seq</code> es una
-expresión para definir una secuencia completa. No es un «paso a paso»
-de cómo generar uno a uno los elementos.</p><p>Es decir, esta expresión es válida:</p><pre><code class="clojure">(lazy-seq [1 2 3 4 5 6])
-</code></pre><p>Como es un macro, la expresión queda pendiente, hasta el momento que
-algo quiera evaluarlo.</p><p>Es decir, ese vector no existe hasta que sea necesario.</p><p>Fíjense que no hay una expresión recursiva, no es necesario.</p><h1 id="nemotécnico">Nemotécnico</h1><p>Para recordar todo esto, lo que hago ahora es leer <code>lazy-seq</code> como
-algo indicando que transforme la secuencia dada en una secuencia
-«lazy».</p><p>De ahora en adelante, no voy a olvidar cómo usar <code>lazy-seq</code>, aunque
-tal vez no lo vuelva a utilizar mucho.</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
+        <li>
+            <a href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño</a>
+        </li>
     
-    <a href="/tags-output/seq/">seq</a>
-    
-    <a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a>
-    
-    <a href="/tags-output/Python/">Python</a>
-    
-    <a href="/tags-output/lazy-seq/">lazy-seq</a>
-    
-    <a href="/tags-output/Clojure/">Clojure</a>
-    
-    <a href="/tags-output/es/">es</a>
-    
-    <a href="/tags-output/generators/">generators</a>
-    
-    <a href="/tags-output/lazy/">lazy</a>
-    
-    <a href="/tags-output/generadores/">generadores</a>
-    
-</div>
-
-
-    <div id="prev-next">
-        
-        <a href="/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">&laquo; Rake y precondiciones arbitrarias</a>
-        
-        
-        <a class="right" href="/posts-output/2021-10-11-clojure-cli/">Clojure CLI &raquo;</a>
-        
-    </div>
-
-    
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_config = function () {
-            this.page.url = "http://jgomo3.info/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/";
-            this.page.identifier = "¡Por fin entiendo lazy-seq!";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//jgomo3-info.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    
-
-
+    </ul>
 </div>
 
             </div>

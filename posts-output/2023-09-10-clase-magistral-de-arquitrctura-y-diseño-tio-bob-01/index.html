@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño</title>
+    
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,Rake,limpio,organizado,software,desarrollo,organizada,Ruby,Clojure CLI,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
+
+<meta name="description" content="Tabla de Contenidos">
+
+<meta property="og:description" content="Tabla de Contenidos">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño</a></li>
+                        
+                        <li><a href="/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">Rake y precondiciones arbitrarias</a></li>
+                        
+                        <li><a href="/posts-output/2021-10-24-por-fin-entiendo-lazy-seq/">¡Por fin entiendo lazy-seq!</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">September 10, 2023</div>
+        
+    </div>
+    <h2>Clase magistral de arquitectura y diseño</h2>
+</div>
+<div>
+    
+    <h1 id="tabla-de-contenidos">Tabla de Contenidos</h1><ol><li><a href="#orgd317d54">El Tío Bob</a></li><li><a href="#orga731efa">Día 1: ¿Quién, qué y por qué?</a><ol><li><a href="#orgc963a39">Las reglas de la arquitectura de software no cambian.</a></li><li><a href="#orge4bb941">Reflexiones y Revelaciónes</a><ol><li><a href="#org63ca07a">Los 2 valores del Software</a></li><li><a href="#orgfa6c4eb">El Código fuente <span class="underline">ES</span> Diseño</a></li></ol></li><li><a href="#org81087d2">Otras lecciones</a><ol><li><a href="#org09b8e59">Hacer que funcione es la parte fácil</a></li></ol></li><li><a href="#org96ca4ca">Acerca de Arquitectura</a><ol><li><a href="#org65d0824">La meta del buen arquitecto</a></li></ol></li><li><a href="#org775ab75">Adicionalmente</a><ol><li><a href="#org3bb78a7">No le digas a nadie que estás haciendo «Refactoring»</a></li><li><a href="#orgdb38a16">Métricas para la productividad del desarrollo de Software</a></li></ol></li></ol></li><li><a href="#org10f92bc">Finalmente</a></li></ol><p><img src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" alt="img" /></p><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
+asista, con la intención de registrar parte de mis notas y las
+reflexiones que me surjan cada vez.</p><p><a id="orgd317d54"></a></p><h1 id="el-tío-bob">El Tío Bob</h1><p>Robert C. Martin es un personaje muy influyente en el mundo de la
+Computación, particularmente en el área del desarrollo de Software, y
+más precisamente en el mundo del desarrollo de software Empresarial.</p><p>Creo que es principalmente conocido por describir y promover un
+conjunto de principios de programación que, en conjunto, acuñó como
+<a href="https://es.wikipedia.org/wiki/SOLID">SOLID</a>.</p><p>También es reconocido por ser uno de los autores de el <a href="https://agilemanifesto.org/iso/es/manifesto.html">Manifiesto por
+el Desarrollo Ágil de Software</a>.</p><p>De Robert C. Martin he leído su libro de Arquitectura Limpia, su
+blog, algunos de sus videos en <a href="http://cleancoder.com">cleancoder.com</a> y varias entrevistas.</p><p>Además de su influencia en la industria que indirectamente nos influye
+a todos, creo que el artículo de él que más me ha afectado
+personalmente fue <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">su entrada en el blog donde explica su idea de
+Arquitectura Limpia</a>, que resonó mucho con mi experiencia profesional
+y desde entonce empecé a ver la arquitectura con otros ojos.</p><p><a id="orga731efa"></a></p><h1 id="día-1-quién-qué-y-por-qué">Día 1: ¿Quién, qué y por qué?</h1><p><a id="orgc963a39"></a></p><h2 id="las-reglas-de-la-arquitectura-de-software-no-cambian">Las reglas de la arquitectura de software no cambian.</h2><p>Esencialmente el Software siempre ha sido <strong>secuencia</strong>, <strong>selección</strong> y
+<strong>repetición</strong>.</p><p>Y las reglas de la arquitectura de software siempre han sido y por
+muchos años más serán las mismas.</p><p>Esta afirmación se sustenta principalmente en la experiencia.</p><p>Robert C. Martin (y seguramente muchos otros), como testigos de buena
+parte de la evolución de la industria de la Computación, han observado
+este fenómeno de «inmutabilidad» de las reglas de la arquitectura del
+software.</p><p>Como contraste, considere la magnitud del cambio que sí ha
+experimentado la Computación desde sus inicios al día de hoy. Dice el
+cliché que con la computadora que tienes en tu movil, en tu bolsillo,
+fácilmente pudieras haber «llegado a la luna» en los años 60.</p><p>La promesa de este curso es estudiar esas reglas, que se cumplían
+desde hace 70 años (más o menos), se siguen cumpliendo hoy, y se
+seguirán cumpliendo por muchos años más.</p><p>«Esta falta de cambio del código es la razón de que la arquitectura
+de software sea tan consistente a través de todos los tipos de
+sistemas. Las reglas de la arquitectura de software son las reglas que
+regulan cómo ordenar y ensamblar los componentes básicos de los
+programas. Y como esos componentes básicos son universales y no han
+cambiado, las reglas par ordenarlos son a su vez universales y no
+cambian» - Robert C. Martin.</p><p><a id="orge4bb941"></a></p><h2 id="reflexiones-y-revelaciónes">Reflexiones y Revelaciónes</h2><p>Tal vez las 2 ideas más reveladoras para mi durante esta primera clase
+fueron:</p><ul><li>Los 2 valores del Software</li><li>El Código fuente es Diseño</li></ul><p><a id="org63ca07a"></a></p><h3 id="los-2-valores-del-software">Los 2 valores del Software</h3><p>La naturaleza del Software <span class="underline">ES</span> ser adaptable. De hecho, para eso fue
+inventado.</p><p>El software es la «pieza» que «insertas» en una computadora para
+transformarla en una máquina con un propósito para el cual el diseño
+original de la computadora no había considerado.</p><p>Al momento de «insertar» una «pieza» de software en una computadora,
+la conviertes en algo diferente: tal vez un videojuego, tal vez una
+calculadora, tal vez un reproductor de películas.</p><p>Inspirados en esta idea, y en la «etimología» de la palabra software,
+compuesta por «soft» (flexible) y «ware» (producto), implicando un
+«producto flexible», se puede justificar la expectativa que se tiene
+de que el Software sea adaptable.</p><p>En todo caso, la lección es que es un hecho que todo el mundo espera
+que el Software sea adaptable. Es una verdad de la vida que la gente
+cambie de opinión y que «los requerimientos» de hoy no serán
+exactamente los mismo de mañana.</p><p>Tal vez el único que espera que el software no cambie sea el mismo
+programador, típicamente con poca experiencia, quien se niega
+neciamente a esta realidad.</p><p>La tensión está entre el punto de vista de los «Interesados» en el
+Software, cuando necesitan cambiar el «alcance» de su operación
+(soportada por el software), y la «forma» que tiene el sistema y su
+capacidad para adaptarse.</p><p>A su vez, la tensión se encuentra también entre la «función» o
+«comportamiento» del Sistema y su «forma», cuando este sistema deba
+adaptarse al nuevo alcance.</p><p>Como los «Interesados» sólo ven la «función», es responsabilidad del
+arquitecto darle prioridad al equilibrio «función»/«forma» (o la
+arquitectura) para garantizar que siga siendo un sistema resiliente, y
+pueda adaptarse una vez más en el futuro, no sólo en este instante.</p><p>Si la Arquitectura no es prioridad, llegará un momento en el que el
+sistema perderá su capacidad de adaptación, y se estancará. Esto es
+INACEPTABLE porque atenta contra le escencia misma del Software.</p><p><a id="orgfa6c4eb"></a></p><h3 id="el-código-fuente-es-diseño">El Código fuente <span class="underline">ES</span> Diseño</h3><p>El arquitecto de una edificación produce, entre otras cosas, un plano
+final lleno de muchos detalles técnicos que sirven para que los
+constructores e ingenieros puedan materializar el concepto ahí
+descrito (el edificio).</p><p>Es posible entonces decir que dichos planos detallados son en efecto
+una forma de Software, escrito en un lenguaje declarativo, cuya
+máquina son los constructores e ingenieros.</p><p>Robert señaló que esta «revelación» la conoció gracias a un «paper»
+escrito por <a href="http://wiki.c2.com/?JackReeves">Jack Reeves</a> en 1992 intitualdo <a href="http://www.bleading-edge.com/Publications/C++Journal/Cpjour2.htm">¿Qué es Diseño de Software?</a>
+donde en otras palabras se afirma que <a href="http://wiki.c2.com/?TheSourceCodeIsTheProduct">El Código Fuente <span class="underline">ES</span> Diseño</a>.</p><p><a id="org81087d2"></a></p><h2 id="otras-lecciones">Otras lecciones</h2><p><a id="org09b8e59"></a></p><h3 id="hacer-que-funcione-es-la-parte-fácil">Hacer que funcione es la parte fácil</h3><p>Hacer que un programa funcione por primera vez es la parte fácil. Lo
+más dificil es poder diseñar un sistema que se mantenga útil por mucho
+tiempo. Se dice entonces que para lograr esta meta, hay que hacer
+«lo correcto» al crear el sistema.</p><p>Hacer «lo correct» es la parte difícil.</p><p>Sin embargo, la experience ha demostrado que cuando haces «lo
+correcto», se facilita la flexibilidad de los sistemas (lo que
+les da una mayor pertinencia en el tiempo).</p><p>Aquí es donde la productividad de los desarrolladores de Software se
+ve directamente impactada por la decisión de entre «hacer lo correcto»
+o «hacer que simplemente funcione».</p><p>Hacer desorden es siempre más lento que mantenerse ordenado
+(limpio). Aunque la intuición diga lo contrario, que desrodenar un
+poco sin limpiar ahora, para hacerlo después, pueda parecer más
+rápido: Siempre termina siendo más lento.</p><p>«Pare ir rápido, hay que ir bien» - Rober C. Martin.</p><p><a id="org96ca4ca"></a></p><h2 id="acerca-de-arquitectura">Acerca de Arquitectura</h2><p>La arquitectura y el código fuente están relacionados entre si en un
+contínuo, donde jerárquicamente la «arquitectura» está en el extremo
+«alto», favoreciendo los conceptos de alto nivel de un sistema, y en
+el otro extremo «bajo» está el código fuente dedicado a los detalles
+de implementación.</p><p>Pero como «El código fuente <span class="underline">ES</span> diseño», no existe una división
+discreta. En el código fuente <span class="underline">HAY</span> arquitectura, y la arquitectura se
+expresa también con código fuente.</p><p><a id="org65d0824"></a></p><h3 id="la-meta-del-buen-arquitecto">La meta del buen arquitecto</h3><p>Una buena arquitectura, o un buen diseño, minimiza el esfuerzo
+necesario para realizar el producto.</p><p><a id="org775ab75"></a></p><h2 id="adicionalmente">Adicionalmente</h2><p><a id="org3bb78a7"></a></p><h3 id="no-le-digas-a-nadie-que-estás-haciendo-refactoring">No le digas a nadie que estás haciendo «Refactoring»</h3><p>Hacer «refactoring» es una actividad tan necesaria como la de lavarse
+las manos antes de operar a alguien, o cocinar.</p><p>Ni los doctores, ni los cocineros le piden permiso a nadie para
+lavarse las manos. De esa misma manera, un programador no debe pedir
+permiso para «refactorizar».</p><p><a id="orgdb38a16"></a></p><h3 id="métricas-para-la-productividad-del-desarrollo-de-software">Métricas para la productividad del desarrollo de Software</h3><p>Las líneas de código de un programa pueden y han sido utilizadas como
+métrica para medir el desempeño del proceso de desarrollo.</p><p>Sin embargo, <a href="https://en.wikipedia.org/wiki/Tom_DeMarco">Tom deMarco</a>, en su Libro «Controlar Proyectos de
+Software», rechaza esta métrica y sugiere transformar el código fuente
+con una técnica que en efecto es parecida a los algoritmos de
+compresión de datos, y medir el tamaño de esos resultados.</p><p>La idea es que al transformar los datos de esa manera, se obtiene algo
+muy cercano al mínimo número de «tokens» necesario para representar la
+información original. Entonces, la comparación entre dos versiones de
+código, transformadas de dicha manera, sería más justa que simplemente
+compararlas en términos de las líneas de código.</p><p><a id="org10f92bc"></a></p><h1 id="finalmente">Finalmente</h1><p>Aparte de lo mencionado, Una cosa más aprendí en este día: Una clase
+del «Tío Bob» está complementada con una basta cantidad de gemas de
+sabiduría y cultura general del área de la Computación. Sólo por esto
+justificaría el curso.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/arquitectura/">arquitectura</a>
+    
+    <a href="/tags-output/dise%C3%B1o/">diseño</a>
+    
+    <a href="/tags-output/limpia/">limpia</a>
+    
+    <a href="/tags-output/programaci%C3%B3n/">programación</a>
+    
+    <a href="/tags-output/limpio/">limpio</a>
+    
+    <a href="/tags-output/organizado/">organizado</a>
+    
+    <a href="/tags-output/software/">software</a>
+    
+    <a href="/tags-output/desarrollo/">desarrollo</a>
+    
+    <a href="/tags-output/organizada/">organizada</a>
+    
+    <a href="/tags-output/t%C3%ADo%20bob/">tío bob</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/robert%20c.%20martin/">robert c. martin</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">Rake y precondiciones arbitrarias &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/";
+            this.page.identifier = "Clase magistral de arquitectura y diseño";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2023 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
