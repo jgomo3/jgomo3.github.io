@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 2)</title>
+    
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,Rake,limpio,organizado,software,desarrollo,organizada,Ruby,Clojure CLI,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
+
+<meta name="description" content="Table of Contents">
+
+<meta property="og:description" content="Table of Contents">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 2)" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2)</a></li>
+                        
+                        <li><a href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño</a></li>
+                        
+                        <li><a href="/posts-output/2022-06-18-rake-y-precondiciones-arbitrarias/">Rake y precondiciones arbitrarias</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">September 20, 2023</div>
+        
+    </div>
+    <h2>Clase magistral de arquitectura y diseño (día 2)</h2>
+</div>
+<div>
+    
+    <h1 id="table-of-contents">Table of Contents</h1><ol><li><a href="#org1ad446c">Día 2: Paradigmas y personajes históricos</a><ol><li><a href="#org172eb10">Paradigmas</a><ol><li><a href="#org02b18ce">Programación Primitiva</a></li><li><a href="#org2f4cf9f">Programación Estructurada</a></li><li><a href="#orgf235cc0">Programación Orientada a Objetos</a></li><li><a href="#orgf06ddf7">Programación Funcional</a></li><li><a href="#org2925115">Conclusión</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a> (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
+asista, con la intención de registrar parte de mis notas y las
+reflexiones que me surjan cada vez.</p><p><a id="org1ad446c"></a></p><h1 id="día-2-paradigmas-y-personajes-históricos">Día 2: Paradigmas y personajes históricos</h1><p>La intención de esta clase era presentar lo que a juicio de Robert
+C. Martin representan los elementos fundamentales de la arquitectura
+de software, o los «bloques de construcción», que son los 3 grandes
+paradigmas de programación:</p><ul><li>La programación estructural</li><li>La programación orientada a objetos</li><li>La programación funcional</li></ul><p>Pero siendo esta una clase del tío Bob, terminó siendo mucho más que
+eso y nos regaló una clase de la historia de la programación.</p><p>La forma en que lo hizo fue mediante la presentación de personajes
+históricos que determinaron de una forma u otra estos tres paradigmas
+de programación.</p><p>Los personajes presentados de alguna u otra forma durante la clase
+fueron:</p><ul><li><a href="https://es.wikipedia.org/wiki/Charles_Babbage">Charles Babbage</a></li><li><a href="https://es.wikipedia.org/wiki/Ada_Lovelace">Augusta Ada King</a></li><li><a href="https://es.wikipedia.org/wiki/Alan_Turing">Alan Turing</a></li><li><a href="https://es.wikipedia.org/wiki/David_Hilbert">David Hilbert</a></li><li><a href="https://es.wikipedia.org/wiki/Edsger_Dijkstra">Edsger Wybe Dijkstra</a></li><li><a href="https://es.wikipedia.org/wiki/Corrado_B%C3%B6hm">Corrado Böhm</a></li><li><a href="https://it.wikipedia.org/wiki/Giuseppe_Jacopini">Giuseppe Jacoppini</a></li><li><a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a></li><li><a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a></li><li><a href="https://es.wikipedia.org/wiki/Bjarne_Stroustrup">Bjarne Stroustrup</a></li><li><a href="https://es.wikipedia.org/wiki/Alan_Kay">Alan Kay</a></li><li><a href="https://es.wikipedia.org/wiki/Alonzo_Church">Alonzo Church</a></li><li><a href="https://es.wikipedia.org/wiki/John_McCarthy_(cient%C3%ADfico)">John McCarthy</a></li></ul><p>No pretendo repetir aquí toda la historia. Pero sí dejaré los puntos
+necesarios para soportar el argumento de esta clase.</p><p>La síntesis de esta clase se reduce a que estos 3 paradigmas de
+programación ofrecen cada uno un valor arquitectónico importante. Los
+3 valores son restricciones impuestas a los programadores, que
+facilitan un orden importante en el código de los programas. Sin
+dichas restricciones, se hubiera requerido una disciplina casi
+inhumana para conseguir tal orden.</p><p>Éstas son restricciones sobre:</p><ul><li>La transferencia directa del control del flujo de instrucciones</li><li>La transferencia indirecta del control de flujo de instrucciones</li><li>La asignación de valores (o mutabilidad)</li></ul><p><a id="org172eb10"></a></p><h2 id="paradigmas">Paradigmas</h2><p><a id="org02b18ce"></a></p><h3 id="programación-primitiva">Programación Primitiva</h3><p>El término «programación primitiva» lo introduzco yo para ubicar esta
+era en la narrativa cronológica utilizada por Robert C. Martin.</p><p>Esta era empieza en el siglo XIX con <a href="https://es.wikipedia.org/wiki/Charles_Babbage">Babbage</a>, sus máquinas de
+<a href="https://es.wikipedia.org/wiki/M%C3%A1quina_diferencial">diferencias</a> y <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica">analíticas</a>, y <a href="https://es.wikipedia.org/wiki/Ada_Lovelace">Augusta Ada King</a>, quien en forma de
+anotaciones extra que introdujo en una traducción al inglés que hizo
+del diseño de la máquina analítica, escribió el primer programa para
+demostrar el uso de dicha máquina.</p><p>Esta máquina analítica nunca se construyó, pero llegó a inspirar a los
+pioneros de la computación a inicios del siglo XX.</p><p>En esta primera era de la programación, los programadores contaban con
+la simple idea de que puedes listar una serie de instrucciones para
+que un computador ejecute una tras otra.</p><p>Y sólo con esa idea, se desarrollaron los primeros programas de cuya
+experiencia las personas empezaron a notar problemas y patrones.</p><p>Subrutinas, punto flotante, aritmética y lógica, etc., no eran
+desconocidos: todo lo necesario para programar existía.</p><p>Pero faltaba la disciplina que sólo la experiencia y los años pueden
+dar.</p><p><a href="https://es.wikipedia.org/wiki/Alan_Turing">Alan Turing</a> mismo, dada su experiencia al escribir sus primeros
+programas comentó y predijo acerca de la programación que:</p><p>«Necesitaremos un gran número de matemáticos hábiles» porque
+«probablemente habrá bastante trabajo de este tipo» y «una de nuestras
+dificultades será mantener una disciplina apropiada, para no perder el
+hilo de lo que vamos haciendo».</p><p>Note: El tío Bob recomienda el libro <a href="https://www.google.ca/books/edition/The_Annotated_Turing/LFQ7DwAAQBAJ?hl=en&amp;gbpv=0">The annotated Turing</a> de Charles
+Petzold.</p><p><a id="org2f4cf9f"></a></p><h3 id="programación-estructurada">Programación Estructurada</h3><p>De la necesidad de tratar de demostrar formalmente la «correctitud» de
+un programa, <a href="https://es.wikipedia.org/wiki/Edsger_Dijkstra">Dijkstra</a> notó que la existencia de la transferencia de
+control indiscriminada (por ejemplo, con la instrucción <a href="https://es.wikipedia.org/wiki/GOTO">GOTO</a>) no hacía
+posible determinar si un programa era correcto o no.</p><p>Entonces, junto con <a href="https://es.wikipedia.org/wiki/Corrado_B%C3%B6hm">Böhm</a> y <a href="https://it.wikipedia.org/wiki/Giuseppe_Jacopini">Jacopini</a>, quienes establecieron que todo
+programa se puede reducir en secuencias, selecciones y repeticiones
+(<a href="https://es.wikipedia.org/wiki/Teorema_del_programa_estructurado">Teorema del programa estructurado</a>), describieron la programación
+estructurada basada en estos 3 elementos.</p><p>Y esta fue la solución al problema que señaló <a href="https://es.wikipedia.org/wiki/Edsger_Dijkstra">Dijkstra</a> del <code>GOTO</code>: Un
+modelo de programación que no lo necesita.</p><p>Entonces, obtuvimos la primera restricción:</p><p><span class="underline">Disciplina en la transferencia directa de control</span>; o evitar la
+transferencia directa del control.</p><ol><li><p>«Demostrabilidad» vs el Método Científico</p><p>Al día de hoy, la práctica más normal es escribir pruebas que
+descarten errores. Todavía no podemos escribir pruebas que demuestren
+que un programa es correcto, para todos los posibles programas que
+podamos escribir.</p><p>En este sentido, nuestra disciplina se parece más a la Ciencia que a
+las Matemáticas.</p></li></ol><p><a id="orgf235cc0"></a></p><h3 id="programación-orientada-a-objetos">Programación Orientada a Objetos</h3><p>Luego <a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a> junto con <a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a>, inventaron la
+<a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos">Programación Orientada a Objetos</a>: casi sin darse cuenta. Lo hicieron
+cuando crearon el lenguaje <a href="https://es.wikipedia.org/wiki/Simula">Simula</a>, modificando el compilador del
+lenguaje <a href="https://es.wikipedia.org/wiki/ALGOL">Algol</a>, moviendo el marco de las llamadas a las funciones de
+la Pila al Montículo.</p><p>Sobre esta innovación <a href="https://es.wikipedia.org/wiki/Bjarne_Stroustrup">Bjarne Stroustrup</a> creo <a href="https://es.wikipedia.org/wiki/C%2B%2B">C++</a> y <a href="https://es.wikipedia.org/wiki/Alan_Kay">Alan Kay</a> creo
+<a href="https://es.wikipedia.org/wiki/Smalltalk">Smalltalk</a>.</p><p>Pero de todas las nuevas innovaciones que la Programación Orientada a
+Objetos nos trajo, la más importante desde la perspectiva de la
+arquitectura del software es la siguiente restricción:</p><p><span class="underline">Disciplina en la transferencia indirecta de control</span>.</p><p>El punto es que antes de la Programación Orientada a Objetos, el
+<a href="https://es.wikipedia.org/wiki/Polimorfismo_(inform%C3%A1tica)">polimorfismo</a> se lograba con apuntadores a funciones, pero esta
+práctica fue considera peligrosa y escasamente usada, excepto en
+programación de sistemas (por ejemplo, el desarrollo de sistemas
+operativos).</p><p>La programación orientada a objetos rescató y popularizó esta técnica
+haciéndola una práctica segura.</p><p>Esta práctica es especialmente importante en la arquitectura de
+software porque permite la <a href="https://es.wikipedia.org/wiki/Principio_de_inversi%C3%B3n_de_la_dependencia">Inversión de Dependencia</a>.</p><p>Estae es una característica presente en la relación que hay entre dos
+«módulos» donde la dirección del flujo de control va en dirección
+contraria a la dirección de la relación de dependencia, permitiendo
+una independencia entre módulos tal que se puede modificar o cambiar
+completamente un módulo sin tener que notificar al otro.</p><p><a id="orgf06ddf7"></a></p><h3 id="programación-funcional">Programación Funcional</h3><p>Finalmente la <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional">Programación Funcional</a> es presentada como un antiguo
+paradigma que resurgió en popularidad debido a que las computadoras
+dejaron de seguir la ley de Moore, causando la proliferación de
+computadoras de múltiples núcleos y poniendo en la palestra la
+programación concurrente.</p><p>La principal dificultad de la programación concurrente es la
+coordinación del acceso y uso de los recursos compartidos.</p><p>En este contexto, la programación funcional resalta.</p><p>La programación funcional favorece la proliferación de funciones
+puras. Estas funciones, entre otras cosas, garantizan la inmutabilidad
+de los datos: porque es condición necesaria para que una función sea
+pura.</p><p>Como consecuencia, un programa escrito siguiendo el paradigma de
+programación funcional minimiza el código que sí modifica el estado
+de los datos.</p><p>Así queda confinado en lugares predecibles y pequeños los mecanismos
+que tienen que lidiar con los problemas de la concurrencia.</p><p>Entonces podemos decir que la programación funcional nos regaló a
+nivel arquitectónico:</p><p><span class="underline">Disciplina en la mutabilidad</span>.</p><p><a id="org2925115"></a></p><h3 id="conclusión">Conclusión</h3><p>En estos 70 años de la computación hemos aprendido sobre todas las
+cosas, qué no hacer:</p><ul><li>La programación estructurada nos impuso una disciplina sobre la
+transferencia directa de control</li><li>La programación orientada a objetos nos impuso una disciplina sobre
+la transferencia indirecta de control</li><li>Y la programación funcional nos impuso una disciplina sobre las
+asignaciones (o mutabilidad)</li></ul><p>Entonces, una definición de arquitectura que se relaciona con estos
+paradigmas, es:</p><ul><li><p>Una <strong>conducta</strong> concreta,</p></li><li><p><strong>Organizada</strong> en una <strong>estructura</strong></p><ul><li><strong>Flexible</strong></li><li>y <strong>mantenible</strong></li></ul></li><li><p>que de manera <strong>Segura</strong></p><ul><li><p><strong>Transporta</strong></p></li><li><p>y <strong>Transforma</strong></p></li><li><p>los <strong>datos</strong> y <strong>eventos</strong> que <strong>recibe</strong></p></li><li><p>en aquello que <strong>produce</strong></p></li></ul></li></ul>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/arquitectura/">arquitectura</a>
+    
+    <a href="/tags-output/dise%C3%B1o/">diseño</a>
+    
+    <a href="/tags-output/limpia/">limpia</a>
+    
+    <a href="/tags-output/programaci%C3%B3n/">programación</a>
+    
+    <a href="/tags-output/limpio/">limpio</a>
+    
+    <a href="/tags-output/organizado/">organizado</a>
+    
+    <a href="/tags-output/software/">software</a>
+    
+    <a href="/tags-output/desarrollo/">desarrollo</a>
+    
+    <a href="/tags-output/organizada/">organizada</a>
+    
+    <a href="/tags-output/t%C3%ADo%20bob/">tío bob</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/robert%20c.%20martin/">robert c. martin</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/";
+            this.page.identifier = "Clase magistral de arquitectura y diseño (día 2)";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2023 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
