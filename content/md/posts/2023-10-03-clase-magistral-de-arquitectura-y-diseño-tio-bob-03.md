@@ -1,14 +1,17 @@
+{:title "Clase magistral de arquitectura y diseño (día 2)"
+ :layout :post
+ :tags ["es" "arquitectura" "software" "programación" "desarrollo" "diseño" "limpio" "limpia" "organizado" "organizada" "tío bob" "robert c. martin" "principios" "srp" "solid"]}
 
 # Tabla de Contenidos
 
-1.  [Día 3: El Principio de sólo una Responsabilidad (SRP)](#org79ae119)
-    1.  [Breve historia de los principios SOLID](#orgdcff3b1)
-    2.  [Una Exhortación a la Profesionalización de la Industria del Software](#org7c625eb)
-    3.  [El Software es Diferente](#org2df7dda)
-        1.  [Detalles sospechosos](#orgd309386)
-        2.  [Cómo lograr flexibilidad y robustez](#org75ab141)
-    4.  [Principio de sólo una Responsabilidad (SRP)](#orgcee7e4f)
-        1.  [Ejemplo](#org3e25224)
+1.  [Día 3: El Principio de sólo una Responsabilidad (SRP)](#orgf87f657)
+    1.  [Breve historia de los principios SOLID](#org209998a)
+    2.  [Una Exhortación a la Profesionalización de la Industria del Software](#org4739765)
+    3.  [El Software es Diferente](#orgc4453d0)
+        1.  [Detalles sospechosos](#org187004d)
+        2.  [Cómo lograr flexibilidad y robustez](#org7e8798f)
+    4.  [Principio de sólo una Responsabilidad (SRP)](#org7f29b8b)
+        1.  [Ejemplo](#org985ecb2)
 
 Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) [Robert C. Martin](https://es.wikipedia.org/wiki/Robert_C._Martin) (mejor conocido como «El
@@ -22,7 +25,7 @@ asista, con la intención de registrar parte de mis notas y las
 reflexiones que me surjan cada vez.
 
 
-<a id="org79ae119"></a>
+<a id="orgf87f657"></a>
 
 # Día 3: El Principio de sólo una Responsabilidad (SRP)
 
@@ -34,7 +37,7 @@ Pero antes de tratar ese tema en particular, fue necesario presentar
 una breve historia de los principios SOLID.
 
 
-<a id="orgdcff3b1"></a>
+<a id="org209998a"></a>
 
 ## Breve historia de los principios SOLID
 
@@ -62,33 +65,33 @@ reusables en su nuevo «Framework» (que empezó vacío), pero con la
 restricción de que todo lo que era aceptado en el Framework debía
 funcionar con todas las aplicaciones construidas hasta el momento.
 
-Luego que unas 3 aplicaciones siguiendo esta regla, ya contaban con un
-«Framework» bastante estable, y que no requirió muchos más cambios al
-final del proyecto, para cuando lograron desarrollar las 36
-aplicaciones.
+Después de haber construido alrededor de unas 3 aplicaciones siguiendo
+esta regla, ya contaban con un «Framework» amplio y bastante estable,
+y que no requirió muchos más cambios al final del proyecto. Y así
+lograron desarrollar las 36 aplicaciones.
 
 Esta fue una historia bien interesante. Tal vez nos enseña que la
-dirección de un proyecto de software debe ser siempre darle prioridad
-a la aplicación (al uso).
+dirección de un proyecto de software siempre debe darle prioridad a la
+aplicación (al uso).
 
-Pero en lo que compete a este artículo, fue la base «moral» con la que
-Robert C. Martin definió esos proto-principios como respuesta a «Los
-10 mandamientos» que luego se transformarían en los principios SOLID.
+Pero en lo que compete a este artículo, esta experiencia fue la base
+«moral» con la que Robert C. Martin definió esos proto-principios como
+respuesta a «Los 10 mandamientos» que luego se transformarían en los
+principios SOLID.
 
 El libro de referencia de los principios SOLID, según Robert
 C. Martin, es «Desarrollo de Software Ágil: Principios, Patrones y
 Prácticas», a pesar de que para entonces, ese acrónimo no lo usaba
-(fue un amigo de él que le sugirió reordenar la presentación
-de los principios para que formaran la palabra SOLID (sólido en
-inglés)).
+(fue un amigo de él que le sugirió reordenar la presentación de los
+principios para que formaran la palabra SOLID (sólido en inglés)).
 
 
-<a id="org7c625eb"></a>
+<a id="org4739765"></a>
 
 ## Una Exhortación a la Profesionalización de la Industria del Software
 
 
-<a id="org2df7dda"></a>
+<a id="orgc4453d0"></a>
 
 ## El Software es Diferente
 
@@ -99,7 +102,7 @@ El plano de un edificio cuesta poco en comparación con el costo de la
 edificación.
 
 Pero en software, el programa en ejecución o el ejecutable, lo
-equivalente al edificio es relativamente gratis pero los planos, que
+equivalente al edificio, es relativamente gratis pero los planos, que
 serían el código fuente, cuestan relativamente todo.
 
 Además, hacer cambios en una edificación real cuesta mucho, pero en
@@ -151,18 +154,18 @@ Por estos motivos, el desarrollo de software tiende naturalmente a ser
 «evolutivo».
 
 
-<a id="orgd309386"></a>
+<a id="org187004d"></a>
 
 ### Detalles sospechosos
 
 El desarrollo evolutivo tiene sus propias ventajas y desventajas.
 
-Si no se diseñan con cuidado las soluciones, o como otros lo
+Si no se diseñan con cuidado las soluciones o, como otros lo
 presentan, si no se cría y cuida durante su crecimiento, el producto
 puede resultar en algo desastroso.
 
 Durante su desarrollo, debemos estar atentos a las señales que nos
-indican que el producto está por deteriorarse.
+indican si el producto está por deteriorarse.
 
 En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
 «Detalles sospechosos».
@@ -179,10 +182,12 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
 
     Es la tendencia del Sistema a estropearse si cambia.
     
-    Parecido al caso anterior, pero no cuesta mucho supuestamente corregir
-    el «bug», pero en cambio, el sistema se estropea en algún lugar que no
-    estaba evidentemente relacionado con el cambio que aplicaste. En este
-    caso, estás frente a un sistema frágil.
+    Parecido al «detalle» anterior, pero el costo del cambio es
+    irrelevante.
+    
+    Siguiendo con el ejemplo anterior, si luego de corregir el «bug», el
+    sistema se estropea en algún lugar inesperado, entonces estás frente a
+    un sistema frágil.
     
     Una de las causas más comunes de la fragilidad es un conjunto de
     interdependencias escondidas entre módulos.
@@ -201,16 +206,16 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
 
 4.  Viscosidad
 
-    Es la tendencia de un Sistema de facilitar cambios malos y hacer
-    difícil cambios buenos.
+    Es la tendencia de un Sistema a facilitar cambios malos y a dificultar
+    cambios buenos.
     
     Algunas causas comunes son:
     
     -   Tiempos de compilación alto
     -   Tiempos de pruebas alto
     
-    Estas son causas porque los altos tiempos hacen que las personas
-    realices esas actividades. Entonces, si no «compilas» frecuentemente,
+    Estas son causas porque los altos tiempos evitan que que las personas
+    repitan esas actividades. Entonces, si no «compilas» frecuentemente,
     no obtienes «feedback» del sistema con suficiente
     frecuencia. Igualmente pasa con las pruebas.
     
@@ -237,8 +242,8 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
         Pero luego te piden que también leas del «paper tape». Ok&#x2026;
         
         Tal vez es muy tarde para cambiar la firma de la función, porque ya
-        habrán personas usándola. Hubiera sido útil usar un parámetro pero no
-        se puede.
+        habrán personas usándola. Hubiera sido útil usar un parámetro pero ya
+        no se puede.
         
         Solución: una variable global (sarcasmo).
         
@@ -262,7 +267,7 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
         Ok, ya te imaginas que va a pasar. Una nueva variable global, una
         nueva expresión ternaria (a?b:c).
         
-        En pocas palabras, le código se está pudriendo.
+        En pocas palabras, el código se está pudriendo.
     
     4.  Versión CORRECTA
     
@@ -276,25 +281,27 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
               }
         
         La diferencia es que las funciones `getchar` y `putchar` no saben a
-        ciencia cierta con qué dispositivos estarán trabajando, sólo sabed de
+        ciencia cierta con qué dispositivos estarán trabajando, sólo saben de
         un dispositivo de entrada estándar y un dispositivo de salida
         estándar. De esta manera, esta versión del programa habría satisfecho
         todos los requerimientos presentados sin necesidad de cambiar nada.
         
-        Y este es el objetivo de este curso. Poder desarrollar sistemas que
-        pueda adaptarse fácilmente a cambios de requerimientos (flexibles) y
-        que puedan soportar cambios en las condiciones del entorno (robustos).
+        Y éste es el objetivo de este curso. Poder desarrollar sistemas que
+        puedan adaptarse fácilmente a cambios de requerimientos (flexibles) y
+        que puedan soportar cambios en las condiciones de su entorno
+        (robustos).
 
 
-<a id="org75ab141"></a>
+<a id="org7e8798f"></a>
 
 ### Cómo lograr flexibilidad y robustez
 
 Lograremos flexibilidad y robustez principalmente ordenando los
 componentes de un sistema pertinentemente alrededor de sus
 responsabilidades, buscando una independencia tal que los cambios no
-se propaguen entre ellos (es decir, que si hacemos un cambio en un
-módulo, no tengamos que hacer cambios en muchos otros, idealmente 0).
+se propaguen entre ellos. Es decir, que si hacemos un cambio en un
+módulo, no tengamos que hacer cambios en muchos otros, idealmente en
+ninguno.
 
 Puede decirse que buscamos establecer «contra-fuegos» para contener los
 efectos colaterales de los cambios.
@@ -302,27 +309,27 @@ efectos colaterales de los cambios.
 Los principios SOLID están pensados para eso.
 
 
-<a id="orgcee7e4f"></a>
+<a id="org7f29b8b"></a>
 
 ## Principio de sólo una Responsabilidad (SRP)
 
 Este es el principio más malinterpretado. La razón es su nombre. Las
-personas los confunden mucho con la filosofía Unix: «Haz una sola
-cosa, y hazla bien».
+personas lo confunden mucho con la filosofía Unix: «Haz una sola cosa,
+y hazla bien».
 
 Originalmente descrito por [Bertrand Meyer](https://es.wikipedia.org/wiki/Bertrand_Meyer), este principio no se trata
 de lo que un sistema puede hacer, sino de a quién le rinde cuentas. La
 idea es que un sistema, módulo o componente le debería rendir cuentas
 idealmente a un solo Usuario.
 
-Una revelación muy importante dada expuesta por este principio es que
-son los Usuarios quienes causan los cambios.
+Una revelación muy importante expuesta por este principio es que son
+los Usuarios quienes causan los cambios en los Sistemas.
 
 Otro asunto que hay que aclarar es que este concepto de Usuario es
 sinónimo de Rol. Entonces, un sistemas con muchos Usuarios, en este
 contexto, no se trata de un sistema que tiene muchas cuentas, o es
-multijugador, etc. Se trata de un sistema que puede ser UTILIZADO de
-diferentes maneras, tantas como roles haya establecido.
+multijugador, etc.; se trata de un sistema que puede ser UTILIZADO de
+diferentes maneras, tantas como roles haya.
 
 Entonces, la idea es que al momento de diseñar un Sistema, componente
 o módulo, lo primero que debe quedar claro es cuales Roles pueden
@@ -331,10 +338,9 @@ tal vez descomponiendo en elementos más pequeños y segregando por
 roles.
 
 
-<a id="org3e25224"></a>
+<a id="org985ecb2"></a>
 
 ### Ejemplo
 
 Me queda pendiente mostrarles el ejemplo. En una próxima actualización
 de esta entrada lo agregaré.
-
