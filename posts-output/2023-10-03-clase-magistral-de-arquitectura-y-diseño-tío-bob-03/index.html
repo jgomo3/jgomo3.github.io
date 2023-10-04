@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 3)</title>
+    
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,Clojure CLI,solid,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
+
+<meta name="description" content="Table of Contents">
+
+<meta property="og:description" content="Table of Contents">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 3)" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 3)</a></li>
+                        
+                        <li><a href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2)</a></li>
+                        
+                        <li><a href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/principios/">principios</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/srp/">srp</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/solid/">solid</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 3, 2023</div>
+        
+    </div>
+    <h2>Clase magistral de arquitectura y diseño (día 3)</h2>
+</div>
+<div>
+    
+    <h1 id="table-of-contents">Table of Contents</h1><ol><li><a href="#org79ae119">Día 3: El Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#orgdcff3b1">Breve historia de los principios SOLID</a></li><li><a href="#org7c625eb">Una Exhortación a la Profesionalización de la Industria del Software</a></li><li><a href="#org2df7dda">El Software es Diferente</a><ol><li><a href="#orgd309386">Detalles sospechosos</a></li><li><a href="#org75ab141">Cómo lograr flexibilidad y robustez</a></li></ol></li><li><a href="#orgcee7e4f">Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org3e25224">Ejemplo</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a> (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
+asista, con la intención de registrar parte de mis notas y las
+reflexiones que me surjan cada vez.</p><p><a id="org79ae119"></a></p><h1 id="día-3-el-principio-de-sólo-una-responsabilidad-srp">Día 3: El Principio de sólo una Responsabilidad (SRP)</h1><p>Esta es la primera clase donde se trató directamente uno de los
+principios «SOLID»: El Principio de sólo una Responsabilidad, SRP de
+sus siglas en inglés (<em>Single Responsability Principle</em>).</p><p>Pero antes de tratar ese tema en particular, fue necesario presentar
+una breve historia de los principios SOLID.</p><p><a id="orgdcff3b1"></a></p><h2 id="breve-historia-de-los-principios-solid">Breve historia de los principios SOLID</h2><p>El 15 de marzo de 1995, en el <a href="https://es.wikipedia.org/wiki/Usenet#ISPs_y_servidores_de_noticias">grupo de noticias USENET</a> <code>comp.object</code>,
+Jim Fleming publicó una lista preliminar de «Los 10 mandamientos de la
+Programación Orientada a Objetos».</p><p>Robert C. Martin respondió con su lista de lo que consideraba eran
+<a href="https://groups.google.com/g/comp.object/c/WICPDcXAMG8/m/EbGa2Vt-7q0J">unos principios más importantes</a>. Esta lista fue la semilla que luego
+se convirtió en los principios SOLID.</p><p>La principal influencia de esta lista vino de un proyecto de software
+memorable para Robert C. Martin.</p><p>Este fue un proyecto de Software de gran envergadura para el «Consejo
+Nacional de Arquitectos», donde el plan A fracasó. Ellos iniciaron el
+proyecto creando un «Framework» que luego utilizarían para crear 36
+aplicaciones. Cuando estaban ya realizando la 3ra aplicación, el
+«Framework» se volvió más un problema que una solución. Fue tan grave
+el asunto que decidieron  empezar de cero (0).</p><p>Para el segundo intento, empezaron creando las aplicaciones
+independientemente, con la disciplina de ir coleccionando componentes
+reusables en su nuevo «Framework» (que empezó vacío), pero con la
+restricción de que todo lo que era aceptado en el Framework debía
+funcionar con todas las aplicaciones construidas hasta el momento.</p><p>Luego que unas 3 aplicaciones siguiendo esta regla, ya contaban con un
+«Framework» bastante estable, y que no requirió muchos más cambios al
+final del proyecto, para cuando lograron desarrollar las 36
+aplicaciones.</p><p>Esta fue una historia bien interesante. Tal vez nos enseña que la
+dirección de un proyecto de software debe ser siempre darle prioridad
+a la aplicación (al uso).</p><p>Pero en lo que compete a este artículo, fue la base «moral» con la que
+Robert C. Martin definió esos proto-principios como respuesta a «Los
+10 mandamientos» que luego se transformarían en los principios SOLID.</p><p>El libro de referencia de los principios SOLID, según Robert
+C. Martin, es «Desarrollo de Software Ágil: Principios, Patrones y
+Prácticas», a pesar de que para entonces, ese acrónimo no lo usaba
+(fue un amigo de él que le sugirió reordenar la presentación
+de los principios para que formaran la palabra SOLID (sólido en
+inglés)).</p><p><a id="org7c625eb"></a></p><h2 id="una-exhortación-a-la-profesionalización-de-la-industria-del-software">Una Exhortación a la Profesionalización de la Industria del Software</h2><p><a id="org2df7dda"></a></p><h2 id="el-software-es-diferente">El Software es Diferente</h2><p>No puedes equiparar la construcción de software con la construcción de
+edificios, porque los costos de sus etapas difieren en demasía.</p><p>El plano de un edificio cuesta poco en comparación con el costo de la
+edificación.</p><p>Pero en software, el programa en ejecución o el ejecutable, lo
+equivalente al edificio es relativamente gratis pero los planos, que
+serían el código fuente, cuestan relativamente todo.</p><p>Además, hacer cambios en una edificación real cuesta mucho, pero en
+software los cambios se hacen directamente en los «planos» y el costo
+es relativamente bajo.</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left"></col><col class="org-left"></col><col class="org-left"></col></colgroup><thead><tr><th scope="col" class="org-left">Costos</th><th scope="col" class="org-left">Arquitectura Material</th><th scope="col" class="org-left">Arquitectura de Software</th></tr></thead><tbody><tr><td class="org-left">«Planos»</td><td class="org-left">Bajo</td><td class="org-left">Mucho</td></tr><tr><td class="org-left">«Edificación»</td><td class="org-left">Mucho</td><td class="org-left">Casi nulo</td></tr><tr><td class="org-left">Cambio</td><td class="org-left">Alto</td><td class="org-left">Poco</td></tr></tbody></table><p>Por estos motivos, el desarrollo de software tiende naturalmente a ser
+«evolutivo».</p><p><a id="orgd309386"></a></p><h3 id="detalles-sospechosos">Detalles sospechosos</h3><p>El desarrollo evolutivo tiene sus propias ventajas y desventajas.</p><p>Si no se diseñan con cuidado las soluciones, o como otros lo
+presentan, si no se cría y cuida durante su crecimiento, el producto
+puede resultar en algo desastroso.</p><p>Durante su desarrollo, debemos estar atentos a las señales que nos
+indican que el producto está por deteriorarse.</p><p>En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
+«Detalles sospechosos».</p><ol><li><p>Rigidez</p><p>Es la tendencia del Sistema a dificultar su cambio.</p><p>Si alguna vez estás frente a un sistema que tiene un «bug», sabes
+dónde está, qué lo causa, pero no puedes eliminarlo sin invertir
+muchos días de trabajo, están frente a un sistema rígido.</p></li><li><p>Fragilidad</p><p>Es la tendencia del Sistema a estropearse si cambia.</p><p>Parecido al caso anterior, pero no cuesta mucho supuestamente corregir
+el «bug», pero en cambio, el sistema se estropea en algún lugar que no
+estaba evidentemente relacionado con el cambio que aplicaste. En este
+caso, estás frente a un sistema frágil.</p><p>Una de las causas más comunes de la fragilidad es un conjunto de
+interdependencias escondidas entre módulos.</p><p>Una consecuencia típica de un sistema Frágil es que después de muchas
+«fracturas», una rigidez «formal» es declarada por alguna autoridad.</p></li><li><p>Inmovilidad</p><p>Es la tendencia de un sistema a evitar que sus componentes se muevan a
+otros sistemas.</p><p>Ejemplo, un módulo que quisieras reutilizar de un proyecto, pero que
+no puedes utilizar sin llevar junto con él todo el proyecto, sufre de
+inmovilidad.</p></li><li><p>Viscosidad</p><p>Es la tendencia de un Sistema de facilitar cambios malos y hacer
+difícil cambios buenos.</p><p>Algunas causas comunes son:</p><ul><li>Tiempos de compilación alto</li><li>Tiempos de pruebas alto</li></ul><p>Estas son causas porque los altos tiempos hacen que las personas
+realices esas actividades. Entonces, si no «compilas» frecuentemente,
+no obtienes «feedback» del sistema con suficiente
+frecuencia. Igualmente pasa con las pruebas.</p><p>Y no obtener feedback frecuentemente causa la proliferación de errores.</p></li><li><p>Ejemplo de un programa «pudriéndose»</p><p>Supón que te piden un programa que simplemente imprima los caracteres
+que recibe por el teclado directamente en la impresora.</p><ol><li><p>Versión 1</p><p>De forma trivial, en pseudo C:</p><pre><code>void copy(void)
+  {
+    int ch;
+    while( (ch=ReadKeyboard()) != EOF)
+      WritePrinter(ch);
+  }
+</code></pre></li><li><p>Versión 2</p><p>Pero luego te piden que también leas del «paper tape». Ok…</p><p>Tal vez es muy tarde para cambiar la firma de la función, porque ya
+habrán personas usándola. Hubiera sido útil usar un parámetro pero no
+se puede.</p><p>Solución: una variable global (sarcasmo).</p><pre><code>bool GtapeReader = false;
+// remember to clear
+
+  void copy(void)
+  {
+    int ch;
+    while( (ch=GTapeReader ?
+               ReadTape() :
+               ReadKeyboard()) != EOF)
+      WritePrinter(ch);
+  }
+</code></pre></li><li><p>Versión 3</p><p>Nuevamente, te piden un cambio. Esta vez, quieren que puedas imprimir
+en el «tape punch».</p><p>Ok, ya te imaginas que va a pasar. Una nueva variable global, una
+nueva expresión ternaria (a?b:c).</p><p>En pocas palabras, le código se está pudriendo.</p></li><li><p>Versión CORRECTA</p><p>Pero si al principio, el programa hubiera sido escrito de esta manera:</p><pre><code>void copy(void)
+  {
+    int c;
+    while( (ch=getchar()) != EOF)
+      putchar(ch);
+  }
+</code></pre><p>La diferencia es que las funciones <code>getchar</code> y <code>putchar</code> no saben a
+ciencia cierta con qué dispositivos estarán trabajando, sólo sabed de
+un dispositivo de entrada estándar y un dispositivo de salida
+estándar. De esta manera, esta versión del programa habría satisfecho
+todos los requerimientos presentados sin necesidad de cambiar nada.</p><p>Y este es el objetivo de este curso. Poder desarrollar sistemas que
+pueda adaptarse fácilmente a cambios de requerimientos (flexibles) y
+que puedan soportar cambios en las condiciones del entorno (robustos).</p></li></ol></li></ol><p><a id="org75ab141"></a></p><h3 id="cómo-lograr-flexibilidad-y-robustez">Cómo lograr flexibilidad y robustez</h3><p>Lograremos flexibilidad y robustez principalmente ordenando los
+componentes de un sistema pertinentemente alrededor de sus
+responsabilidades, buscando una independencia tal que los cambios no
+se propaguen entre ellos (es decir, que si hacemos un cambio en un
+módulo, no tengamos que hacer cambios en muchos otros, idealmente 0).</p><p>Puede decirse que buscamos establecer «contra-fuegos» para contener los
+efectos colaterales de los cambios.</p><p>Los principios SOLID están pensados para eso.</p><p><a id="orgcee7e4f"></a></p><h2 id="principio-de-sólo-una-responsabilidad-srp">Principio de sólo una Responsabilidad (SRP)</h2><p>Este es el principio más malinterpretado. La razón es su nombre. Las
+personas los confunden mucho con la filosofía Unix: «Haz una sola
+cosa, y hazla bien».</p><p>Originalmente descrito por <a href="https://es.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a>, este principio no se trata
+de lo que un sistema puede hacer, sino de a quién le rinde cuentas. La
+idea es que un sistema, módulo o componente le debería rendir cuentas
+idealmente a un solo Usuario.</p><p>Una revelación muy importante dada expuesta por este principio es que
+son los Usuarios quienes causan los cambios.</p><p>Otro asunto que hay que aclarar es que este concepto de Usuario es
+sinónimo de Rol. Entonces, un sistemas con muchos Usuarios, en este
+contexto, no se trata de un sistema que tiene muchas cuentas, o es
+multijugador, etc. Se trata de un sistema que puede ser UTILIZADO de
+diferentes maneras, tantas como roles haya establecido.</p><p>Entonces, la idea es que al momento de diseñar un Sistema, componente
+o módulo, lo primero que debe quedar claro es cuales Roles pueden
+causar cambios en él, y si ese número es más de 1, entonces rediseñar,
+tal vez descomponiendo en elementos más pequeños y segregando por
+roles.</p><p><a id="org3e25224"></a></p><h3 id="ejemplo">Ejemplo</h3><p>Me queda pendiente mostrarles el ejemplo. En una próxima actualización
+de esta entrada lo agregaré.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/arquitectura/">arquitectura</a>
+    
+    <a href="/tags-output/dise%C3%B1o/">diseño</a>
+    
+    <a href="/tags-output/limpia/">limpia</a>
+    
+    <a href="/tags-output/programaci%C3%B3n/">programación</a>
+    
+    <a href="/tags-output/principios/">principios</a>
+    
+    <a href="/tags-output/limpio/">limpio</a>
+    
+    <a href="/tags-output/organizado/">organizado</a>
+    
+    <a href="/tags-output/software/">software</a>
+    
+    <a href="/tags-output/desarrollo/">desarrollo</a>
+    
+    <a href="/tags-output/srp/">srp</a>
+    
+    <a href="/tags-output/organizada/">organizada</a>
+    
+    <a href="/tags-output/solid/">solid</a>
+    
+    <a href="/tags-output/t%C3%ADo%20bob/">tío bob</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/robert%20c.%20martin/">robert c. martin</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2) &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/";
+            this.page.identifier = "Clase magistral de arquitectura y diseño (día 3)";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2023 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
