@@ -2,16 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 3)</title>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 2)</title>
     
 <meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,Clojure CLI,solid,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
 
-<meta name="description" content="Table of Contents">
+<meta name="description" content="Tabla de Contenidos">
 
-<meta property="og:description" content="Table of Contents">
+<meta property="og:description" content="Tabla de Contenidos">
 
 <meta property="og:url" content="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/" />
-<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 3)" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 2)" />
 <meta property="og:type" content="article" />
 
     <link rel="canonical" href="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">
@@ -64,7 +64,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
-                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 3)</a></li>
+                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 2)</a></li>
                         
                         <li><a href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2)</a></li>
                         
@@ -160,19 +160,19 @@
         <div class="col-lg-6">October 3, 2023</div>
         
     </div>
-    <h2>Clase magistral de arquitectura y diseño (día 3)</h2>
+    <h2>Clase magistral de arquitectura y diseño (día 2)</h2>
 </div>
 <div>
     
-    <h1 id="table-of-contents">Table of Contents</h1><ol><li><a href="#org79ae119">Día 3: El Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#orgdcff3b1">Breve historia de los principios SOLID</a></li><li><a href="#org7c625eb">Una Exhortación a la Profesionalización de la Industria del Software</a></li><li><a href="#org2df7dda">El Software es Diferente</a><ol><li><a href="#orgd309386">Detalles sospechosos</a></li><li><a href="#org75ab141">Cómo lograr flexibilidad y robustez</a></li></ol></li><li><a href="#orgcee7e4f">Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org3e25224">Ejemplo</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+    <h1 id="tabla-de-contenidos">Tabla de Contenidos</h1><ol><li><a href="#orgf87f657">Día 3: El Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org209998a">Breve historia de los principios SOLID</a></li><li><a href="#org4739765">Una Exhortación a la Profesionalización de la Industria del Software</a></li><li><a href="#orgc4453d0">El Software es Diferente</a><ol><li><a href="#org187004d">Detalles sospechosos</a></li><li><a href="#org7e8798f">Cómo lograr flexibilidad y robustez</a></li></ol></li><li><a href="#org7f29b8b">Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org985ecb2">Ejemplo</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a> (mejor conocido como «El
 tío Bob»), ha impartido y estará impartiendo una clase magistral
 dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
 asista, con la intención de registrar parte de mis notas y las
-reflexiones que me surjan cada vez.</p><p><a id="org79ae119"></a></p><h1 id="día-3-el-principio-de-sólo-una-responsabilidad-srp">Día 3: El Principio de sólo una Responsabilidad (SRP)</h1><p>Esta es la primera clase donde se trató directamente uno de los
+reflexiones que me surjan cada vez.</p><p><a id="orgf87f657"></a></p><h1 id="día-3-el-principio-de-sólo-una-responsabilidad-srp">Día 3: El Principio de sólo una Responsabilidad (SRP)</h1><p>Esta es la primera clase donde se trató directamente uno de los
 principios «SOLID»: El Principio de sólo una Responsabilidad, SRP de
 sus siglas en inglés (<em>Single Responsability Principle</em>).</p><p>Pero antes de tratar ese tema en particular, fue necesario presentar
-una breve historia de los principios SOLID.</p><p><a id="orgdcff3b1"></a></p><h2 id="breve-historia-de-los-principios-solid">Breve historia de los principios SOLID</h2><p>El 15 de marzo de 1995, en el <a href="https://es.wikipedia.org/wiki/Usenet#ISPs_y_servidores_de_noticias">grupo de noticias USENET</a> <code>comp.object</code>,
+una breve historia de los principios SOLID.</p><p><a id="org209998a"></a></p><h2 id="breve-historia-de-los-principios-solid">Breve historia de los principios SOLID</h2><p>El 15 de marzo de 1995, en el <a href="https://es.wikipedia.org/wiki/Usenet#ISPs_y_servidores_de_noticias">grupo de noticias USENET</a> <code>comp.object</code>,
 Jim Fleming publicó una lista preliminar de «Los 10 mandamientos de la
 Programación Orientada a Objetos».</p><p>Robert C. Martin respondió con su lista de lo que consideraba eran
 <a href="https://groups.google.com/g/comp.object/c/WICPDcXAMG8/m/EbGa2Vt-7q0J">unos principios más importantes</a>. Esta lista fue la semilla que luego
@@ -186,42 +186,42 @@ el asunto que decidieron  empezar de cero (0).</p><p>Para el segundo intento, em
 independientemente, con la disciplina de ir coleccionando componentes
 reusables en su nuevo «Framework» (que empezó vacío), pero con la
 restricción de que todo lo que era aceptado en el Framework debía
-funcionar con todas las aplicaciones construidas hasta el momento.</p><p>Luego que unas 3 aplicaciones siguiendo esta regla, ya contaban con un
-«Framework» bastante estable, y que no requirió muchos más cambios al
-final del proyecto, para cuando lograron desarrollar las 36
-aplicaciones.</p><p>Esta fue una historia bien interesante. Tal vez nos enseña que la
-dirección de un proyecto de software debe ser siempre darle prioridad
-a la aplicación (al uso).</p><p>Pero en lo que compete a este artículo, fue la base «moral» con la que
-Robert C. Martin definió esos proto-principios como respuesta a «Los
-10 mandamientos» que luego se transformarían en los principios SOLID.</p><p>El libro de referencia de los principios SOLID, según Robert
+funcionar con todas las aplicaciones construidas hasta el momento.</p><p>Después de haber construido alrededor de unas 3 aplicaciones siguiendo
+esta regla, ya contaban con un «Framework» amplio y bastante estable,
+y que no requirió muchos más cambios al final del proyecto. Y así
+lograron desarrollar las 36 aplicaciones.</p><p>Esta fue una historia bien interesante. Tal vez nos enseña que la
+dirección de un proyecto de software siempre debe darle prioridad a la
+aplicación (al uso).</p><p>Pero en lo que compete a este artículo, esta experiencia fue la base
+«moral» con la que Robert C. Martin definió esos proto-principios como
+respuesta a «Los 10 mandamientos» que luego se transformarían en los
+principios SOLID.</p><p>El libro de referencia de los principios SOLID, según Robert
 C. Martin, es «Desarrollo de Software Ágil: Principios, Patrones y
 Prácticas», a pesar de que para entonces, ese acrónimo no lo usaba
-(fue un amigo de él que le sugirió reordenar la presentación
-de los principios para que formaran la palabra SOLID (sólido en
-inglés)).</p><p><a id="org7c625eb"></a></p><h2 id="una-exhortación-a-la-profesionalización-de-la-industria-del-software">Una Exhortación a la Profesionalización de la Industria del Software</h2><p><a id="org2df7dda"></a></p><h2 id="el-software-es-diferente">El Software es Diferente</h2><p>No puedes equiparar la construcción de software con la construcción de
+(fue un amigo de él que le sugirió reordenar la presentación de los
+principios para que formaran la palabra SOLID (sólido en inglés)).</p><p><a id="org4739765"></a></p><h2 id="una-exhortación-a-la-profesionalización-de-la-industria-del-software">Una Exhortación a la Profesionalización de la Industria del Software</h2><p><a id="orgc4453d0"></a></p><h2 id="el-software-es-diferente">El Software es Diferente</h2><p>No puedes equiparar la construcción de software con la construcción de
 edificios, porque los costos de sus etapas difieren en demasía.</p><p>El plano de un edificio cuesta poco en comparación con el costo de la
 edificación.</p><p>Pero en software, el programa en ejecución o el ejecutable, lo
-equivalente al edificio es relativamente gratis pero los planos, que
+equivalente al edificio, es relativamente gratis pero los planos, que
 serían el código fuente, cuestan relativamente todo.</p><p>Además, hacer cambios en una edificación real cuesta mucho, pero en
 software los cambios se hacen directamente en los «planos» y el costo
 es relativamente bajo.</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left"></col><col class="org-left"></col><col class="org-left"></col></colgroup><thead><tr><th scope="col" class="org-left">Costos</th><th scope="col" class="org-left">Arquitectura Material</th><th scope="col" class="org-left">Arquitectura de Software</th></tr></thead><tbody><tr><td class="org-left">«Planos»</td><td class="org-left">Bajo</td><td class="org-left">Mucho</td></tr><tr><td class="org-left">«Edificación»</td><td class="org-left">Mucho</td><td class="org-left">Casi nulo</td></tr><tr><td class="org-left">Cambio</td><td class="org-left">Alto</td><td class="org-left">Poco</td></tr></tbody></table><p>Por estos motivos, el desarrollo de software tiende naturalmente a ser
-«evolutivo».</p><p><a id="orgd309386"></a></p><h3 id="detalles-sospechosos">Detalles sospechosos</h3><p>El desarrollo evolutivo tiene sus propias ventajas y desventajas.</p><p>Si no se diseñan con cuidado las soluciones, o como otros lo
+«evolutivo».</p><p><a id="org187004d"></a></p><h3 id="detalles-sospechosos">Detalles sospechosos</h3><p>El desarrollo evolutivo tiene sus propias ventajas y desventajas.</p><p>Si no se diseñan con cuidado las soluciones o, como otros lo
 presentan, si no se cría y cuida durante su crecimiento, el producto
 puede resultar en algo desastroso.</p><p>Durante su desarrollo, debemos estar atentos a las señales que nos
-indican que el producto está por deteriorarse.</p><p>En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
+indican si el producto está por deteriorarse.</p><p>En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
 «Detalles sospechosos».</p><ol><li><p>Rigidez</p><p>Es la tendencia del Sistema a dificultar su cambio.</p><p>Si alguna vez estás frente a un sistema que tiene un «bug», sabes
 dónde está, qué lo causa, pero no puedes eliminarlo sin invertir
-muchos días de trabajo, están frente a un sistema rígido.</p></li><li><p>Fragilidad</p><p>Es la tendencia del Sistema a estropearse si cambia.</p><p>Parecido al caso anterior, pero no cuesta mucho supuestamente corregir
-el «bug», pero en cambio, el sistema se estropea en algún lugar que no
-estaba evidentemente relacionado con el cambio que aplicaste. En este
-caso, estás frente a un sistema frágil.</p><p>Una de las causas más comunes de la fragilidad es un conjunto de
+muchos días de trabajo, están frente a un sistema rígido.</p></li><li><p>Fragilidad</p><p>Es la tendencia del Sistema a estropearse si cambia.</p><p>Parecido al «detalle» anterior, pero el costo del cambio es
+irrelevante.</p><p>Siguiendo con el ejemplo anterior, si luego de corregir el «bug», el
+sistema se estropea en algún lugar inesperado, entonces estás frente a
+un sistema frágil.</p><p>Una de las causas más comunes de la fragilidad es un conjunto de
 interdependencias escondidas entre módulos.</p><p>Una consecuencia típica de un sistema Frágil es que después de muchas
 «fracturas», una rigidez «formal» es declarada por alguna autoridad.</p></li><li><p>Inmovilidad</p><p>Es la tendencia de un sistema a evitar que sus componentes se muevan a
 otros sistemas.</p><p>Ejemplo, un módulo que quisieras reutilizar de un proyecto, pero que
 no puedes utilizar sin llevar junto con él todo el proyecto, sufre de
-inmovilidad.</p></li><li><p>Viscosidad</p><p>Es la tendencia de un Sistema de facilitar cambios malos y hacer
-difícil cambios buenos.</p><p>Algunas causas comunes son:</p><ul><li>Tiempos de compilación alto</li><li>Tiempos de pruebas alto</li></ul><p>Estas son causas porque los altos tiempos hacen que las personas
-realices esas actividades. Entonces, si no «compilas» frecuentemente,
+inmovilidad.</p></li><li><p>Viscosidad</p><p>Es la tendencia de un Sistema a facilitar cambios malos y a dificultar
+cambios buenos.</p><p>Algunas causas comunes son:</p><ul><li>Tiempos de compilación alto</li><li>Tiempos de pruebas alto</li></ul><p>Estas son causas porque los altos tiempos evitan que que las personas
+repitan esas actividades. Entonces, si no «compilas» frecuentemente,
 no obtienes «feedback» del sistema con suficiente
 frecuencia. Igualmente pasa con las pruebas.</p><p>Y no obtener feedback frecuentemente causa la proliferación de errores.</p></li><li><p>Ejemplo de un programa «pudriéndose»</p><p>Supón que te piden un programa que simplemente imprima los caracteres
 que recibe por el teclado directamente en la impresora.</p><ol><li><p>Versión 1</p><p>De forma trivial, en pseudo C:</p><pre><code>void copy(void)
@@ -231,8 +231,8 @@ que recibe por el teclado directamente en la impresora.</p><ol><li><p>Versión 1
       WritePrinter(ch);
   }
 </code></pre></li><li><p>Versión 2</p><p>Pero luego te piden que también leas del «paper tape». Ok…</p><p>Tal vez es muy tarde para cambiar la firma de la función, porque ya
-habrán personas usándola. Hubiera sido útil usar un parámetro pero no
-se puede.</p><p>Solución: una variable global (sarcasmo).</p><pre><code>bool GtapeReader = false;
+habrán personas usándola. Hubiera sido útil usar un parámetro pero ya
+no se puede.</p><p>Solución: una variable global (sarcasmo).</p><pre><code>bool GtapeReader = false;
 // remember to clear
 
   void copy(void)
@@ -245,38 +245,40 @@ se puede.</p><p>Solución: una variable global (sarcasmo).</p><pre><code>bool Gt
   }
 </code></pre></li><li><p>Versión 3</p><p>Nuevamente, te piden un cambio. Esta vez, quieren que puedas imprimir
 en el «tape punch».</p><p>Ok, ya te imaginas que va a pasar. Una nueva variable global, una
-nueva expresión ternaria (a?b:c).</p><p>En pocas palabras, le código se está pudriendo.</p></li><li><p>Versión CORRECTA</p><p>Pero si al principio, el programa hubiera sido escrito de esta manera:</p><pre><code>void copy(void)
+nueva expresión ternaria (a?b:c).</p><p>En pocas palabras, el código se está pudriendo.</p></li><li><p>Versión CORRECTA</p><p>Pero si al principio, el programa hubiera sido escrito de esta manera:</p><pre><code>void copy(void)
   {
     int c;
     while( (ch=getchar()) != EOF)
       putchar(ch);
   }
 </code></pre><p>La diferencia es que las funciones <code>getchar</code> y <code>putchar</code> no saben a
-ciencia cierta con qué dispositivos estarán trabajando, sólo sabed de
+ciencia cierta con qué dispositivos estarán trabajando, sólo saben de
 un dispositivo de entrada estándar y un dispositivo de salida
 estándar. De esta manera, esta versión del programa habría satisfecho
-todos los requerimientos presentados sin necesidad de cambiar nada.</p><p>Y este es el objetivo de este curso. Poder desarrollar sistemas que
-pueda adaptarse fácilmente a cambios de requerimientos (flexibles) y
-que puedan soportar cambios en las condiciones del entorno (robustos).</p></li></ol></li></ol><p><a id="org75ab141"></a></p><h3 id="cómo-lograr-flexibilidad-y-robustez">Cómo lograr flexibilidad y robustez</h3><p>Lograremos flexibilidad y robustez principalmente ordenando los
+todos los requerimientos presentados sin necesidad de cambiar nada.</p><p>Y éste es el objetivo de este curso. Poder desarrollar sistemas que
+puedan adaptarse fácilmente a cambios de requerimientos (flexibles) y
+que puedan soportar cambios en las condiciones de su entorno
+(robustos).</p></li></ol></li></ol><p><a id="org7e8798f"></a></p><h3 id="cómo-lograr-flexibilidad-y-robustez">Cómo lograr flexibilidad y robustez</h3><p>Lograremos flexibilidad y robustez principalmente ordenando los
 componentes de un sistema pertinentemente alrededor de sus
 responsabilidades, buscando una independencia tal que los cambios no
-se propaguen entre ellos (es decir, que si hacemos un cambio en un
-módulo, no tengamos que hacer cambios en muchos otros, idealmente 0).</p><p>Puede decirse que buscamos establecer «contra-fuegos» para contener los
-efectos colaterales de los cambios.</p><p>Los principios SOLID están pensados para eso.</p><p><a id="orgcee7e4f"></a></p><h2 id="principio-de-sólo-una-responsabilidad-srp">Principio de sólo una Responsabilidad (SRP)</h2><p>Este es el principio más malinterpretado. La razón es su nombre. Las
-personas los confunden mucho con la filosofía Unix: «Haz una sola
-cosa, y hazla bien».</p><p>Originalmente descrito por <a href="https://es.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a>, este principio no se trata
+se propaguen entre ellos. Es decir, que si hacemos un cambio en un
+módulo, no tengamos que hacer cambios en muchos otros, idealmente en
+ninguno.</p><p>Puede decirse que buscamos establecer «contra-fuegos» para contener los
+efectos colaterales de los cambios.</p><p>Los principios SOLID están pensados para eso.</p><p><a id="org7f29b8b"></a></p><h2 id="principio-de-sólo-una-responsabilidad-srp">Principio de sólo una Responsabilidad (SRP)</h2><p>Este es el principio más malinterpretado. La razón es su nombre. Las
+personas lo confunden mucho con la filosofía Unix: «Haz una sola cosa,
+y hazla bien».</p><p>Originalmente descrito por <a href="https://es.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a>, este principio no se trata
 de lo que un sistema puede hacer, sino de a quién le rinde cuentas. La
 idea es que un sistema, módulo o componente le debería rendir cuentas
-idealmente a un solo Usuario.</p><p>Una revelación muy importante dada expuesta por este principio es que
-son los Usuarios quienes causan los cambios.</p><p>Otro asunto que hay que aclarar es que este concepto de Usuario es
+idealmente a un solo Usuario.</p><p>Una revelación muy importante expuesta por este principio es que son
+los Usuarios quienes causan los cambios en los Sistemas.</p><p>Otro asunto que hay que aclarar es que este concepto de Usuario es
 sinónimo de Rol. Entonces, un sistemas con muchos Usuarios, en este
 contexto, no se trata de un sistema que tiene muchas cuentas, o es
-multijugador, etc. Se trata de un sistema que puede ser UTILIZADO de
-diferentes maneras, tantas como roles haya establecido.</p><p>Entonces, la idea es que al momento de diseñar un Sistema, componente
+multijugador, etc.; se trata de un sistema que puede ser UTILIZADO de
+diferentes maneras, tantas como roles haya.</p><p>Entonces, la idea es que al momento de diseñar un Sistema, componente
 o módulo, lo primero que debe quedar claro es cuales Roles pueden
 causar cambios en él, y si ese número es más de 1, entonces rediseñar,
 tal vez descomponiendo en elementos más pequeños y segregando por
-roles.</p><p><a id="org3e25224"></a></p><h3 id="ejemplo">Ejemplo</h3><p>Me queda pendiente mostrarles el ejemplo. En una próxima actualización
+roles.</p><p><a id="org985ecb2"></a></p><h3 id="ejemplo">Ejemplo</h3><p>Me queda pendiente mostrarles el ejemplo. En una próxima actualización
 de esta entrada lo agregaré.</p>
 </div>
 
@@ -328,7 +330,7 @@ de esta entrada lo agregaré.</p>
     <script type="text/javascript">
         var disqus_config = function () {
             this.page.url = "http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/";
-            this.page.identifier = "Clase magistral de arquitectura y diseño (día 3)";
+            this.page.identifier = "Clase magistral de arquitectura y diseño (día 2)";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
