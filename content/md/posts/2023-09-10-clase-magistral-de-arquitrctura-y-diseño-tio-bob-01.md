@@ -2,23 +2,6 @@
  :layout :post
  :tags ["es" "arquitectura" "software" "programación" "desarrollo" "diseño" "limpio" "limpia" "organizado" "organizada" "tío bob" "robert c. martin"]}
 
-# Tabla de Contenidos
-
-1.  [El Tío Bob](#orgd317d54)
-2.  [Día 1: ¿Quién, qué y por qué?](#orga731efa)
-    1.  [Las reglas de la arquitectura de software no cambian.](#orgc963a39)
-    2.  [Reflexiones y Revelaciónes](#orge4bb941)
-        1.  [Los 2 valores del Software](#org63ca07a)
-        2.  [El Código fuente <span class="underline">ES</span> Diseño](#orgfa6c4eb)
-    3.  [Otras lecciones](#org81087d2)
-        1.  [Hacer que funcione es la parte fácil](#org09b8e59)
-    4.  [Acerca de Arquitectura](#org96ca4ca)
-        1.  [La meta del buen arquitecto](#org65d0824)
-    5.  [Adicionalmente](#org775ab75)
-        1.  [No le digas a nadie que estás haciendo «Refactoring»](#org3bb78a7)
-        2.  [Métricas para la productividad del desarrollo de Software](#orgdb38a16)
-3.  [Finalmente](#org10f92bc)
-
 ![img](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 
 Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
@@ -32,8 +15,6 @@ Por mi parte, dedicaré una entrada al blog por cada clase a la que
 asista, con la intención de registrar parte de mis notas y las
 reflexiones que me surjan cada vez.
 
-
-<a id="orgd317d54"></a>
 
 # El Tío Bob
 
@@ -58,12 +39,7 @@ Arquitectura Limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-
 y desde entonce empecé a ver la arquitectura con otros ojos.
 
 
-<a id="orga731efa"></a>
-
 # Día 1: ¿Quién, qué y por qué?
-
-
-<a id="orgc963a39"></a>
 
 ## Las reglas de la arquitectura de software no cambian.
 
@@ -98,8 +74,6 @@ cambiado, las reglas par ordenarlos son a su vez universales y no
 cambian» - Robert C. Martin.
 
 
-<a id="orge4bb941"></a>
-
 ## Reflexiones y Revelaciónes
 
 Tal vez las 2 ideas más reveladoras para mi durante esta primera clase
@@ -107,9 +81,6 @@ fueron:
 
 -   Los 2 valores del Software
 -   El Código fuente es Diseño
-
-
-<a id="org63ca07a"></a>
 
 ### Los 2 valores del Software
 
@@ -157,8 +128,6 @@ sistema perderá su capacidad de adaptación, y se estancará. Esto es
 INACEPTABLE porque atenta contra le escencia misma del Software.
 
 
-<a id="orgfa6c4eb"></a>
-
 ### El Código fuente <span class="underline">ES</span> Diseño
 
 El arquitecto de una edificación produce, entre otras cosas, un plano
@@ -175,12 +144,7 @@ escrito por [Jack Reeves](http://wiki.c2.com/?JackReeves) en 1992 intitualdo [¿
 donde en otras palabras se afirma que [El Código Fuente <span class="underline">ES</span> Diseño](http://wiki.c2.com/?TheSourceCodeIsTheProduct).
 
 
-<a id="org81087d2"></a>
-
 ## Otras lecciones
-
-
-<a id="org09b8e59"></a>
 
 ### Hacer que funcione es la parte fácil
 
@@ -207,8 +171,6 @@ rápido: Siempre termina siendo más lento.
 «Pare ir rápido, hay que ir bien» - Rober C. Martin.
 
 
-<a id="org96ca4ca"></a>
-
 ## Acerca de Arquitectura
 
 La arquitectura y el código fuente están relacionados entre si en un
@@ -222,20 +184,13 @@ discreta. En el código fuente <span class="underline">HAY</span> arquitectura, 
 expresa también con código fuente.
 
 
-<a id="org65d0824"></a>
-
 ### La meta del buen arquitecto
 
 Una buena arquitectura, o un buen diseño, minimiza el esfuerzo
 necesario para realizar el producto.
 
 
-<a id="org775ab75"></a>
-
 ## Adicionalmente
-
-
-<a id="org3bb78a7"></a>
 
 ### No le digas a nadie que estás haciendo «Refactoring»
 
@@ -246,8 +201,6 @@ Ni los doctores, ni los cocineros le piden permiso a nadie para
 lavarse las manos. De esa misma manera, un programador no debe pedir
 permiso para «refactorizar».
 
-
-<a id="orgdb38a16"></a>
 
 ### Métricas para la productividad del desarrollo de Software
 
@@ -265,8 +218,6 @@ información original. Entonces, la comparación entre dos versiones de
 código, transformadas de dicha manera, sería más justa que simplemente
 compararlas en términos de las líneas de código.
 
-
-<a id="org10f92bc"></a>
 
 # Finalmente
 

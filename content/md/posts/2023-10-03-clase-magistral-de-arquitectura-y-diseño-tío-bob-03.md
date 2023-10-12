@@ -1,17 +1,6 @@
-{:title "Clase magistral de arquitectura y diseño (día 2)"
+{:title "Clase magistral de arquitectura y diseño (día 3)"
  :layout :post
  :tags ["es" "arquitectura" "software" "programación" "desarrollo" "diseño" "limpio" "limpia" "organizado" "organizada" "tío bob" "robert c. martin" "principios" "srp" "solid"]}
-
-# Tabla de Contenidos
-
-1.  [Día 3: El Principio de sólo una Responsabilidad (SRP)](#orgf87f657)
-    1.  [Breve historia de los principios SOLID](#org209998a)
-    2.  [Una Exhortación a la Profesionalización de la Industria del Software](#org4739765)
-    3.  [El Software es Diferente](#orgc4453d0)
-        1.  [Detalles sospechosos](#org187004d)
-        2.  [Cómo lograr flexibilidad y robustez](#org7e8798f)
-    4.  [Principio de sólo una Responsabilidad (SRP)](#org7f29b8b)
-        1.  [Ejemplo](#org985ecb2)
 
 Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) [Robert C. Martin](https://es.wikipedia.org/wiki/Robert_C._Martin) (mejor conocido como «El
@@ -25,8 +14,6 @@ asista, con la intención de registrar parte de mis notas y las
 reflexiones que me surjan cada vez.
 
 
-<a id="orgf87f657"></a>
-
 # Día 3: El Principio de sólo una Responsabilidad (SRP)
 
 Esta es la primera clase donde se trató directamente uno de los
@@ -36,8 +23,6 @@ sus siglas en inglés (*Single Responsability Principle*).
 Pero antes de tratar ese tema en particular, fue necesario presentar
 una breve historia de los principios SOLID.
 
-
-<a id="org209998a"></a>
 
 ## Breve historia de los principios SOLID
 
@@ -86,12 +71,8 @@ Prácticas», a pesar de que para entonces, ese acrónimo no lo usaba
 principios para que formaran la palabra SOLID (sólido en inglés)).
 
 
-<a id="org4739765"></a>
-
 ## Una Exhortación a la Profesionalización de la Industria del Software
 
-
-<a id="orgc4453d0"></a>
 
 ## El Software es Diferente
 
@@ -153,8 +134,6 @@ es relativamente bajo.
 Por estos motivos, el desarrollo de software tiende naturalmente a ser
 «evolutivo».
 
-
-<a id="org187004d"></a>
 
 ### Detalles sospechosos
 
@@ -292,8 +271,6 @@ En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
         (robustos).
 
 
-<a id="org7e8798f"></a>
-
 ### Cómo lograr flexibilidad y robustez
 
 Lograremos flexibilidad y robustez principalmente ordenando los
@@ -308,8 +285,6 @@ efectos colaterales de los cambios.
 
 Los principios SOLID están pensados para eso.
 
-
-<a id="org7f29b8b"></a>
 
 ## Principio de sólo una Responsabilidad (SRP)
 
@@ -337,8 +312,6 @@ causar cambios en él, y si ese número es más de 1, entonces rediseñar,
 tal vez descomponiendo en elementos más pequeños y segregando por
 roles.
 
-
-<a id="org985ecb2"></a>
 
 ### Ejemplo
 

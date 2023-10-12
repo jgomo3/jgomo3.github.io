@@ -2,16 +2,6 @@
  :layout :post
  :tags ["es" "arquitectura" "software" "programación" "desarrollo" "diseño" "limpio" "limpia" "organizado" "organizada" "tío bob" "robert c. martin"]}
 
-# Table of Contents
-
-1.  [Día 2: Paradigmas y personajes históricos](#org1ad446c)
-    1.  [Paradigmas](#org172eb10)
-        1.  [Programación Primitiva](#org02b18ce)
-        2.  [Programación Estructurada](#org2f4cf9f)
-        3.  [Programación Orientada a Objetos](#orgf235cc0)
-        4.  [Programación Funcional](#orgf06ddf7)
-        5.  [Conclusión](#org2925115)
-
 Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) [Robert C. Martin](https://es.wikipedia.org/wiki/Robert_C._Martin) (mejor conocido como «El
 tío Bob»), ha impartido y estará impartiendo una clase magistral
@@ -23,8 +13,6 @@ Por mi parte, dedicaré una entrada al blog por cada clase a la que
 asista, con la intención de registrar parte de mis notas y las
 reflexiones que me surjan cada vez.
 
-
-<a id="org1ad446c"></a>
 
 # Día 2: Paradigmas y personajes históricos
 
@@ -78,12 +66,7 @@ inhumana para conseguir tal orden.
 -   La asignación de valores (o mutabilidad)
 
 
-<a id="org172eb10"></a>
-
 ## Paradigmas
-
-
-<a id="org02b18ce"></a>
 
 ### Programación Primitiva
 
@@ -124,8 +107,6 @@ Note: El tío Bob recomienda el libro [The annotated Turing](https://www.google.
 Petzold.
 
 
-<a id="org2f4cf9f"></a>
-
 ### Programación Estructurada
 
 De la necesidad de tratar de demostrar formalmente la «correctitud» de
@@ -156,8 +137,6 @@ transferencia directa del control.
     En este sentido, nuestra disciplina se parece más a la Ciencia que a
     las Matemáticas.
 
-
-<a id="orgf235cc0"></a>
 
 ### Programación Orientada a Objetos
 
@@ -195,8 +174,6 @@ una independencia entre módulos tal que se puede modificar o cambiar
 completamente un módulo sin tener que notificar al otro.
 
 
-<a id="orgf06ddf7"></a>
-
 ### Programación Funcional
 
 Finalmente la [Programación Funcional](https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional) es presentada como un antiguo
@@ -227,8 +204,6 @@ nivel arquitectónico:
 
 <span class="underline">Disciplina en la mutabilidad</span>.
 
-
-<a id="org2925115"></a>
 
 ### Conclusión
 
