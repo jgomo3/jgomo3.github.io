@@ -2,16 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 2)</title>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 3)</title>
     
 <meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,Clojure CLI,solid,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
 
-<meta name="description" content="Tabla de Contenidos">
+<meta name="description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
 
-<meta property="og:description" content="Tabla de Contenidos">
+<meta property="og:description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
 
 <meta property="og:url" content="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/" />
-<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 2)" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 3)" />
 <meta property="og:type" content="article" />
 
     <link rel="canonical" href="http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">
@@ -64,7 +70,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
-                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 2)</a></li>
+                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 3)</a></li>
                         
                         <li><a href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2)</a></li>
                         
@@ -160,19 +166,19 @@
         <div class="col-lg-6">October 3, 2023</div>
         
     </div>
-    <h2>Clase magistral de arquitectura y diseño (día 2)</h2>
+    <h2>Clase magistral de arquitectura y diseño (día 3)</h2>
 </div>
 <div>
     
-    <h1 id="tabla-de-contenidos">Tabla de Contenidos</h1><ol><li><a href="#orgf87f657">Día 3: El Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org209998a">Breve historia de los principios SOLID</a></li><li><a href="#org4739765">Una Exhortación a la Profesionalización de la Industria del Software</a></li><li><a href="#orgc4453d0">El Software es Diferente</a><ol><li><a href="#org187004d">Detalles sospechosos</a></li><li><a href="#org7e8798f">Cómo lograr flexibilidad y robustez</a></li></ol></li><li><a href="#org7f29b8b">Principio de sólo una Responsabilidad (SRP)</a><ol><li><a href="#org985ecb2">Ejemplo</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+    <p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a> (mejor conocido como «El
 tío Bob»), ha impartido y estará impartiendo una clase magistral
 dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
 asista, con la intención de registrar parte de mis notas y las
-reflexiones que me surjan cada vez.</p><p><a id="orgf87f657"></a></p><h1 id="día-3-el-principio-de-sólo-una-responsabilidad-srp">Día 3: El Principio de sólo una Responsabilidad (SRP)</h1><p>Esta es la primera clase donde se trató directamente uno de los
+reflexiones que me surjan cada vez.</p><h1 id="día-3-el-principio-de-sólo-una-responsabilidad-srp">Día 3: El Principio de sólo una Responsabilidad (SRP)</h1><p>Esta es la primera clase donde se trató directamente uno de los
 principios «SOLID»: El Principio de sólo una Responsabilidad, SRP de
 sus siglas en inglés (<em>Single Responsability Principle</em>).</p><p>Pero antes de tratar ese tema en particular, fue necesario presentar
-una breve historia de los principios SOLID.</p><p><a id="org209998a"></a></p><h2 id="breve-historia-de-los-principios-solid">Breve historia de los principios SOLID</h2><p>El 15 de marzo de 1995, en el <a href="https://es.wikipedia.org/wiki/Usenet#ISPs_y_servidores_de_noticias">grupo de noticias USENET</a> <code>comp.object</code>,
+una breve historia de los principios SOLID.</p><h2 id="breve-historia-de-los-principios-solid">Breve historia de los principios SOLID</h2><p>El 15 de marzo de 1995, en el <a href="https://es.wikipedia.org/wiki/Usenet#ISPs_y_servidores_de_noticias">grupo de noticias USENET</a> <code>comp.object</code>,
 Jim Fleming publicó una lista preliminar de «Los 10 mandamientos de la
 Programación Orientada a Objetos».</p><p>Robert C. Martin respondió con su lista de lo que consideraba eran
 <a href="https://groups.google.com/g/comp.object/c/WICPDcXAMG8/m/EbGa2Vt-7q0J">unos principios más importantes</a>. Esta lista fue la semilla que luego
@@ -198,14 +204,14 @@ principios SOLID.</p><p>El libro de referencia de los principios SOLID, según R
 C. Martin, es «Desarrollo de Software Ágil: Principios, Patrones y
 Prácticas», a pesar de que para entonces, ese acrónimo no lo usaba
 (fue un amigo de él que le sugirió reordenar la presentación de los
-principios para que formaran la palabra SOLID (sólido en inglés)).</p><p><a id="org4739765"></a></p><h2 id="una-exhortación-a-la-profesionalización-de-la-industria-del-software">Una Exhortación a la Profesionalización de la Industria del Software</h2><p><a id="orgc4453d0"></a></p><h2 id="el-software-es-diferente">El Software es Diferente</h2><p>No puedes equiparar la construcción de software con la construcción de
+principios para que formaran la palabra SOLID (sólido en inglés)).</p><h2 id="una-exhortación-a-la-profesionalización-de-la-industria-del-software">Una Exhortación a la Profesionalización de la Industria del Software</h2><h2 id="el-software-es-diferente">El Software es Diferente</h2><p>No puedes equiparar la construcción de software con la construcción de
 edificios, porque los costos de sus etapas difieren en demasía.</p><p>El plano de un edificio cuesta poco en comparación con el costo de la
 edificación.</p><p>Pero en software, el programa en ejecución o el ejecutable, lo
 equivalente al edificio, es relativamente gratis pero los planos, que
 serían el código fuente, cuestan relativamente todo.</p><p>Además, hacer cambios en una edificación real cuesta mucho, pero en
 software los cambios se hacen directamente en los «planos» y el costo
 es relativamente bajo.</p><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"><colgroup><col class="org-left"></col><col class="org-left"></col><col class="org-left"></col></colgroup><thead><tr><th scope="col" class="org-left">Costos</th><th scope="col" class="org-left">Arquitectura Material</th><th scope="col" class="org-left">Arquitectura de Software</th></tr></thead><tbody><tr><td class="org-left">«Planos»</td><td class="org-left">Bajo</td><td class="org-left">Mucho</td></tr><tr><td class="org-left">«Edificación»</td><td class="org-left">Mucho</td><td class="org-left">Casi nulo</td></tr><tr><td class="org-left">Cambio</td><td class="org-left">Alto</td><td class="org-left">Poco</td></tr></tbody></table><p>Por estos motivos, el desarrollo de software tiende naturalmente a ser
-«evolutivo».</p><p><a id="org187004d"></a></p><h3 id="detalles-sospechosos">Detalles sospechosos</h3><p>El desarrollo evolutivo tiene sus propias ventajas y desventajas.</p><p>Si no se diseñan con cuidado las soluciones o, como otros lo
+«evolutivo».</p><h3 id="detalles-sospechosos">Detalles sospechosos</h3><p>El desarrollo evolutivo tiene sus propias ventajas y desventajas.</p><p>Si no se diseñan con cuidado las soluciones o, como otros lo
 presentan, si no se cría y cuida durante su crecimiento, el producto
 puede resultar en algo desastroso.</p><p>Durante su desarrollo, debemos estar atentos a las señales que nos
 indican si el producto está por deteriorarse.</p><p>En inglés le dicen a estas señales «Design Smells». Aquí les diremos,
@@ -258,13 +264,13 @@ estándar. De esta manera, esta versión del programa habría satisfecho
 todos los requerimientos presentados sin necesidad de cambiar nada.</p><p>Y éste es el objetivo de este curso. Poder desarrollar sistemas que
 puedan adaptarse fácilmente a cambios de requerimientos (flexibles) y
 que puedan soportar cambios en las condiciones de su entorno
-(robustos).</p></li></ol></li></ol><p><a id="org7e8798f"></a></p><h3 id="cómo-lograr-flexibilidad-y-robustez">Cómo lograr flexibilidad y robustez</h3><p>Lograremos flexibilidad y robustez principalmente ordenando los
+(robustos).</p></li></ol></li></ol><h3 id="cómo-lograr-flexibilidad-y-robustez">Cómo lograr flexibilidad y robustez</h3><p>Lograremos flexibilidad y robustez principalmente ordenando los
 componentes de un sistema pertinentemente alrededor de sus
 responsabilidades, buscando una independencia tal que los cambios no
 se propaguen entre ellos. Es decir, que si hacemos un cambio en un
 módulo, no tengamos que hacer cambios en muchos otros, idealmente en
 ninguno.</p><p>Puede decirse que buscamos establecer «contra-fuegos» para contener los
-efectos colaterales de los cambios.</p><p>Los principios SOLID están pensados para eso.</p><p><a id="org7f29b8b"></a></p><h2 id="principio-de-sólo-una-responsabilidad-srp">Principio de sólo una Responsabilidad (SRP)</h2><p>Este es el principio más malinterpretado. La razón es su nombre. Las
+efectos colaterales de los cambios.</p><p>Los principios SOLID están pensados para eso.</p><h2 id="principio-de-sólo-una-responsabilidad-srp">Principio de sólo una Responsabilidad (SRP)</h2><p>Este es el principio más malinterpretado. La razón es su nombre. Las
 personas lo confunden mucho con la filosofía Unix: «Haz una sola cosa,
 y hazla bien».</p><p>Originalmente descrito por <a href="https://es.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a>, este principio no se trata
 de lo que un sistema puede hacer, sino de a quién le rinde cuentas. La
@@ -278,7 +284,7 @@ diferentes maneras, tantas como roles haya.</p><p>Entonces, la idea es que al mo
 o módulo, lo primero que debe quedar claro es cuales Roles pueden
 causar cambios en él, y si ese número es más de 1, entonces rediseñar,
 tal vez descomponiendo en elementos más pequeños y segregando por
-roles.</p><p><a id="org985ecb2"></a></p><h3 id="ejemplo">Ejemplo</h3><p>Me queda pendiente mostrarles el ejemplo. En una próxima actualización
+roles.</p><h3 id="ejemplo">Ejemplo</h3><p>Me queda pendiente mostrarles el ejemplo. En una próxima actualización
 de esta entrada lo agregaré.</p>
 </div>
 
@@ -330,7 +336,7 @@ de esta entrada lo agregaré.</p>
     <script type="text/javascript">
         var disqus_config = function () {
             this.page.url = "http://jgomo3.info/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/";
-            this.page.identifier = "Clase magistral de arquitectura y diseño (día 2)";
+            this.page.identifier = "Clase magistral de arquitectura y diseño (día 3)";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

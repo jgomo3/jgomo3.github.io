@@ -6,9 +6,15 @@
     
 <meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,limpia,programación,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,Clojure CLI,solid,tío bob,lazy-seq,Clojure,jar,es,generators,lazy,robert c. martin,Java,generadores">
 
-<meta name="description" content="Table of Contents">
+<meta name="description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
 
-<meta property="og:description" content="Table of Contents">
+<meta property="og:description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
+tío Bob»), ha impartido y estará impartiendo una clase magistral
+dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
 
 <meta property="og:url" content="http://jgomo3.info/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/" />
 <meta property="og:title" content="Clase magistral de arquitectura y diseño (día 2)" />
@@ -64,7 +70,7 @@
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
-                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 2)</a></li>
+                        <li><a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">Clase magistral de arquitectura y diseño (día 3)</a></li>
                         
                         <li><a href="/posts-output/2023-09-20-clase-magistral-de-arquitrctura-y-diseño-tio-bob-02/">Clase magistral de arquitectura y diseño (día 2)</a></li>
                         
@@ -164,12 +170,12 @@
 </div>
 <div>
     
-    <h1 id="table-of-contents">Table of Contents</h1><ol><li><a href="#org1ad446c">Día 2: Paradigmas y personajes históricos</a><ol><li><a href="#org172eb10">Paradigmas</a><ol><li><a href="#org02b18ce">Programación Primitiva</a></li><li><a href="#org2f4cf9f">Programación Estructurada</a></li><li><a href="#orgf235cc0">Programación Orientada a Objetos</a></li><li><a href="#orgf06ddf7">Programación Funcional</a></li><li><a href="#org2925115">Conclusión</a></li></ol></li></ol></li></ol><p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+    <p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert C. Martin</a> (mejor conocido como «El
 tío Bob»), ha impartido y estará impartiendo una clase magistral
 dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
 asista, con la intención de registrar parte de mis notas y las
-reflexiones que me surjan cada vez.</p><p><a id="org1ad446c"></a></p><h1 id="día-2-paradigmas-y-personajes-históricos">Día 2: Paradigmas y personajes históricos</h1><p>La intención de esta clase era presentar lo que a juicio de Robert
+reflexiones que me surjan cada vez.</p><h1 id="día-2-paradigmas-y-personajes-históricos">Día 2: Paradigmas y personajes históricos</h1><p>La intención de esta clase era presentar lo que a juicio de Robert
 C. Martin representan los elementos fundamentales de la arquitectura
 de software, o los «bloques de construcción», que son los 3 grandes
 paradigmas de programación:</p><ul><li>La programación estructural</li><li>La programación orientada a objetos</li><li>La programación funcional</li></ul><p>Pero siendo esta una clase del tío Bob, terminó siendo mucho más que
@@ -182,7 +188,7 @@ programación ofrecen cada uno un valor arquitectónico importante. Los
 3 valores son restricciones impuestas a los programadores, que
 facilitan un orden importante en el código de los programas. Sin
 dichas restricciones, se hubiera requerido una disciplina casi
-inhumana para conseguir tal orden.</p><p>Éstas son restricciones sobre:</p><ul><li>La transferencia directa del control del flujo de instrucciones</li><li>La transferencia indirecta del control de flujo de instrucciones</li><li>La asignación de valores (o mutabilidad)</li></ul><p><a id="org172eb10"></a></p><h2 id="paradigmas">Paradigmas</h2><p><a id="org02b18ce"></a></p><h3 id="programación-primitiva">Programación Primitiva</h3><p>El término «programación primitiva» lo introduzco yo para ubicar esta
+inhumana para conseguir tal orden.</p><p>Éstas son restricciones sobre:</p><ul><li>La transferencia directa del control del flujo de instrucciones</li><li>La transferencia indirecta del control de flujo de instrucciones</li><li>La asignación de valores (o mutabilidad)</li></ul><h2 id="paradigmas">Paradigmas</h2><h3 id="programación-primitiva">Programación Primitiva</h3><p>El término «programación primitiva» lo introduzco yo para ubicar esta
 era en la narrativa cronológica utilizada por Robert C. Martin.</p><p>Esta era empieza en el siglo XIX con <a href="https://es.wikipedia.org/wiki/Charles_Babbage">Babbage</a>, sus máquinas de
 <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_diferencial">diferencias</a> y <a href="https://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica">analíticas</a>, y <a href="https://es.wikipedia.org/wiki/Ada_Lovelace">Augusta Ada King</a>, quien en forma de
 anotaciones extra que introdujo en una traducción al inglés que hizo
@@ -198,7 +204,7 @@ programas comentó y predijo acerca de la programación que:</p><p>«Necesitarem
 «probablemente habrá bastante trabajo de este tipo» y «una de nuestras
 dificultades será mantener una disciplina apropiada, para no perder el
 hilo de lo que vamos haciendo».</p><p>Note: El tío Bob recomienda el libro <a href="https://www.google.ca/books/edition/The_Annotated_Turing/LFQ7DwAAQBAJ?hl=en&amp;gbpv=0">The annotated Turing</a> de Charles
-Petzold.</p><p><a id="org2f4cf9f"></a></p><h3 id="programación-estructurada">Programación Estructurada</h3><p>De la necesidad de tratar de demostrar formalmente la «correctitud» de
+Petzold.</p><h3 id="programación-estructurada">Programación Estructurada</h3><p>De la necesidad de tratar de demostrar formalmente la «correctitud» de
 un programa, <a href="https://es.wikipedia.org/wiki/Edsger_Dijkstra">Dijkstra</a> notó que la existencia de la transferencia de
 control indiscriminada (por ejemplo, con la instrucción <a href="https://es.wikipedia.org/wiki/GOTO">GOTO</a>) no hacía
 posible determinar si un programa era correcto o no.</p><p>Entonces, junto con <a href="https://es.wikipedia.org/wiki/Corrado_B%C3%B6hm">Böhm</a> y <a href="https://it.wikipedia.org/wiki/Giuseppe_Jacopini">Jacopini</a>, quienes establecieron que todo
@@ -210,7 +216,7 @@ transferencia directa del control.</p><ol><li><p>«Demostrabilidad» vs el Méto
 descarten errores. Todavía no podemos escribir pruebas que demuestren
 que un programa es correcto, para todos los posibles programas que
 podamos escribir.</p><p>En este sentido, nuestra disciplina se parece más a la Ciencia que a
-las Matemáticas.</p></li></ol><p><a id="orgf235cc0"></a></p><h3 id="programación-orientada-a-objetos">Programación Orientada a Objetos</h3><p>Luego <a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a> junto con <a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a>, inventaron la
+las Matemáticas.</p></li></ol><h3 id="programación-orientada-a-objetos">Programación Orientada a Objetos</h3><p>Luego <a href="https://es.wikipedia.org/wiki/Ole-Johan_Dahl">Ole-Johan Dahl</a> junto con <a href="https://es.wikipedia.org/wiki/Kristen_Nygaard">Kristen Nygaard</a>, inventaron la
 <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos">Programación Orientada a Objetos</a>: casi sin darse cuenta. Lo hicieron
 cuando crearon el lenguaje <a href="https://es.wikipedia.org/wiki/Simula">Simula</a>, modificando el compilador del
 lenguaje <a href="https://es.wikipedia.org/wiki/ALGOL">Algol</a>, moviendo el marco de las llamadas a las funciones de
@@ -227,7 +233,7 @@ software porque permite la <a href="https://es.wikipedia.org/wiki/Principio_de_i
 «módulos» donde la dirección del flujo de control va en dirección
 contraria a la dirección de la relación de dependencia, permitiendo
 una independencia entre módulos tal que se puede modificar o cambiar
-completamente un módulo sin tener que notificar al otro.</p><p><a id="orgf06ddf7"></a></p><h3 id="programación-funcional">Programación Funcional</h3><p>Finalmente la <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional">Programación Funcional</a> es presentada como un antiguo
+completamente un módulo sin tener que notificar al otro.</p><h3 id="programación-funcional">Programación Funcional</h3><p>Finalmente la <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional">Programación Funcional</a> es presentada como un antiguo
 paradigma que resurgió en popularidad debido a que las computadoras
 dejaron de seguir la ley de Moore, causando la proliferación de
 computadoras de múltiples núcleos y poniendo en la palestra la
@@ -239,7 +245,7 @@ pura.</p><p>Como consecuencia, un programa escrito siguiendo el paradigma de
 programación funcional minimiza el código que sí modifica el estado
 de los datos.</p><p>Así queda confinado en lugares predecibles y pequeños los mecanismos
 que tienen que lidiar con los problemas de la concurrencia.</p><p>Entonces podemos decir que la programación funcional nos regaló a
-nivel arquitectónico:</p><p><span class="underline">Disciplina en la mutabilidad</span>.</p><p><a id="org2925115"></a></p><h3 id="conclusión">Conclusión</h3><p>En estos 70 años de la computación hemos aprendido sobre todas las
+nivel arquitectónico:</p><p><span class="underline">Disciplina en la mutabilidad</span>.</p><h3 id="conclusión">Conclusión</h3><p>En estos 70 años de la computación hemos aprendido sobre todas las
 cosas, qué no hacer:</p><ul><li>La programación estructurada nos impuso una disciplina sobre la
 transferencia directa de control</li><li>La programación orientada a objetos nos impuso una disciplina sobre
 la transferencia indirecta de control</li><li>Y la programación funcional nos impuso una disciplina sobre las
@@ -279,7 +285,7 @@ paradigmas, es:</p><ul><li><p>Una <strong>conducta</strong> concreta,</p></li><l
 
     <div id="prev-next">
         
-        <a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">&laquo; Clase magistral de arquitectura y diseño (día 2)</a>
+        <a href="/posts-output/2023-10-03-clase-magistral-de-arquitectura-y-diseño-tío-bob-03/">&laquo; Clase magistral de arquitectura y diseño (día 3)</a>
         
         
         <a class="right" href="/posts-output/2023-09-10-clase-magistral-de-arquitrctura-y-diseño-tio-bob-01/">Clase magistral de arquitectura y diseño &raquo;</a>
