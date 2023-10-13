@@ -2,7 +2,7 @@
  :layout :post
  :tags ["es" "arquitectura" "software" "programación" "desarrollo" "diseño" "limpio" "limpia" "organizado" "organizada" "tío bob" "robert c. martin"]}
 
-![img](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+![img](/img/CleanArchitecture.jpg)
 
 Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
