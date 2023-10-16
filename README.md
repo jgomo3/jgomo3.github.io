@@ -38,8 +38,7 @@ Para ver cómo va quedando el contenido, puedes ejecutar el servidor
 web de desarrollo de Cryogen con:
 
 ```
-lein ring server # OR
-lein ring server-headless
+clojure -X:serve
 ```
 
 # Desplegar
@@ -50,7 +49,7 @@ Esta carpeta se crea cada vez que ejecutas el servidor de desarrollo,
 o explícitamente con:
 
 ```shell
-lein run
+clojure -X:build
 ```
 
 Luego, esa carpeta en su totalidad debe copiarse en la rama master, y
@@ -70,7 +69,7 @@ git worktree add ../jgomo3.github.io-master master
 Luego de crear el contenido en la rama `dev`, reconstruyo la carpeta `public`:
 
 ```shell
-lein run
+clojure -X:build
 ```
 
 Y copio su contenido completo en el «worktree» de `master`:
