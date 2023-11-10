@@ -49,7 +49,7 @@ Esta carpeta se crea cada vez que ejecutas el servidor de desarrollo,
 o explícitamente con:
 
 ```shell
-clojure -X:build
+clojure -M:build
 ```
 
 Luego, esa carpeta en su totalidad debe copiarse en la rama master, y
@@ -69,13 +69,13 @@ git worktree add ../jgomo3.github.io-master master
 Luego de crear el contenido en la rama `dev`, reconstruyo la carpeta `public`:
 
 ```shell
-clojure -X:build
+clojure -M:build
 ```
 
 Y copio su contenido completo en el «worktree» de `master`:
 
 ```shell
-rsync -av public/ ../jgomo3.github.io-master/
+rsync -av --delete --exclude='.git' public/ ../jgomo3.github.io-master/
 ```
 
 Finalmente publico el cambio en Github:
