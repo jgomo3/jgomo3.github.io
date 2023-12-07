@@ -55,17 +55,16 @@ el programa anterior sin modificar los componentes existentes.
 
 Parece un buen plan. Entonces, ¿Qué nombre le ponemos a esa interface?
 
-Una tendencia popular hace muchos años era darle prioridad a los
-componentes que implementan las interfaces sobre los componentes que
-los usa.
+Una tendencia popular hace muchos años era asignar nombres acordes a
+los componentes que implementan las interfaces.
 
 Si siguiéramos esa tendencia, el nombre sería «Bombillo Abstracto».
 
 Pero ese nombre no colabora con la idea «Abierto/Cerrado»; no es útil
 para significar la extensión del programa para los otros dispositivos.
 
-Por eso la otra tendencia ha sido la dominante: darle prioridad a los
-usuarios de las interfaces.
+Por eso la otra tendencia ha sido la dominante: asignar nombres acorde
+a los usuarios de las interfaces.
 
 Seguiremos esta dirección y por ende el nombre sería «Encendible».
 
@@ -73,5 +72,64 @@ Pero tenemos otro problema ...
 
 ### Propiedad de los componentes
 
-¿Qué sucede si no tenemos el control de los dispositivos?¿Qué tal si
+¿Qué sucede si no tenemos el control de los dispositivos? ¿Qué tal si
 fueran componentes de software mantenidos por terceros?.
+
+Dejemos esta pregunta pendiente por los momentos, y conozcamos primero
+un poco de los orígenes del Principio de Segregación de Interfaces
+(ISP).
+
+## Orígenes del Principio de Segregación de Interfaces
+
+Alrededor de 1992, Robert trabajó como consultor
+C++ experto para Xerox en un proyecto dedicado a desarrollar la
+primera copiadora digital a color en red.
+
+![img](/img/xerox-copier.png)
+
+Esta era una copiadora compartida por red, la cual tenía su propio
+planificador de tareas (las tareas en este caso serían copiar
+documentos).
+
+El sistema se diseño con alrededor de una clase de la cual muchas
+otras dependían mucho. Esta clase era la clase «Tarea».
+
+Un «tarea» describía todos los detalles que necesitaba la copiadora
+para realizar su tarea. Tenía información del tamaño de la hora, si
+era en blanco y negro o a color, la calidad, etc.
+
+La arquitectura del sistema en algún momento era un conjunto de
+módulos, todos utilizando la misma clase «Tarea». Algunos de sus
+módulos eran:
+
+ - Alimentador
+ - Cortador
+ - Trayectoria del Papel
+ - Apilador
+ - Receptor de Fotografía
+ - Inversor
+ - Engrapador
+
+![img](/img/tarea-v1.svg)
+
+Y cada uno de esos módulos era desarrollado por un equipo diferente,
+incluyendo el «Equipo del Planificador de Tareas», que era el
+responsable de la clase «Tarea».
+
+Esta arquitectura presetaba un problema: Cada vez que había que hacer
+un cambio en la clase «Tarea», todos los otros módulos debían ser
+recompilados.
+
+Este era un problema gigante en 1992, ya que el tiempo que se tomaba
+un proyecto de esa embergadura para compilar podía tomar muchas horas.
+
+En este contexto, a Robert se le ocurrió una solución basada en
+herencia múltiple, una característica nueva de C++ en esa época.
+
+Y la solución tenía esta forma:
+
+![img](/img/tarea-v2.svg)
+
+El razonamiento era que a pesar de que la clase «Tarea» era requerida
+por todos los otros módulos, lo que cada módulo necesitaba de «Tarea»
+no era necesariamente igual a lo que los otros módulos necesitaban.
