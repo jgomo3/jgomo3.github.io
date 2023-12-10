@@ -133,3 +133,38 @@ Y la solución tenía esta forma:
 El razonamiento era que a pesar de que la clase «Tarea» era requerida
 por todos los otros módulos, lo que cada módulo necesitaba de «Tarea»
 no era necesariamente igual a lo que los otros módulos necesitaban.
+
+Así, si un módulo necesita cambiar algo de «Tarea», ese cambio lo
+afecta a él sólamente.
+
+Ejemplo, digamos que los programadores del módulo «Alimentador»
+descubren que necesitan cambiar una de las funciones de «Tarea» que
+ellos usan de manera que deben añadirle un nuevo parámetro. Entonces
+los programadores de «Tarea» modifican esa función y los programadores
+de «Alimentador» tienen que volver a «compilar y enlazar» su programa
+con «Tarea», pero más nadie debe hacerlo. Anteriormente, todos debían
+hacerlo.
+
+Lo que logramos con esta reconfiguración es minimizar el número de
+cosas de las cuales los módulos dependen a sólo las cosas que
+realmente necesitan.
+
+## El Principio
+
+Entonces, ¿Cuál es el principio de segregación de interfaces?.
+
+En pocas palabras es:
+
+**No dependas de cosas que no necesitas**.
+
+Por ejemplo:
+
+ - No dependas de módulos con funciones que no necesites
+ - No dependas de componentes con clases que no necesitas
+ - No dependas de servicios con «APIs» que no necesitas
+ - No dependas de «Frameworks» con artefactos que no necesitas
+
+Pero yo le añadiría un detalle: **Intenta**. Es decir, dejar claro que
+la idea es minimizar la cantidad de cosas que no necesitamos pero que
+dependemos de ellas como efecto secundario de depender de cosas que
+ofrecen muchas características.
