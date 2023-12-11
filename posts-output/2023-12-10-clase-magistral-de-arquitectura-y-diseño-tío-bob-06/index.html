@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces</title>
+    
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,ocp,limpia,programación,principio de segregaión de interfaces,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,psi,Clojure CLI,isp,solid,tío bob,lazy-seq,Clojure,jar,es,psl,principio abierto/cerrado,generators,lazy,open close principle,robert c. martin,Java,principio de substitución de liskov,generadores">
+
+<meta name="description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert
+C. Martin (mejor
+conocido como «El tío Bob»), ha impartido y estará impartiendo una
+clase magistral dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
+
+<meta property="og:description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) Robert
+C. Martin (mejor
+conocido como «El tío Bob»), ha impartido y estará impartiendo una
+clase magistral dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y es impartida por Zoom.">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/" />
+<meta property="og:title" content="Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/">Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces</a></li>
+                        
+                        <li><a href="/posts-output/2023-10-30-clase-magistral-de-arquitectura-y-diseño-tío-bob-05/">Clase magistral de arquitectura y diseño (día 5) - Principio de Substitución de Liskov</a></li>
+                        
+                        <li><a href="/posts-output/2023-10-15-clase-magistral-de-arquitectura-y-diseño-tío-bob-04/">Clase magistral de arquitectura y diseño (día 4)</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/ocp/">ocp</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20segregai%C3%B3n%20de%20interfaces/">principio de segregaión de interfaces</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/principios/">principios</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/srp/">srp</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/psi/">psi</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/isp/">isp</a></li>
+                        
+                        <li><a href="/tags-output/solid/">solid</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/psl/">psl</a></li>
+                        
+                        <li><a href="/tags-output/principio%20abierto%2Fcerrado/">principio abierto/cerrado</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/open%20close%20principle/">open close principle</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20substituci%C3%B3n%20de%20liskov/">principio de substitución de liskov</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">2023-decembro-10</div>
+        
+    </div>
+    <h2>Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces</h2>
+</div>
+<div>
+    
+    <p>Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
+miércoles (excepto por 2) <a href="https://es.wikipedia.org/wiki/Robert_C._Martin">Robert
+C. Martin</a> (mejor
+conocido como «El tío Bob»), ha impartido y estará impartiendo una
+clase magistral dedicada a la Arquitectura de Software.</p><p>Cada clase dura aproximadamente 2 horas y es impartida por Zoom.</p><p>Por mi parte, dedicaré una entrada al blog por cada clase a la que
+asista, con la intención de registrar parte de mis notas y las
+reflexiones que me surjan cada vez.</p><h1 id="día-6-el-principio-de-segregación-de-interfaces-isp">Día 6: El Principio de Segregación de Interfaces (ISP)</h1><h2 id="ejercicio-de-diseño-cómo-encender-un-bombillo">Ejercicio de diseño ¿Cómo encender un bombillo?</h2><p>¿Cómo diseñarías un programa con el que pudieras encender (solamente
+encender) un bombillo?</p><p>¿Cómo modelarías el sistema?</p><h3 id="modelo-sencillo">Modelo sencillo</h3><p>Un primer modelo muy sencillo pudiera ser el siguiente:</p><p><img src="/img/bombillo-simple.svg" alt="img" /></p><p>Pero...</p><h3 id="principio-abiertocerrado">Principio Abierto/Cerrado</h3><p>Pero los interruptores pueden usarse para encender otros dispositivos
+además de los bombillos.</p><p>¿Qué tal si definimos una interfaz entre el interruptor y el
+bombillo, que el bombillo pueda implementar y el interruptor utilizar
+para <em>encender</em> el bombillo?</p><p><img src="/img/bombillo-interfaz.svg" alt="img" /></p><p>Y gracias a este cambio, el programa puede adaptarse fácilmente para
+que el interruptor pueda <em>encender</em> otros dispositivos (televisores,
+licuadoras, ventiladores, etc.)</p><p><img src="/img/interruptor-extendido.svg" alt="img" /></p><p>Aquí vemos en práctica el Principio «Abierto/Cerrado». Hemos extendido
+el programa anterior sin modificar los componentes existentes.</p><h3 id="nomenclatura">Nomenclatura</h3><p>Parece un buen plan. Entonces, ¿Qué nombre le ponemos a esa interfaz?</p><p>Una tendencia popular hace muchos años era asignar nombres acordes a
+los componentes que implementan las interfaces.</p><p>Si siguiéramos esa tendencia, el nombre sería «Bombillo Abstracto».</p><p>Pero ese nombre no colabora con la idea «Abierto/Cerrado»; no es útil
+para significar la extensión del programa para los otros dispositivos.</p><p>Por eso la otra tendencia ha sido la dominante: asignar nombres acorde
+a los usuarios de las interfaces.</p><p>Seguiremos esta dirección y por ende el nombre sería «Encendible».</p><p>Pero tenemos otro problema ...</p><h3 id="propiedad-de-los-componentes">Propiedad de los componentes</h3><p>¿Qué sucede si no tenemos el control de los dispositivos? ¿Qué tal si
+fueran componentes de software mantenidos por terceros?.</p><p>Dejaremos esta pregunta sin contestar por los momentos y la
+responderemos en otra clase.</p><h2 id="orígenes-del-principio-de-segregación-de-interfaces">Orígenes del Principio de Segregación de Interfaces</h2><p>Alrededor de 1992, Robert trabajó como consultor
+C++ experto para Xerox en un proyecto dedicado a desarrollar la
+primera copiadora digital a color en red.</p><p><img src="/img/xerox-copier.png" alt="img" /></p><p>Esta era una copiadora compartida por red, la cual tenía su propio
+planificador de tareas (las tareas en este caso serían copiar
+documentos).</p><p>El sistema fue diseñado tal que había una una clase de la cual muchas
+otras dependían. Esta clase era la clase «Tarea».</p><p>Un «tarea» describía todos los detalles que necesitaba la copiadora
+para realizar su una copia. Tenía información del tamaño de la hora,
+si era en blanco y negro o a color, la calidad, etc.</p><p>La arquitectura del sistema en algún momento era un conjunto de
+módulos, tal que, como ya mencionamos, todos utilizando la misma clase
+«Tarea». Algunos de sus módulos eran:</p><ul><li>Alimentador</li><li>Cortador</li><li>Trayectoria del Papel</li><li>Apilador</li><li>Receptor de Fotografía</li><li>Inversor</li><li>Engrapadora</li></ul><p><img src="/img/tarea-v1.svg" alt="img" /></p><p>Y cada uno de esos módulos era desarrollado por un equipo diferente,
+incluyendo el «Equipo del Planificador de Tareas», que era el
+responsable de la clase «Tarea».</p><p>Esta arquitectura presentaba un problema: Cada vez que había que hacer
+un cambio en la clase «Tarea», todos los otros módulos debían ser
+recompilados.</p><p>Este era un problema gigante en 1992, ya que el tiempo que se tomaba
+un proyecto de esa envergadura para compilar podía tomar muchas horas.</p><p>En este contexto, a Robert se le ocurrió una solución basada en
+herencia múltiple, una característica nueva de C++ en esa época.</p><p>Y la solución tenía esta forma:</p><p><img src="/img/tarea-v2.svg" alt="img" /></p><p>El razonamiento era que a pesar de que la clase «Tarea» era requerida
+por todos los otros módulos, lo que cada módulo necesitaba de «Tarea»
+no era necesariamente igual a lo que los otros módulos necesitaban.</p><p>Así, si un módulo necesita cambiar algo de «Tarea», ese cambio lo
+afecta a él solamente.</p><p>Ejemplo, digamos que los programadores del módulo «Alimentador»
+descubren que necesitan cambiar una de las funciones de «Tarea» que
+ellos usan de manera que deben añadirle un nuevo parámetro. Entonces
+los programadores de «Tarea» modifican esa función y los programadores
+de «Alimentador» tienen que volver a «compilar y enlazar» su programa
+con «Tarea», pero más nadie debe hacerlo. Anteriormente, todos debían
+hacerlo.</p><p>Lo que logramos con esta reconfiguración es minimizar el número de
+cosas de las cuales los módulos dependen a sólo las cosas que
+realmente necesitan.</p><h2 id="el-principio">El Principio</h2><p>Entonces, ¿Cuál es el principio de segregación de interfaces?.</p><p>Dado su origen, su nombre hace referencia a las interfaces. En
+realidad, segregar interfaces, como se demostró en el ejemplo, es sólo
+una forma de respetar dicho principio. Pero el principio en realidad se
+trata, en pocas palabras de que:</p><p><strong>No dependas de cosas que no necesitas</strong>.</p><p>Por ejemplo:</p><ul><li>No dependas de módulos con funciones que no necesites</li><li>No dependas de componentes con clases que no necesitas</li><li>No dependas de servicios con «APIs» que no necesitas</li><li>No dependas de «Frameworks» con artefactos que no necesitas</li></ul><p>Pero yo le añadiría un detalle: <strong>Intenta</strong>. Es decir, dejar claro que
+la idea es minimizar la cantidad de cosas que no necesitamos pero que
+dependemos de ellas como efecto secundario de utilizar cosas que
+ofrecen muchas características.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/arquitectura/">arquitectura</a>
+    
+    <a href="/tags-output/dise%C3%B1o/">diseño</a>
+    
+    <a href="/tags-output/limpia/">limpia</a>
+    
+    <a href="/tags-output/programaci%C3%B3n/">programación</a>
+    
+    <a href="/tags-output/principio%20de%20segregai%C3%B3n%20de%20interfaces/">principio de segregaión de interfaces</a>
+    
+    <a href="/tags-output/principios/">principios</a>
+    
+    <a href="/tags-output/limpio/">limpio</a>
+    
+    <a href="/tags-output/organizado/">organizado</a>
+    
+    <a href="/tags-output/software/">software</a>
+    
+    <a href="/tags-output/desarrollo/">desarrollo</a>
+    
+    <a href="/tags-output/organizada/">organizada</a>
+    
+    <a href="/tags-output/psi/">psi</a>
+    
+    <a href="/tags-output/isp/">isp</a>
+    
+    <a href="/tags-output/solid/">solid</a>
+    
+    <a href="/tags-output/t%C3%ADo%20bob/">tío bob</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/robert%20c.%20martin/">robert c. martin</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2023-10-30-clase-magistral-de-arquitectura-y-diseño-tío-bob-05/">Clase magistral de arquitectura y diseño (día 5) - Principio de Substitución de Liskov &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/";
+            this.page.identifier = "Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2023 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
