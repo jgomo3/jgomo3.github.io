@@ -18,7 +18,7 @@ reflexiones que me surjan cada vez.
 
 ## Ejercicio de diseño ¿Cómo encender un bombillo?
 
-¿Cómo diseñarías un programa con el que pudieras encender (sólamente
+¿Cómo diseñarías un programa con el que pudieras encender (solamente
 encender) un bombillo?
 
 ¿Cómo modelarías el sistema?
@@ -36,15 +36,15 @@ Pero...
 Pero los interruptores pueden usarse para encender otros dispositivos
 además de los bombillos.
 
-¿Qué tal si definimos una interface entre el interruptor y el
+¿Qué tal si definimos una interfaz entre el interruptor y el
 bombillo, que el bombillo pueda implementar y el interruptor utilizar
 para *encender* el bombillo?
 
-![img](/img/bombillo-interface.svg)
+![img](/img/bombillo-interfaz.svg)
 
 Y gracias a este cambio, el programa puede adaptarse fácilmente para
 que el interruptor pueda *encender* otros dispositivos (televisores,
-licuadores, ventiladores, etc.)
+licuadoras, ventiladores, etc.)
 
 ![img](/img/interruptor-extendido.svg)
 
@@ -53,7 +53,7 @@ el programa anterior sin modificar los componentes existentes.
 
 ### Nomenclatura
 
-Parece un buen plan. Entonces, ¿Qué nombre le ponemos a esa interface?
+Parece un buen plan. Entonces, ¿Qué nombre le ponemos a esa interfaz?
 
 Una tendencia popular hace muchos años era asignar nombres acordes a
 los componentes que implementan las interfaces.
@@ -75,9 +75,8 @@ Pero tenemos otro problema ...
 ¿Qué sucede si no tenemos el control de los dispositivos? ¿Qué tal si
 fueran componentes de software mantenidos por terceros?.
 
-Dejemos esta pregunta pendiente por los momentos, y conozcamos primero
-un poco de los orígenes del Principio de Segregación de Interfaces
-(ISP).
+Dejaremos esta pregunta sin contestar por los momentos y la
+responderemos en otra clase.
 
 ## Orígenes del Principio de Segregación de Interfaces
 
@@ -91,16 +90,16 @@ Esta era una copiadora compartida por red, la cual tenía su propio
 planificador de tareas (las tareas en este caso serían copiar
 documentos).
 
-El sistema se diseño con alrededor de una clase de la cual muchas
-otras dependían mucho. Esta clase era la clase «Tarea».
+El sistema fue diseñado tal que había una una clase de la cual muchas
+otras dependían. Esta clase era la clase «Tarea».
 
 Un «tarea» describía todos los detalles que necesitaba la copiadora
-para realizar su tarea. Tenía información del tamaño de la hora, si
-era en blanco y negro o a color, la calidad, etc.
+para realizar su una copia. Tenía información del tamaño de la hora,
+si era en blanco y negro o a color, la calidad, etc.
 
 La arquitectura del sistema en algún momento era un conjunto de
-módulos, todos utilizando la misma clase «Tarea». Algunos de sus
-módulos eran:
+módulos, tal que, como ya mencionamos, todos utilizando la misma clase
+«Tarea». Algunos de sus módulos eran:
 
  - Alimentador
  - Cortador
@@ -108,7 +107,7 @@ módulos eran:
  - Apilador
  - Receptor de Fotografía
  - Inversor
- - Engrapador
+ - Engrapadora
 
 ![img](/img/tarea-v1.svg)
 
@@ -116,12 +115,12 @@ Y cada uno de esos módulos era desarrollado por un equipo diferente,
 incluyendo el «Equipo del Planificador de Tareas», que era el
 responsable de la clase «Tarea».
 
-Esta arquitectura presetaba un problema: Cada vez que había que hacer
+Esta arquitectura presentaba un problema: Cada vez que había que hacer
 un cambio en la clase «Tarea», todos los otros módulos debían ser
 recompilados.
 
 Este era un problema gigante en 1992, ya que el tiempo que se tomaba
-un proyecto de esa embergadura para compilar podía tomar muchas horas.
+un proyecto de esa envergadura para compilar podía tomar muchas horas.
 
 En este contexto, a Robert se le ocurrió una solución basada en
 herencia múltiple, una característica nueva de C++ en esa época.
@@ -135,7 +134,7 @@ por todos los otros módulos, lo que cada módulo necesitaba de «Tarea»
 no era necesariamente igual a lo que los otros módulos necesitaban.
 
 Así, si un módulo necesita cambiar algo de «Tarea», ese cambio lo
-afecta a él sólamente.
+afecta a él solamente.
 
 Ejemplo, digamos que los programadores del módulo «Alimentador»
 descubren que necesitan cambiar una de las funciones de «Tarea» que
@@ -153,7 +152,10 @@ realmente necesitan.
 
 Entonces, ¿Cuál es el principio de segregación de interfaces?.
 
-En pocas palabras es:
+Dado su origen, su nombre hace referencia a las interfaces. En
+realidad, segregar interfaces, como se demostró en el ejemplo, es sólo
+una forma de respetar dicho principio. Pero el principio en realidad se
+trata, en pocas palabras de que:
 
 **No dependas de cosas que no necesitas**.
 
@@ -166,5 +168,5 @@ Por ejemplo:
 
 Pero yo le añadiría un detalle: **Intenta**. Es decir, dejar claro que
 la idea es minimizar la cantidad de cosas que no necesitamos pero que
-dependemos de ellas como efecto secundario de depender de cosas que
+dependemos de ellas como efecto secundario de utilizar de cosas que
 ofrecen muchas características.
