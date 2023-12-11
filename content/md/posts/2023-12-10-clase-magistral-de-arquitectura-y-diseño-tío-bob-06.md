@@ -168,5 +168,5 @@ Por ejemplo:
 
 Pero yo le añadiría un detalle: **Intenta**. Es decir, dejar claro que
 la idea es minimizar la cantidad de cosas que no necesitamos pero que
-dependemos de ellas como efecto secundario de utilizar de cosas que
+dependemos de ellas como efecto secundario de utilizar cosas que
 ofrecen muchas características.
