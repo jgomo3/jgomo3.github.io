@@ -23,65 +23,81 @@ envolver.
 Ejemplo:
 
 ```ruby
-class A # clase que define el método que queremos envolver
-  def m
-    :m
-  end
+class A
+  def m = :m
 end
 
-module EspacioDeNombres
-  module EnvolturaAlrededorDeM
-    def m
-      "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-    end
-
-    freeze
-  end
+module E1
+  def m = "E1{ #{super} }1E"
 end
 
+A.new.m # => :m
 
-class A # clase que define el método que queremos envolver
-  def m
-    :m
-  end
-end
-
-module EspacioDeNombres1
-  module EnvolturaAlrededorDeM
-    alias_method :espacio_de_nombres_1__original_m, :m
-    def m
-      "envoltura_pre_1{ #{espacio_de_nombres_1__original_m} }1_rep_arutlovne"
-    end
-  end
-end
-
-module EspacioDeNombres2
-  module EnvolturaAlrededorDeM
-    alias_method :espacio_de_nombres_2__original_m, :m
-    def m
-      "envoltura_pre_2{ #{espacio_de_nombres_2__original_m} }2_rep_arutlovne"
-    end
-  end
-end
-
-A.new.m # => "m"
-
-A.prepend(EspacioDeNombres::EnvolturaAlrededorDeM)
-A.new.m # => "envoltura_pre_1{ m }1_erp_arutlovne"
+A.prepend(E1)
+A.new.m # => "E1{ m }1E"
 ```
 
 El método `Module#prepend` inserta <span class="under">el módulo que
 le pasas como argumento</span> de primero en <span class="under">la
-cadena de resolución de símbolos</span> de <span class="under">el
-módulo al que se le aplica el método</span>.  Así, en este ejemplo,
-cuando invocames el método `m` en el nuevo objeto de la clase `A`, la
-implementación de `m` que se ejecuta es la que está definido en el
-módulo `EnvolturaAlrededorDeM` porque está de primero en la cadena de
-resolución de símbolos.
+lista de búsqueda de métodos</span> de <span class="under">la clase (o
+módulo)</span> al que se le aplica el método `prepend`.  Así, en este
+ejemplo, cuando invocamos el método `m` en el nuevo objeto de la clase
+`A`, la implementación de `m` que se ejecuta es la que está definida
+en el módulo `E1` porque está de primero en la lista de búsqueda de
+métodos.
 
-El uso de `freeze` en la definición del método envolvente, que
-previene que ese módulo pueda ser abierto y/o modificado luego, es
-para evitar un problema que explicaré más adelante.
+Con `super` invocamos el método original, que en este ejemplo el la
+siguiente implementación en la lista de búsqueda de métodos.
+
+## Múltiples envolturas
+
+Módulos adicionales prefijados de esta manera tomarán precedencia y
+envolverán toda la composición acumulada hasta entonces.  Siempre y
+cuando recuerdes invocar a `super` en algún lugar de los envoltorios,
+el método original será invocado.  Si omites `super`, el método
+original (y todos los envoltorios anteriores) serán omitidos.
+
+```ruby
+# ... continuación del ejemplo
+module E2
+  def m = "E2{ #{super} }2E"
+end
+
+module E3
+  def m = :E3 # No llama a `super`
+end
+
+A.prepend(E2)
+A.new.m # => "E2{ E1{ m }1E }2E"
+
+A.prepend(E3) # oculta toda la composición acumulada hasta ahora
+A.new.m # => :E3
+```
+
+### El mismo módulo no se repite en la lista de resolución de métodos
+
+`prepend`, al igual que `include` no causa que el mismo módulo se
+repita en la lista de resolución de métodos.
+
+Así que, prefijar 2 veces un módulo envolvente sombre el mismo
+módulo/clase, no envolverá 2 veces el método.
+
+```ruby
+class A
+  def m = :m
+end
+
+module E
+  def m = "E{ #{super} }E"
+end
+
+2.times{ A.prepend(E) }
+
+A.new.m # => "E{ m }E"
+```
+
+Nota que la envoltura afecta una sola vez, y por ende el resultado no
+es `"E{ E{ m }E }E"`.
 
 # Técnica: «Anotar aparte» el método original con un alias
 
@@ -93,26 +109,40 @@ El ejemplo anterior lo podríamos haber implementado con esta técnica
 de la siguiente manera:
 
 ```ruby
-class A # Esta vez, define la clase
-  def m
-    :m
-  end
+class A
+  def m = :m
 end
 
-class A # Pero esta vez, abre la clase que ya fue definida antes
-  private alias_method :espacio_de_nombres__original_m, :m
+class A
+  private alias_method :e1__m, :m
 
-  def m
-    "envoltura_alias_1{ #{espacio_de_nombres__original_m} }1_saila_arutlovne"
-  end
+  def m = "e1{ #{e1__m} }1e"
 end
 
-A.new.m # => envoltura_alias_1{ m }1_saila_arutlovne
+A.new.m # => e1{ m }1e
 ```
 
-# El problema con los nombres utilizados
+Una diferencia muy importante es que en vez de utilizar `super`, el
+envoltorio llama al método «anotado aparte», o `e1_m` en este
+ejemplo.
 
-¿Por qué el uso los «espacios de nombres» en los ejemplos?
+## Múltiples envolturas
+
+Al igual que con la técnica de prefijar módulos, puedes crear varios
+niveles de envoltura:
+
+```ruby
+class A
+  private alias_method :e2__m, :m
+
+  def m = "e2{ #{e2__m} }2e"
+end
+```
+
+Esto funciona siempre y cuando los nombres de las anotaciones son
+únicos.
+
+# El problema con los nombres utilizados
 
 Es posible que durante la ejecución de un programa que haga uso de
 estas técnicas, diferentes partes del programa la repitan utilizando
@@ -121,7 +151,7 @@ los mismos nombres para los aliases o para los módulos envolventes.
 Es muy fácil imaginar esa posibilidad con la técnica de los aliases,
 porque se ha vuelto muy común en el ecosistema Ruby utilizar el
 prefijo `original_` en el nombre de dicho alias.  Así que no es
-decabellado que en diferentes momentos, el programa ejecute:
+descabellado que en diferentes momentos, el programa ejecute:
 
 ```ruby
 
@@ -129,9 +159,7 @@ decabellado que en diferentes momentos, el programa ejecute:
 class A 
   private alias_method :original_m, :m
   
-  def m
-    "envoltura_alias_1{ #{original_m} }1_saila_arutlovne"
-  end
+  def m = "e1{ #{original_m} }1e"
 end
 ```
 
@@ -142,28 +170,27 @@ Y luego, el mismo programa, también ejecute:
 class A
   private alias_method :original_m, :m
   
-  def m
-    "envoltura_alias_2{ #{original_m} }2_saila_arutlovne"
-  end
+  def m = "e2{ #{original_m} }2e"
 end
 ```
 
-Luego de la segunda redefinición de `m`, invocarla causará que el
-programa quede atrapado en un bucle sin fin.  La razón es que para
-cuando la segunda apertura de la clase `A` se realize, el método `m`
-no es en realidad el método original, si no la primera envoltura.  Es
-decir, desde ese momento `original_m` ya no será el método original,
-si no la primera envoltura (la que envuelve con
-`"envoltura_alias_1..."`).  Entonces ¿qué crees que sucederá cuando la
+Luego de la segunda definición de `m`, el método `m` causará que el
+programa quede atrapado en un bucle sin fin.
+
+La razón es que para cuando la segunda apertura de la clase `A` se
+realice, el método `m` no es en realidad el método original, si no la
+primera envoltura.  Es decir, desde ese momento `original_m` ya no
+será el método original, si no la primera envoltura (la que envuelve
+con `"e1{...}1e"`).  Entonces ¿qué crees que sucederá cuando la
 primera envoltura llame a `original_m`?.  Pues en ese momento, ese
-método se estará llamando a si mismo.
+método se estará llamando a si mismo, activando la trampa.
 
 ```ruby
 A.new.m # => ... Bucle infinito ...
 ```
 
 Un problema similar, pero relativamente menos grave, sucede con la
-técnica de prefijar el módulo envolvente.  Es concevible que varias
+técnica de prefijar el módulo envolvente.  Es concebible que varias
 partes de un mismo programa traten de envolver el mismo método, con la
 misma técnica, utilizando el mismo nombre de módulo.
 
@@ -173,50 +200,46 @@ uso de la misma palabra para definir los elementos auxiliares (en el
 caso del alias, estoy hablando de la palabra «original»).  Sin embargo
 es posible.
 
-Nuevamente, no es decabellado pensar que el programa ejecute primero:
+Nuevamente, no es descabellado pensar que el programa ejecute primero:
 
 ```ruby
-module EnvolturaAlrededorDeM
-  def m
-    "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-  end
+module E1
+  def m = "E1{ #{super} }1E"
 end
 
-A.prepend(EnvolturaAlrededorDeM)
+A.prepend(E1)
 ```
 
 Y luego, el mismo programa, ejecute:
 ```ruby
-module EnvolturaAlrededorDeM
-  def m
-    "envoltura_pre_2{ #{super} }2_rep_arutlovne"
-  end
+module E1
+  def m = "E1'{ #{super} }'1E"
 end
 
-A.prepend(EnvolturaAlrededorDeM)
+A.prepend(E1)
 ```
 
 Sin embargo, en este caso, y a diferencia de la técnica con aliases,
 invocar el método `m` no atrapará al programa en un bucle infinito, si
 no más bien, ofuscará la primera envoltura con la segunda.
 
-Es decir, este sería el resultado:
+Es decir, éste sería el resultado:
 
 ```ruby
-A.new.m => "envoltura_pre_2{ m }2_rep_arutlovne"
+A.new.m => "E1'{ m }'1E"
 ```
 
 Cuando probablemente, uno hubiera deseado este resultado:
 
 ```ruby
-A.new.m => "envoltura_pre_2{ envoltura_pre_1{ m }1_rep_arutlovne }2_rep_arutlovne"
+A.new.m => "E1'{ E1{ m }1E }'1E"
 ```
 
 Nota que al menos, el programa no queda atrapado en un bucle infinito.
 
 # Solución
 
-Todos estos problemas pueden mitigarse con un uso responsable de
+Todos estos problemas se pueden mitigar con un uso responsable de
 espacios de nombres.
 
 En Ruby, los espacios de nombres normalmente se trabajan con módulos y
@@ -226,183 +249,116 @@ Los módulos sirven como una colección de constantes, y las constantes
 pueden tener asociadas módulos, haciendo posible una estructura de
 árbol que se navega con el operador `::`.
 
-En la técnica de prefijar un módulo a otro, utilicé espacios de
-nombres de esta manera. I.e:
+Como ejemplo, supongamos 2 proyectos independientes que definen
+envoltorios del método `m`, y un tercero que los requiere a los 2:
 
-
+```ruby
+# framework.rb
+class A
+  def m = :m
+end
 ```
-module EspacioDeNombres
-  module EnvolturaAlrededorDeM
-    def m
-      "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-    end
 
-    freeze
-  end
+```ruby
+# org_1/proyecto_1.rb
+require 'framework'
+
+module Org1
+module Org1::Proy1
+module Org1::Proy1::E1
+  def m = "O1_P1_E1{ #{super} }1E_1P_1O"
 end
 
-A.prepend(EspacioDeNombres::EnvolturaAlrededorDeM)
+A.prepend(Org1::Proy1::E1)
 ```
+
+```ruby
+# org_2/proyecto_1.rb
+
+module Org2
+module Org2::Proy1
+module Org2::Proy1::E1
+  def m = "O2_P1_E1{ #{super} }1E_1P_2O"
+end
+
+A.prepend(Org2::Proy1::E1)
+```
+
+```
+# program.rb
+
+require 'org1/proyecto_1'
+require 'org2/proyecto_2'
+
+puts A.m
+```
+
+El resultado de este programa sería: `O2_P1_E1{ O1_P1_E1{ #{super} }1E_1P_1O }1E_1P_2O`.
+
+Si no fueran por los espacios de nombre, ambos proyectos se tendrían
+que coordinar y ponerse de acuerdo para no utilizar los mismos
+nombres, o el resultado hubiera sido: `O2_P1_E1{ #{super} }1E_1P_2O`.
 
 Pero en el caso de la técnica del uso de `alias_method`, utilicé un
 convenio muy personal que tengo para crear espacios de nombres
 «improvisados».  La idea es que al nombrar variables, utilizo 2
 «subrayados» como análogo al operador `::`.  I.e, en el ejemplo, en la
-variable `espacio_de_nombres__original_m`, `espacio_de_nombres` es,
-como lo sugiere su nombre, un espacio de nombres, y `original`
-conrrespondería entenderlo (al programador) como el nombre de la
+variable `e1__m`, `e1` es un espacio de nombres improvisado, y `m`
+correspondería entenderlo (al programador) como el nombre de la
 variable en dicho espacio.  Ruby no te protegería de que otro bloque
 de código haga uso del mismo nombre de variable, sin embargo, sería
 muy raro que sucediera y si sucede, es posiblemente a propósito.
 
 # Conclusión
 
-Mi recomendación es utilizar la técnica de prefijar módulos bien
-catalogados en un espacio de nombres del que tengas control absoluto.
-
-Así, varios módulos envolventes se encadenarían de forma que todos son
-considerados a la hora de llamar al método envuelto:
-
-```ruby
-class A # clase que define el método que queremos envolver
-  def m
-    :m
-  end
-end
-
-module EspacioDeNombres1
-  module EnvolturaAlrededorDeM
-    def m
-      "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-    end
-
-    freeze
-  end
-end
-
-A.prepend(EspacioDeNombres1::EnvolturaAlrededorDeM)
-
-module EspacioDeNombres2
-  module EnvolturaAlrededorDeM
-    def m
-      "envoltura_pre_2{ #{super} }2_rep_arutlovne"
-    end
-
-    freeze
-  end
-end
-
-A.prepend(EspacioDeNombres2::EnvolturaAlrededorDeM)
-
-A.new.m # => "envoltura_pre_2{ envoltura_pre_1{ m }1_erp_arutlovne }2_erp_arutlovne"
-```
-
-Por completitud, este sería el ejemplo con la técnica de los alias que
-generaría el mismo resultado:
-
-```ruby
-class A
-  private alias_method :espacio_de_nombres_1__original_m, :m
-
-  def m
-    "envoltura_alias_1{ #{espacio_de_nombres_1__original_m} }1_saila_arutlovne"
-  end
-end
-
-class A
-  private alias_method :espacio_de_nombres_2__original_m, :m
-
-  def m
-    "envoltura_alias_1{ #{espacio_de_nombres_2__original_m} }1_saila_arutlovne"
-  end
-end
-
-A.new.m # => envoltura_alias_2{ envoltura_alias_1{ m }1_saila_arutlovne }2_saila_arutlovne
-```
+Mi recomendación es utilizar la técnica de prefijar módulos, y
+definirlos dentro de un espacio de nombres del que tengas control
+absoluto.
 
 # Anotaciones finales
 
-## ¿Por qué ese `freeze` en la definición del módulo envolvente?
+## «Congela» los módulos con `freeze`
 
+Otra forma de proteger los módulos de ofuscación accidental, es
+«congelarlos» con `freeze`.
 En el ejemplo:
 
 ```ruby
-module EspacioDeNombres1
-  module EnvolturaAlrededorDeM
-    def m
-      "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-    end
-
-    freeze
+module E
+  def m
+    "E1{ #{super} }1E"
   end
+  
+  freeze
 end
 ```
 
-`freeze` es una primera línea de defensa contra la manipulación
-accidental del módulo.
-
-Supongamos que el módulo no hubiera sido parte de un espacio de
-nombres propio.  Entonces al intentar «envolver» nuevamente el mismo
-método con otra «módulo» con el mismo nombre, esa definición del otro
-módulo en realidad estaría modificando el ya definido.  Con `freeze`,
-causamos que el módulo no pueda modificarse y por lo tanto,
-obtendríamos un error.
-
-Es decir, el siguiente ejemplo causaría un error:
+En este ejemplo, el módulo `E` no puede volver a abrirse (fácilmente)
+para modificar.  Y si un bloque de código fuera de tu control (o tuyo
+por error, o exploración) intenta abrir el módulo `E`, recibirá un
+error:
 
 ```ruby
-module EnvolturaAlrededorDeM
-  def m
-    "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-  end
-   freeze
-end
-
-A.prepend(EnvolturaAlrededorDeM)
-
-# ...
-
-module EnvolturaAlrededorDeM
-  def m
-    "envoltura_pre_2{ #{super} }2_rep_arutlovne"
-  end
-end
-# Error, el módulo es inmutable.
-# => `<module:EnvolturaAlrededorDeM>': can't modify frozen module: EnvolturaAlrededorDeM (FrozenError)
+`<module:E>': can't modify frozen module: E (FrozenError)
 ```
 
-Es una prevensión adicional que en el caso de usar espacios de nombres
-propios, donde tienes el control absoluto del mismo, entonces sería
-una protección opcional que te protegería de ti mismo.  Si vez ese
-error, entonces debes tomar la decisión de si quitar el `frozen` o
-reconocer que lo que estás haciendo en ese momento está mal, y buscar
-una alternativa.
+Es una prevención adicional que puedes combinar incluso con el uso de
+espacios de nombres propios (donde tienes el control absoluto del
+mismo), en cuyo caso te protegería de ti mismo.  Si ves ese error,
+entonces debes tomar la decisión de si quitar el `frozen` o reconocer
+que lo que estás haciendo en ese momento está mal, y buscar una
+alternativa.
 
-## Prefijar varias veces el mismo módulo no repite el envolvimiento
+# Otras técnicas
 
-`prepend`, al igual que `include` no causa que el mismo módulo se
-repita en la cadena de resolución de nombres.
+Existen otras técnicas que valen la pena explorar:
 
-Así que, prefijar 2 veces un módulo envolvente sombre el mismo
-módulo/clase, no envolverá 2 veces el método.
+ - Refinamientos
+ - Meta programación con `define_method`, `instance_method` y
+   variables de instancia de los objetos «módulo» o «clase»
+ - Concernientes
+ - Explotar el método `method_missing`
+ - La gema `around_the_world`.
 
-```ruby
-class A
-  def m
-    :m
-  end
-end
-
-module EnvolturaAlrededorDeM
-  def m
-    "envoltura_pre_1{ #{super} }1_rep_arutlovne"
-  end
-end
-
-2.times{ A.prepend(EnvolturaAlrededorDeM) }
-
-A.new.m # => "envoltura_pre_1{ m }1_rep_arutlovne"
-```
-
-Nota que la envoltura afecta una sóla vez, y por ende el resultado no
-es `"envoltura_pre_1{ envoltura_pre_1{ m }1_rep_arutlovne }1_rep_arutlovne"`.
+Son técnicas que tal vez explore y escriba de ellas en el futuro, o
+quedan de «tarea» para el lector ;-)
