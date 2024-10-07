@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>Blog de Jesús Gómez (jgomo3): Clase magistral de arquitectura y diseño (día 2)</title>
     
-<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,evaluación perezosa,ocp,limpia,programación,principio de segregaión de interfaces,Python,MailHog,principios,Rake,limpio,organizado,software,desarrollo,srp,organizada,Ruby,psi,Clojure CLI,isp,solid,tío bob,lazy-seq,Clojure,jar,es,psl,principio abierto/cerrado,generators,lazy,open close principle,robert c. martin,Java,principio de substitución de liskov,generadores">
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,módulos,evaluación perezosa,ocp,limpia,programación,principio de segregaión de interfaces,Python,modules,MailHog,principios,Rake,limpio,method,organizado,software,desarrollo,métodos,srp,wrap,organizada,Ruby,psi,Clojure CLI,isp,module,solid,tío bob,método,lazy-seq,Clojure,jar,es,psl,ruby,principio abierto/cerrado,generators,módulo,lazy,open close principle,robert c. martin,Java,principio de substitución de liskov,envolver,generadores">
 
 <meta name="description" content="Desde el pasado 6 de septiembre hasta el 13 de diciembre, todos los
 miércoles (excepto por 2) Robert C. Martin (mejor conocido como «El
@@ -70,11 +70,11 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         <li class="divider"></li>
                         <li class="dropdown-header">Recent Posts</li>
                         
+                        <li><a href="/posts-output/2024-10-07-envolver-metodos-en-ruby/">Dos técnicas populares para envolver métodos en Ruby</a></li>
+                        
                         <li><a href="/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/">Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces</a></li>
                         
                         <li><a href="/posts-output/2023-10-30-clase-magistral-de-arquitectura-y-diseño-tío-bob-05/">Clase magistral de arquitectura y diseño (día 5) - Principio de Substitución de Liskov</a></li>
-                        
-                        <li><a href="/posts-output/2023-10-15-clase-magistral-de-arquitectura-y-diseño-tío-bob-04/">Clase magistral de arquitectura y diseño (día 4)</a></li>
                         
                         
 
@@ -92,6 +92,8 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         
                         <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
                         
+                        <li><a href="/tags-output/m%C3%B3dulos/">módulos</a></li>
+                        
                         <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
                         
                         <li><a href="/tags-output/ocp/">ocp</a></li>
@@ -104,6 +106,8 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         
                         <li><a href="/tags-output/Python/">Python</a></li>
                         
+                        <li><a href="/tags-output/modules/">modules</a></li>
+                        
                         <li><a href="/tags-output/MailHog/">MailHog</a></li>
                         
                         <li><a href="/tags-output/principios/">principios</a></li>
@@ -112,13 +116,19 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         
                         <li><a href="/tags-output/limpio/">limpio</a></li>
                         
+                        <li><a href="/tags-output/method/">method</a></li>
+                        
                         <li><a href="/tags-output/organizado/">organizado</a></li>
                         
                         <li><a href="/tags-output/software/">software</a></li>
                         
                         <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
                         
+                        <li><a href="/tags-output/m%C3%A9todos/">métodos</a></li>
+                        
                         <li><a href="/tags-output/srp/">srp</a></li>
+                        
+                        <li><a href="/tags-output/wrap/">wrap</a></li>
                         
                         <li><a href="/tags-output/organizada/">organizada</a></li>
                         
@@ -130,9 +140,13 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         
                         <li><a href="/tags-output/isp/">isp</a></li>
                         
+                        <li><a href="/tags-output/module/">module</a></li>
+                        
                         <li><a href="/tags-output/solid/">solid</a></li>
                         
                         <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%A9todo/">método</a></li>
                         
                         <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
                         
@@ -144,9 +158,13 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         
                         <li><a href="/tags-output/psl/">psl</a></li>
                         
+                        <li><a href="/tags-output/ruby/">ruby</a></li>
+                        
                         <li><a href="/tags-output/principio%20abierto%2Fcerrado/">principio abierto/cerrado</a></li>
                         
                         <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%B3dulo/">módulo</a></li>
                         
                         <li><a href="/tags-output/lazy/">lazy</a></li>
                         
@@ -157,6 +175,8 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
                         <li><a href="/tags-output/Java/">Java</a></li>
                         
                         <li><a href="/tags-output/principio%20de%20substituci%C3%B3n%20de%20liskov/">principio de substitución de liskov</a></li>
+                        
+                        <li><a href="/tags-output/envolver/">envolver</a></li>
                         
                         <li><a href="/tags-output/generadores/">generadores</a></li>
                         
@@ -179,7 +199,7 @@ dedicada a la Arquitectura de Software.Cada clase dura aproximadamente 2 horas y
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">2023-septembro-20</div>
+        <div class="col-lg-6">September 20, 2023</div>
         
     </div>
     <h2>Clase magistral de arquitectura y diseño (día 2)</h2>
@@ -329,7 +349,7 @@ paradigmas, es:</p><ul><li><p>Una <strong>conducta</strong> concreta,</p></li><l
             </div>
         </div>
     </div>
-    <footer>Copyright &copy; 2023 Jesús Gómez
+    <footer>Copyright &copy; 2024 Jesús Gómez
         <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
 </div>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

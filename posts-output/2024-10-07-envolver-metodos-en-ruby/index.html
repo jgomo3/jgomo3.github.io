@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Dos técnicas populares para envolver métodos en Ruby</title>
+    
+<meta name="keywords" content="seq,ftp-hog,arquitectura,CLI,diseño,módulos,evaluación perezosa,ocp,limpia,programación,principio de segregaión de interfaces,Python,modules,MailHog,principios,Rake,limpio,method,organizado,software,desarrollo,métodos,srp,wrap,organizada,Ruby,psi,Clojure CLI,isp,module,solid,tío bob,método,lazy-seq,Clojure,jar,es,psl,ruby,principio abierto/cerrado,generators,módulo,lazy,open close principle,robert c. martin,Java,principio de substitución de liskov,envolver,generadores">
+
+<meta name="description" content="Si necesitas envolver un método en Ruby, un par de maneras populares de lograrlo
+serían:">
+
+<meta property="og:description" content="Si necesitas envolver un método en Ruby, un par de maneras populares de lograrlo
+serían:">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2024-10-07-envolver-metodos-en-ruby/" />
+<meta property="og:title" content="Dos técnicas populares para envolver métodos en Ruby" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2024-10-07-envolver-metodos-en-ruby/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2024-10-07-envolver-metodos-en-ruby/">Dos técnicas populares para envolver métodos en Ruby</a></li>
+                        
+                        <li><a href="/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/">Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces</a></li>
+                        
+                        <li><a href="/posts-output/2023-10-30-clase-magistral-de-arquitectura-y-diseño-tío-bob-05/">Clase magistral de arquitectura y diseño (día 5) - Principio de Substitución de Liskov</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%B3dulos/">módulos</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/ocp/">ocp</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20segregai%C3%B3n%20de%20interfaces/">principio de segregaión de interfaces</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/modules/">modules</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/principios/">principios</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/method/">method</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%A9todos/">métodos</a></li>
+                        
+                        <li><a href="/tags-output/srp/">srp</a></li>
+                        
+                        <li><a href="/tags-output/wrap/">wrap</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/psi/">psi</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/isp/">isp</a></li>
+                        
+                        <li><a href="/tags-output/module/">module</a></li>
+                        
+                        <li><a href="/tags-output/solid/">solid</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%A9todo/">método</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/psl/">psl</a></li>
+                        
+                        <li><a href="/tags-output/ruby/">ruby</a></li>
+                        
+                        <li><a href="/tags-output/principio%20abierto%2Fcerrado/">principio abierto/cerrado</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%B3dulo/">módulo</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/open%20close%20principle/">open close principle</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20substituci%C3%B3n%20de%20liskov/">principio de substitución de liskov</a></li>
+                        
+                        <li><a href="/tags-output/envolver/">envolver</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 7, 2024</div>
+        
+    </div>
+    <h2>Dos técnicas populares para envolver métodos en Ruby</h2>
+</div>
+<div>
+    
+    <style>
+.under {
+  text-decoration: underline;
+}
+</style><p>Si necesitas envolver un método en Ruby, un par de maneras populares de lograrlo
+serían:</p><ul><li>Prefijando un módulo con la envoltura</li><li>«Anotando aparte» el método original con un alias</li></ul><h1 id="técnica-prefijar-un-módulo-con-la-envoltura">Técnica: Prefijar un módulo con la envoltura</h1><p>Define un módulo con el método envolvente, y luego «prefija» este
+módulo en aquel otro módulo (o clase) que define el método que quieres
+envolver.</p><p>Ejemplo:</p><pre><code class="ruby">class A
+  def m = :m
+end
+
+module E1
+  def m = "E1{ #{super} }1E"
+end
+
+A.new.m # =&gt; :m
+
+A.prepend(E1)
+A.new.m # =&gt; "E1{ m }1E"
+</code></pre><p>El método <code>Module#prepend</code> inserta <span class="under">el módulo que
+le pasas como argumento</span> de primero en <span class="under">la
+lista de búsqueda de métodos</span> de <span class="under">la clase (o
+módulo)</span> al que se le aplica el método <code>prepend</code>.  Así, en este
+ejemplo, cuando invocamos el método <code>m</code> en el nuevo objeto de la clase
+<code>A</code>, la implementación de <code>m</code> que se ejecuta es la que está definida
+en el módulo <code>E1</code> porque está de primero en la lista de búsqueda de
+métodos.</p><p>Con <code>super</code> invocamos el método original, que en este ejemplo el la
+siguiente implementación en la lista de búsqueda de métodos.</p><h2 id="múltiples-envolturas">Múltiples envolturas</h2><p>Módulos adicionales prefijados de esta manera tomarán precedencia y
+envolverán toda la composición acumulada hasta entonces.  Siempre y
+cuando recuerdes invocar a <code>super</code> en algún lugar de los envoltorios,
+el método original será invocado.  Si omites <code>super</code>, el método
+original (y todos los envoltorios anteriores) serán omitidos.</p><pre><code class="ruby"># ... continuación del ejemplo
+module E2
+  def m = "E2{ #{super} }2E"
+end
+
+module E3
+  def m = :E3 # No llama a `super`
+end
+
+A.prepend(E2)
+A.new.m # =&gt; "E2{ E1{ m }1E }2E"
+
+A.prepend(E3) # oculta toda la composición acumulada hasta ahora
+A.new.m # =&gt; :E3
+</code></pre><h3 id="el-mismo-módulo-no-se-repite-en-la-lista-de-resolución-de-métodos">El mismo módulo no se repite en la lista de resolución de métodos</h3><p><code>prepend</code>, al igual que <code>include</code> no causa que el mismo módulo se
+repita en la lista de resolución de métodos.</p><p>Así que, prefijar 2 veces un módulo envolvente sombre el mismo
+módulo/clase, no envolverá 2 veces el método.</p><pre><code class="ruby">class A
+  def m = :m
+end
+
+module E
+  def m = "E{ #{super} }E"
+end
+
+2.times{ A.prepend(E) }
+
+A.new.m # =&gt; "E{ m }E"
+</code></pre><p>Nota que la envoltura afecta una sola vez, y por ende el resultado no
+es <code>"E{ E{ m }E }E"</code>.</p><h1 id="técnica-anotar-aparte-el-método-original-con-un-alias">Técnica: «Anotar aparte» el método original con un alias</h1><p>Hay otra técnica muy popular en el ecosistema Ruby que se vale de
+utilizar el método <code>Module#alias_method</code>, con el que «anotas aparte»
+el método original antes de modificarlo.</p><p>El ejemplo anterior lo podríamos haber implementado con esta técnica
+de la siguiente manera:</p><pre><code class="ruby">class A
+  def m = :m
+end
+
+class A
+  private alias_method :e1__m, :m
+
+  def m = "e1{ #{e1__m} }1e"
+end
+
+A.new.m # =&gt; e1{ m }1e
+</code></pre><p>Una diferencia muy importante es que en vez de utilizar <code>super</code>, el
+envoltorio llama al método «anotado aparte», o <code>e1_m</code> en este
+ejemplo.</p><h2 id="múltiples-envolturas-1">Múltiples envolturas</h2><p>Al igual que con la técnica de prefijar módulos, puedes crear varios
+niveles de envoltura:</p><pre><code class="ruby">class A
+  private alias_method :e2__m, :m
+
+  def m = "e2{ #{e2__m} }2e"
+end
+</code></pre><p>Esto funciona siempre y cuando los nombres de las anotaciones son
+únicos.</p><h1 id="el-problema-con-los-nombres-utilizados">El problema con los nombres utilizados</h1><p>Es posible que durante la ejecución de un programa que haga uso de
+estas técnicas, diferentes partes del programa la repitan utilizando
+los mismos nombres para los aliases o para los módulos envolventes.</p><p>Es muy fácil imaginar esa posibilidad con la técnica de los aliases,
+porque se ha vuelto muy común en el ecosistema Ruby utilizar el
+prefijo <code>original_</code> en el nombre de dicho alias.  Así que no es
+descabellado que en diferentes momentos, el programa ejecute:</p><pre><code class="ruby">
+# Primera vez que el programa abre la clase A
+class A 
+  private alias_method :original_m, :m
+  
+  def m = "e1{ #{original_m} }1e"
+end
+</code></pre><p>Y luego, el mismo programa, también ejecute:</p><pre><code class="ruby"># Segunda vez que el programa abre la clase A
+class A
+  private alias_method :original_m, :m
+  
+  def m = "e2{ #{original_m} }2e"
+end
+</code></pre><p>Luego de la segunda definición de <code>m</code>, el método <code>m</code> causará que el
+programa quede atrapado en un bucle sin fin.</p><p>La razón es que para cuando la segunda apertura de la clase <code>A</code> se
+realice, el método <code>m</code> no es en realidad el método original, si no la
+primera envoltura.  Es decir, desde ese momento <code>original_m</code> ya no
+será el método original, si no la primera envoltura (la que envuelve
+con <code>"e1{...}1e"</code>).  Entonces ¿qué crees que sucederá cuando la
+primera envoltura llame a <code>original_m</code>?.  Pues en ese momento, ese
+método se estará llamando a si mismo, activando la trampa.</p><pre><code class="ruby">A.new.m # =&gt; ... Bucle infinito ...
+</code></pre><p>Un problema similar, pero relativamente menos grave, sucede con la
+técnica de prefijar el módulo envolvente.  Es concebible que varias
+partes de un mismo programa traten de envolver el mismo método, con la
+misma técnica, utilizando el mismo nombre de módulo.</p><p>Tal vez no sea un problema tan frecuente como con la técnica del
+alias, debido a que no es tan popular y tampoco está tan arraigado el
+uso de la misma palabra para definir los elementos auxiliares (en el
+caso del alias, estoy hablando de la palabra «original»).  Sin embargo
+es posible.</p><p>Nuevamente, no es descabellado pensar que el programa ejecute primero:</p><pre><code class="ruby">module E1
+  def m = "E1{ #{super} }1E"
+end
+
+A.prepend(E1)
+</code></pre><p>Y luego, el mismo programa, ejecute:</p><pre><code class="ruby">module E1
+  def m = "E1'{ #{super} }'1E"
+end
+
+A.prepend(E1)
+</code></pre><p>Sin embargo, en este caso, y a diferencia de la técnica con aliases,
+invocar el método <code>m</code> no atrapará al programa en un bucle infinito, si
+no más bien, ofuscará la primera envoltura con la segunda.</p><p>Es decir, éste sería el resultado:</p><pre><code class="ruby">A.new.m =&gt; "E1'{ m }'1E"
+</code></pre><p>Cuando probablemente, uno hubiera deseado este resultado:</p><pre><code class="ruby">A.new.m =&gt; "E1'{ E1{ m }1E }'1E"
+</code></pre><p>Nota que al menos, el programa no queda atrapado en un bucle infinito.</p><h1 id="solución">Solución</h1><p>Todos estos problemas se pueden mitigar con un uso responsable de
+espacios de nombres.</p><p>En Ruby, los espacios de nombres normalmente se trabajan con módulos y
+constantes.</p><p>Los módulos sirven como una colección de constantes, y las constantes
+pueden tener asociadas módulos, haciendo posible una estructura de
+árbol que se navega con el operador <code>::</code>.</p><p>Como ejemplo, supongamos 2 proyectos independientes que definen
+envoltorios del método <code>m</code>, y un tercero que los requiere a los 2:</p><pre><code class="ruby"># framework.rb
+class A
+  def m = :m
+end
+</code></pre><pre><code class="ruby"># org_1/proyecto_1.rb
+require 'framework'
+
+module Org1
+module Org1::Proy1
+module Org1::Proy1::E1
+  def m = "O1_P1_E1{ #{super} }1E_1P_1O"
+end
+
+A.prepend(Org1::Proy1::E1)
+</code></pre><pre><code class="ruby"># org_2/proyecto_1.rb
+
+module Org2
+module Org2::Proy1
+module Org2::Proy1::E1
+  def m = "O2_P1_E1{ #{super} }1E_1P_2O"
+end
+
+A.prepend(Org2::Proy1::E1)
+</code></pre><pre><code># program.rb
+
+require 'org1/proyecto_1'
+require 'org2/proyecto_2'
+
+puts A.m
+</code></pre><p>El resultado de este programa sería: <code>O2_P1_E1{ O1_P1_E1{ #{super} }1E_1P_1O }1E_1P_2O</code>.</p><p>Si no fueran por los espacios de nombre, ambos proyectos se tendrían
+que coordinar y ponerse de acuerdo para no utilizar los mismos
+nombres, o el resultado hubiera sido: <code>O2_P1_E1{ #{super} }1E_1P_2O</code>.</p><p>Pero en el caso de la técnica del uso de <code>alias_method</code>, utilicé un
+convenio muy personal que tengo para crear espacios de nombres
+«improvisados».  La idea es que al nombrar variables, utilizo 2
+«subrayados» como análogo al operador <code>::</code>.  I.e, en el ejemplo, en la
+variable <code>e1__m</code>, <code>e1</code> es un espacio de nombres improvisado, y <code>m</code>
+correspondería entenderlo (al programador) como el nombre de la
+variable en dicho espacio.  Ruby no te protegería de que otro bloque
+de código haga uso del mismo nombre de variable, sin embargo, sería
+muy raro que sucediera y si sucede, es posiblemente a propósito.</p><h1 id="conclusión">Conclusión</h1><p>Mi recomendación es utilizar la técnica de prefijar módulos, y
+definirlos dentro de un espacio de nombres del que tengas control
+absoluto.</p><h1 id="anotaciones-finales">Anotaciones finales</h1><h2 id="congela-los-módulos-con-freeze">«Congela» los módulos con <code>freeze</code></h2><p>Otra forma de proteger los módulos de ofuscación accidental, es
+«congelarlos» con <code>freeze</code>.
+En el ejemplo:</p><pre><code class="ruby">module E
+  def m
+    "E1{ #{super} }1E"
+  end
+  
+  freeze
+end
+</code></pre><p>En este ejemplo, el módulo <code>E</code> no puede volver a abrirse (fácilmente)
+para modificar.  Y si un bloque de código fuera de tu control (o tuyo
+por error, o exploración) intenta abrir el módulo <code>E</code>, recibirá un
+error:</p><pre><code class="ruby">`&lt;module:E&gt;': can't modify frozen module: E (FrozenError)
+</code></pre><p>Es una prevención adicional que puedes combinar incluso con el uso de
+espacios de nombres propios (donde tienes el control absoluto del
+mismo), en cuyo caso te protegería de ti mismo.  Si ves ese error,
+entonces debes tomar la decisión de si quitar el <code>frozen</code> o reconocer
+que lo que estás haciendo en ese momento está mal, y buscar una
+alternativa.</p><h1 id="otras-técnicas">Otras técnicas</h1><p>Existen otras técnicas que valen la pena explorar:</p><ul><li>Refinamientos</li><li>Meta programación con <code>define_method</code>, <code>instance_method</code> y
+variables de instancia de los objetos «módulo» o «clase»</li><li>Concernientes</li><li>Explotar el método <code>method_missing</code></li><li>La gema <code>around_the_world</code>.</li></ul><p>Son técnicas que tal vez explore y escriba de ellas en el futuro, o
+quedan de «tarea» para el lector ;-)</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/m%C3%B3dulos/">módulos</a>
+    
+    <a href="/tags-output/modules/">modules</a>
+    
+    <a href="/tags-output/method/">method</a>
+    
+    <a href="/tags-output/m%C3%A9todos/">métodos</a>
+    
+    <a href="/tags-output/wrap/">wrap</a>
+    
+    <a href="/tags-output/module/">module</a>
+    
+    <a href="/tags-output/m%C3%A9todo/">método</a>
+    
+    <a href="/tags-output/es/">es</a>
+    
+    <a href="/tags-output/ruby/">ruby</a>
+    
+    <a href="/tags-output/m%C3%B3dulo/">módulo</a>
+    
+    <a href="/tags-output/envolver/">envolver</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/posts-output/2023-12-10-clase-magistral-de-arquitectura-y-diseño-tío-bob-06/">Clase magistral de arquitectura y diseño (día 6) - Principio de Segregación de Interfaces &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2024-10-07-envolver-metodos-en-ruby/";
+            this.page.identifier = "Dos técnicas populares para envolver métodos en Ruby";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2024 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
