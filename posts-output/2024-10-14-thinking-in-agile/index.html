@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Blog de Jesús Gómez (jgomo3): Thinking in Agile</title>
+    
+<meta name="keywords" content="agile,seq,software-development,ftp-hog,en,arquitectura,CLI,diseño,módulos,evaluación perezosa,ocp,limpia,programación,principio de segregaión de interfaces,Python,modules,MailHog,principios,Rake,limpio,method,organizado,software,desarrollo,métodos,srp,wrap,organizada,Ruby,psi,Clojure CLI,isp,module,solid,tío bob,método,thinking-in-systems,lazy-seq,Clojure,jar,es,psl,ruby,sprints,principio abierto/cerrado,generators,módulo,lazy,open close principle,system,robert c. martin,Java,principio de substitución de liskov,envolver,system-thinking,generadores">
+
+<meta name="description" content="Agile Aims to Enhance &quot;Information Flow&quot; and the &quot;Self Organization&quot; in a Software Development SystemWhen I say &quot;Agile,&quot; I am referring to the ideas derived from the
+Manifesto for Agile Software
+Development.">
+
+<meta property="og:description" content="Agile Aims to Enhance &quot;Information Flow&quot; and the &quot;Self Organization&quot; in a Software Development SystemWhen I say &quot;Agile,&quot; I am referring to the ideas derived from the
+Manifesto for Agile Software
+Development.">
+
+<meta property="og:url" content="http://jgomo3.info/posts-output/2024-10-14-thinking-in-agile/" />
+<meta property="og:title" content="Thinking in Agile" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="http://jgomo3.info/posts-output/2024-10-14-thinking-in-agile/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Blog de Jesús Gómez (jgomo3)</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages-output/acerca-de-mi/">Acerca de mi</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!-- <li class="dropdown-header">Links</li> -->
+                        <!-- <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li> -->
+                        <!-- <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li> -->
+                        
+                        <li><a href="/pages-output/rake-dependencias-y-archivos/">Rake, dependencias y archivos</a></li>
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        
+                        <li><a href="/posts-output/2024-10-14-about-sprints/">About Sprints</a></li>
+                        
+                        <li><a href="/posts-output/2024-10-14-thinking-in-agile/">Thinking in Agile</a></li>
+                        
+                        <li><a href="/posts-output/2024-10-07-envolver-metodos-en-ruby/">Dos técnicas populares para envolver métodos en Ruby</a></li>
+                        
+                        
+
+                        
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        
+                        <li><a href="/tags-output/agile/">agile</a></li>
+                        
+                        <li><a href="/tags-output/seq/">seq</a></li>
+                        
+                        <li><a href="/tags-output/software-development/">software-development</a></li>
+                        
+                        <li><a href="/tags-output/ftp-hog/">ftp-hog</a></li>
+                        
+                        <li><a href="/tags-output/en/">en</a></li>
+                        
+                        <li><a href="/tags-output/arquitectura/">arquitectura</a></li>
+                        
+                        <li><a href="/tags-output/CLI/">CLI</a></li>
+                        
+                        <li><a href="/tags-output/dise%C3%B1o/">diseño</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%B3dulos/">módulos</a></li>
+                        
+                        <li><a href="/tags-output/evaluaci%C3%B3n%20perezosa/">evaluación perezosa</a></li>
+                        
+                        <li><a href="/tags-output/ocp/">ocp</a></li>
+                        
+                        <li><a href="/tags-output/limpia/">limpia</a></li>
+                        
+                        <li><a href="/tags-output/programaci%C3%B3n/">programación</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20segregai%C3%B3n%20de%20interfaces/">principio de segregaión de interfaces</a></li>
+                        
+                        <li><a href="/tags-output/Python/">Python</a></li>
+                        
+                        <li><a href="/tags-output/modules/">modules</a></li>
+                        
+                        <li><a href="/tags-output/MailHog/">MailHog</a></li>
+                        
+                        <li><a href="/tags-output/principios/">principios</a></li>
+                        
+                        <li><a href="/tags-output/Rake/">Rake</a></li>
+                        
+                        <li><a href="/tags-output/limpio/">limpio</a></li>
+                        
+                        <li><a href="/tags-output/method/">method</a></li>
+                        
+                        <li><a href="/tags-output/organizado/">organizado</a></li>
+                        
+                        <li><a href="/tags-output/software/">software</a></li>
+                        
+                        <li><a href="/tags-output/desarrollo/">desarrollo</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%A9todos/">métodos</a></li>
+                        
+                        <li><a href="/tags-output/srp/">srp</a></li>
+                        
+                        <li><a href="/tags-output/wrap/">wrap</a></li>
+                        
+                        <li><a href="/tags-output/organizada/">organizada</a></li>
+                        
+                        <li><a href="/tags-output/Ruby/">Ruby</a></li>
+                        
+                        <li><a href="/tags-output/psi/">psi</a></li>
+                        
+                        <li><a href="/tags-output/Clojure%20CLI/">Clojure CLI</a></li>
+                        
+                        <li><a href="/tags-output/isp/">isp</a></li>
+                        
+                        <li><a href="/tags-output/module/">module</a></li>
+                        
+                        <li><a href="/tags-output/solid/">solid</a></li>
+                        
+                        <li><a href="/tags-output/t%C3%ADo%20bob/">tío bob</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%A9todo/">método</a></li>
+                        
+                        <li><a href="/tags-output/thinking-in-systems/">thinking-in-systems</a></li>
+                        
+                        <li><a href="/tags-output/lazy-seq/">lazy-seq</a></li>
+                        
+                        <li><a href="/tags-output/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags-output/jar/">jar</a></li>
+                        
+                        <li><a href="/tags-output/es/">es</a></li>
+                        
+                        <li><a href="/tags-output/psl/">psl</a></li>
+                        
+                        <li><a href="/tags-output/ruby/">ruby</a></li>
+                        
+                        <li><a href="/tags-output/sprints/">sprints</a></li>
+                        
+                        <li><a href="/tags-output/principio%20abierto%2Fcerrado/">principio abierto/cerrado</a></li>
+                        
+                        <li><a href="/tags-output/generators/">generators</a></li>
+                        
+                        <li><a href="/tags-output/m%C3%B3dulo/">módulo</a></li>
+                        
+                        <li><a href="/tags-output/lazy/">lazy</a></li>
+                        
+                        <li><a href="/tags-output/open%20close%20principle/">open close principle</a></li>
+                        
+                        <li><a href="/tags-output/system/">system</a></li>
+                        
+                        <li><a href="/tags-output/robert%20c.%20martin/">robert c. martin</a></li>
+                        
+                        <li><a href="/tags-output/Java/">Java</a></li>
+                        
+                        <li><a href="/tags-output/principio%20de%20substituci%C3%B3n%20de%20liskov/">principio de substitución de liskov</a></li>
+                        
+                        <li><a href="/tags-output/envolver/">envolver</a></li>
+                        
+                        <li><a href="/tags-output/system-thinking/">system-thinking</a></li>
+                        
+                        <li><a href="/tags-output/generadores/">generadores</a></li>
+                        
+                        
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 14, 2024</div>
+        
+    </div>
+    <h2>Thinking in Agile</h2>
+</div>
+<div>
+    
+    <h1 id="agile-aims-to-enhance-information-flow-and-the-self-organization-in-a-software-development-system">Agile Aims to Enhance "Information Flow" and the "Self Organization" in a Software Development System</h1><p>When I say "Agile," I am referring to the ideas derived from the
+<a href="https://agilemanifesto.org/">Manifesto for Agile Software
+Development</a>.</p><p>When I say "Software Development System," I mean the organization that
+develops software in response to software requirements and
+observations of the domain of interest.</p><p>I use the term on deliberately because this assertion is expressed
+through the lens of <strong>System thinking</strong>.</p><p>The <a href="https://www.google.ca/books/edition/Thinking_in_Systems/CpbLAgAAQBAJ">Thinking in
+Systems</a>
+book, define "Leverage Points" as places to intervene a System for
+great effect.  They are commonly understood as places where small
+changes can cause significant shifts in a system's behaviour.</p><p>Two of of the most important leverage points where you can intervene to make changes in a system are:</p><ul><li><strong>The Information Flows</strong>:<br />
+These include the feedback loops that regulate the system's behaviour.</li><li><strong>Self-Organization</strong>:<br />
+The ability of a system to change itself in response to new realities.</li></ul><p>Improving the quality, timeliness, and clarity of the information
+flows (e.g. through faster feedback loops) will almost inevitably
+enhance the performance of the system.</p><p>Additionally, by avoiding the illusion of full control and embracing
+the laws of thermodynamics, and the lessons of reality, evolution,
+history, and economics (think Adam Smith's ideas of free market and
+contemporary thinkers like Javier Milei), you will find that
+encouraging self-organiation also leads to improved system
+performance.</p><p>These are the key leverage points that the authors of the <a href="(https://agilemanifesto.org/)">Agile
+Manifesto</a> address in what I refer to
+as "Software Development Systems" (just for the purpose of this single
+article) though the Manifesto simply refers to "Software Development"
+as a practice, discipline or (I think) as "the Software Industry".</p><p>I think in essence, Agile aimed to keep the feedback loop between
+software developers and users as close, clear, and effective as
+possible, while empowering teams to make organizational changes that
+support this quality.</p><p>This, I believe, is the essence of "Agility" in broader terms.
+Something is agile if it can responds swiftly to new information, even
+by adaptation itself.</p><p>However, I suspect that the principles outlined in the Manifesto work
+best for a particular subset of "systems". As some of the original
+signatories of the Manifesto have pointed out, "Agile is a small
+technique for small to medium sized software teams to build small to
+medium sized software projects" – <a href="https://x.com/unclebobmartin/status/1178281422550945792">Uncle
+Bob</a>.</p><p>But I believe that "Agility" is still achievable and, and desirable,
+even for large organizations.  Whie these organizations may not
+strictly follow the 12 Agile principles, they can still aim to
+positively intervene in the the "Information Flows" and the "Self
+Organization" capacities of their teams to increase Agility.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags-output/agile/">agile</a>
+    
+    <a href="/tags-output/software-development/">software-development</a>
+    
+    <a href="/tags-output/en/">en</a>
+    
+    <a href="/tags-output/software/">software</a>
+    
+    <a href="/tags-output/thinking-in-systems/">thinking-in-systems</a>
+    
+    <a href="/tags-output/system/">system</a>
+    
+    <a href="/tags-output/system-thinking/">system-thinking</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        <a href="/posts-output/2024-10-14-about-sprints/">&laquo; About Sprints</a>
+        
+        
+        <a class="right" href="/posts-output/2024-10-07-envolver-metodos-en-ruby/">Dos técnicas populares para envolver métodos en Ruby &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "http://jgomo3.info/posts-output/2024-10-14-thinking-in-agile/";
+            this.page.identifier = "Thinking in Agile";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//jgomo3-info.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2024 Jesús Gómez
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
