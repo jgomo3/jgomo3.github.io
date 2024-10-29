@@ -52,8 +52,8 @@ possible, while empowering teams to make organizational changes that
 support this quality.
 
 This, I believe, is the essence of "Agility" in broader terms.
-Something is agile if it can responds swiftly to new information, even
-by adaptation itself.
+Something is agile if it can respond swiftly to new information, even
+by adapting itself.
 
 However, I suspect that the principles outlined in the Manifesto work
 best for a particular subset of "systems". As some of the original
@@ -62,8 +62,8 @@ technique for small to medium sized software teams to build small to
 medium sized software projects" – [Uncle
 Bob](https://x.com/unclebobmartin/status/1178281422550945792).
 
-But I believe that "Agility" is still achievable and, and desirable,
-even for large organizations.  Whie these organizations may not
-strictly follow the 12 Agile principles, they can still aim to
-positively intervene in the the "Information Flows" and the "Self
-Organization" capacities of their teams to increase Agility.
+But I believe that "Agility" is still achievable and desirable even
+for large organizations.  Whie these organizations may not strictly
+follow the 12 Agile principles, they still can aim to (and possibly
+alrady do) positively intervene in the "Information Flows" and the
+"Self Organization" capacities of their teams to increase Agility.
